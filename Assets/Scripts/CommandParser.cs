@@ -51,6 +51,7 @@ public class CommandParser : MonoBehaviour
             if (!authorizedCharacters.Contains(c))
             {
                 ShowReturnValue("Illegal Character : '" + c + "'");
+                return;
             }
         }
 
