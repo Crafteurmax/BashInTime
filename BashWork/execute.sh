@@ -1,0 +1,1 @@
+find>BashWork/log.txt
