@@ -1,1 +1,54 @@
-{}
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "GameActionMap",
+            "id": "01234618-60f6-4d07-a3b7-5a48df4c482a",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "d4ebce00-9c2a-413f-b4a2-9995f54a74bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Type",
+                    "type": "Button",
+                    "id": "e84d2136-9ba5-4617-b1b1-6f50b8e151b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7136e18f-3167-4834-b820-d2aac53b815f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43cefbd5-ea56-459a-b6dd-75c324e80afe",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Type",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
