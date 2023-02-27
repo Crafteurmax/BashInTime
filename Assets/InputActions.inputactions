@@ -15,9 +15,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Type",
+                    "name": "Enter",
                     "type": "Button",
                     "id": "e84d2136-9ba5-4617-b1b1-6f50b8e151b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Del",
+                    "type": "Button",
+                    "id": "0c5e3480-7d85-453f-b204-e86eb612f612",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -38,12 +47,34 @@
                 },
                 {
                     "name": "",
-                    "id": "43cefbd5-ea56-459a-b6dd-75c324e80afe",
-                    "path": "<Keyboard>/anyKey",
+                    "id": "4581e539-ac4c-4479-8396-ba6bf755e358",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Type",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b64d1a98-ded4-4ec8-b2e6-a61c291b393f",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7569974-a06f-45e0-a87d-a5ce02dcdc6f",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Del",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
