@@ -1,1 +1,1 @@
-echo coucou les amis>BashWork/log.txt
+find>BashWork/log.txt

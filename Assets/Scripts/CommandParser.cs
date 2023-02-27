@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class CommandParser : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class CommandParser : MonoBehaviour
     public string[] fileCommands = {"cd", "ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail"};
     public string[] directCommands = { "echo", "pwd"};
 
-    public string testline;
+    public string testline; //DEBUG
 
 
     private CommandExecuter executer;
@@ -27,12 +28,20 @@ public class CommandParser : MonoBehaviour
         executer = GetComponent<CommandExecuter>();
     }
 
-    public void testcommand()
+
+    public void testcommand() //DEBUG
     {
-        Debug.Log(ExecuteCommand(testline));
+        ExecuteCommand(testline);
     }
 
-    string ExecuteCommand(string line)
+
+    public void ShowReturnValue(string returnValue)
+    {
+        Debug.Log(returnValue); //A changer
+    }
+
+
+    void ExecuteCommand(string line)
     {
         line = line.Trim();
 
@@ -41,7 +50,7 @@ public class CommandParser : MonoBehaviour
         {
             if (!authorizedCharacters.Contains(c))
             {
-                return "Illegal Character : '" + c + "'";
+                ShowReturnValue("Illegal Character : '" + c + "'");
             }
         }
 
@@ -49,18 +58,25 @@ public class CommandParser : MonoBehaviour
         //Split words
         string[] words = line.Split(" ");
 
-        if (words.Length <= 0) return "Please Input something";
+        if (words.Length <= 0) ShowReturnValue("Please Input something");
 
         string command = words[0].Trim();
         CommandType type = GetCommandType(command);
 
         switch (type)
         {
+            case CommandType.Error:
+                ShowReturnValue(command + " of type " + type + " executed!");
+                break;
             case CommandType.Direct:
-                return RawExecute(line);
+                RawExecute(line, ShowReturnValue);
+                break;
+            case CommandType.File:
+                //ShowReturnValue(RawExecute(line)); ATTENTION
+                break;
         }
 
-        return command + " of type " + type + " executed!";
+        return;
     }
 
 
@@ -81,9 +97,11 @@ public class CommandParser : MonoBehaviour
 
 
     //ATTENTION A CETTE FONCTION!!!
-    private string RawExecute(string line)
+    private void RawExecute(string line, Action<string> callback)
     {
-        return executer.Execute(line, null);
+        StartCoroutine(executer.Execute(line, null, callback));
+
+        return;
     }
 
     //DEBUG
