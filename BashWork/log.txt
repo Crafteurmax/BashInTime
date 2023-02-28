@@ -1,6 +1,0 @@
-ad
-log.txt
-log_error.txt
-newfolder/
-test.txt
-tr3

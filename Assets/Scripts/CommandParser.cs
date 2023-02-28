@@ -209,11 +209,13 @@ public class CommandParser : MonoBehaviour
         {
             currentDirectory = "/";
         }
-
-        //On recupere l'argument correspondant au fichier, et on le met sous la forme d'un chemin virtuel absolu.
-        int fileIndex = 1;
-        while (fileIndex < arguments.Length && IsOption(arguments[fileIndex])) fileIndex++;
-        currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.","/").Replace("//","/");
+        else
+        {
+            //On recupere l'argument correspondant au fichier, et on le met sous la forme d'un chemin virtuel absolu.
+            int fileIndex = 1;
+            while (fileIndex < arguments.Length && IsOption(arguments[fileIndex])) fileIndex++;
+            currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/");
+        }
 
         ShowReturnValue(log, errorLog, command);
     }
