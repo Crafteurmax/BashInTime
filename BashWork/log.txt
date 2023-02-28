@@ -1,6 +1,3 @@
-ad
-log.txt
-log_error.txt
-newfolder/
-test.txt
-tr3
+ligne 1
+ligne 2
+ligne 3

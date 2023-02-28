@@ -123,6 +123,124 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &592210365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9055468011321686452, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_text
+      value: "<color=green>LoL je suis \xE9cris en vert \\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello\\nhello"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519623, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_Name
+      value: AffichageInterne
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055468012073519624, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2f534d3982d5d64d80d0472da75345e, type: 3}
+--- !u!1001 &726869400
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601465, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457988043841601469, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
+      propertyPath: m_Name
+      value: Ecran
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37f564bf59cc32a4fac94bd9de750035, type: 3}
 --- !u!1 &835594187
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enter: {fileID: -4525805633519001073, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   del: {fileID: 1330351582163037850, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  moveCursor: {fileID: -6515351413352715769, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
 --- !u!4 &1128773694
 Transform:
   m_ObjectHideFlags: 0
@@ -291,6 +410,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0c5e3480-7d85-453f-b204-e86eb612f612
     m_ActionName: GameActionMap/Del[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ad7f7d2a-dacb-406f-8aa2-4cee5bf45998
+    m_ActionName: GameActionMap/MoveCursor[/Keyboard/leftArrow,/Keyboard/rightArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameActionMap
