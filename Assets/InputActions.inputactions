@@ -15,13 +15,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Type",
+                    "name": "Enter",
                     "type": "Button",
                     "id": "e84d2136-9ba5-4617-b1b1-6f50b8e151b5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Del",
+                    "type": "Button",
+                    "id": "0c5e3480-7d85-453f-b204-e86eb612f612",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveCursor",
+                    "type": "Value",
+                    "id": "ad7f7d2a-dacb-406f-8aa2-4cee5bf45998",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -38,14 +56,69 @@
                 },
                 {
                     "name": "",
-                    "id": "43cefbd5-ea56-459a-b6dd-75c324e80afe",
-                    "path": "<Keyboard>/anyKey",
+                    "id": "4581e539-ac4c-4479-8396-ba6bf755e358",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Type",
+                    "action": "Enter",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b64d1a98-ded4-4ec8-b2e6-a61c291b393f",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7569974-a06f-45e0-a87d-a5ce02dcdc6f",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Del",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "dd901e14-5d88-4380-ada8-0fed32f6e925",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "277df8a3-d840-40fa-8017-c1ecdd729a57",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6e53d820-02f0-47fd-b5a9-f0ed06899e0f",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
