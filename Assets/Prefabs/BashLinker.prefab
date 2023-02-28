@@ -46,20 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileCommands:
-  - cd
+  - tail
   - ls
   - rm
-  - grep
+  - ls
   - mkdir
-  - cat
+  - help
   - touch
   - cp
   - find
   - mv
   - head
-  - tail
   directCommands:
   - echo
+  interpretedCommands:
+  - cd
   - pwd
   testline: echo coucou
 --- !u!114 &6090874311599351246
@@ -74,6 +75,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d94c4d79ee5f514d8faad52daa0eb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileRoot: Bashwork/root
   root: BashWork
   executeFile: execute.sh
   consoleLogsFile: log.txt
+  timedOutMessage: "The Terminal has crashed. Restarting... \n"
+  maxWaitingDuration: 5
