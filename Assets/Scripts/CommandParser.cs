@@ -204,6 +204,12 @@ public class CommandParser : MonoBehaviour
 
         string[] arguments = command.Trim().Split(" ");
 
+        //Si il manque des arguments, on retourne a la racine
+        if(arguments.Length <= 1)
+        {
+            currentDirectory = "/";
+        }
+
         //On recupere l'argument correspondant au fichier, et on le met sous la forme d'un chemin virtuel absolu.
         int fileIndex = 1;
         while (fileIndex < arguments.Length && IsOption(arguments[fileIndex])) fileIndex++;
