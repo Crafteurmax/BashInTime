@@ -10,12 +10,18 @@ public class SelectObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void detectObject()
     {
-        RaycastHit2D ray = mainCamera.SreenPointToRay(controls.Mouse.Position.ReadValue<Vector2>());
-        RaycastHit2D hits2D = Physics2D.GetRayIntersection();
+        RaycastHit2D hit2D;
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hits2D = Physics2D.Raycast(ray, out hit2D, 100);
+
+        if (hits2D != null)
+        {
+            UnityEngine.Debug.Log("On a sélectionner qqch");
+            UnityEngine.Debug.Log(hits2D);
+        }
     }
 }

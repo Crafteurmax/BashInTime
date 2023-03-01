@@ -271,6 +271,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6090874311599351247, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
+      propertyPath: testline
+      value: cd test
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090874311599351247, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
+      propertyPath: fileCommands.Array.data[5]
+      value: cat
+      objectReference: {fileID: 0}
     - target: {fileID: 6090874311599351280, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
       propertyPath: m_RootOrder
       value: 3

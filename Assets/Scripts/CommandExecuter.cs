@@ -7,43 +7,104 @@ using UnityEngine;
 
 public class CommandExecuter : MonoBehaviour
 {
+    public string fileRoot = "Bashwork/root";
     public string root = "BashWork";
 
     public string executeFile = "execute.sh";
     public string consoleLogsFile = "log.txt";
+    public string errorLogsFile = "log_error.txt";
 
-    public IEnumerator Execute(string command, string output, Action<string> callback)
+
+    public string timedOutMessage = "The Terminal has crashed. Restarting... \n";
+    public float maxWaitingDuration = 5.0f;
+
+    private Process previousProcess = null;
+    private float waitingTime;
+
+    //Execution d'une commande
+    public IEnumerator Execute(string command, string currentDirectory, Action<string, string, string> callback, string userCommand)
     {
-        if(output == null)
-        {
-            output = consoleLogsFile;
-        }
-
+        //Les chemins des differents fichiers utilises
+        string scriptPath = root + "/" + executeFile;
         string logPath = root + "/" + consoleLogsFile;
-        string finalCommand = command + ">" + logPath;
+        string errorPath = root + "/" + errorLogsFile;
 
-        string path = root+"/"+executeFile;
-        StreamWriter writer = new StreamWriter(path, false);
-        writer.WriteLine(finalCommand);
-        writer.Close();
+        //Commande finale
+        string finalCommand = 
+            "exec 1>" + logPath + "\n" +
+            "exec 2>" + errorPath + "\n" +
+            "cd " + fileRoot + currentDirectory + "\n" +
+            command;
 
-        ProcessStartInfo startInfo = new ProcessStartInfo();
-        startInfo.FileName = "C:\\Program Files\\Git\\git-bash.exe";
-        startInfo.Arguments = "--hide  \""+path+"\"";
-        Process bashProcess = Process.Start(startInfo);
 
-        while (!bashProcess.HasExited)
+        //On attend que le processus precedent s'est termine par securité
+        if(previousProcess == null)
         {
             yield return null;
         }
-        
-        StreamReader reader = new StreamReader(logPath, true);
-        string log = reader.ReadToEnd();
-        reader.Close();
 
-        callback.Invoke(log);
+        //On ecrit le script
+        WriteFile(scriptPath, finalCommand);
+
+        //On lance le processus
+        Process bashProcess = StartBashScript(scriptPath);
+        previousProcess = bashProcess;
+
+        //Par securite, on attend que le processus soit termine ou que le temps maximum soit depasse
+        waitingTime = Time.time;
+        while (!bashProcess.HasExited && Time.time < waitingTime + maxWaitingDuration)
+        {
+            yield return null;
+        }
+
+        //Si le temps a ete depasse, on tue le processus, et on met une message d'erreur
+        if (Time.time >= waitingTime + maxWaitingDuration)
+        {
+            bashProcess.Kill();
+            callback.Invoke("", timedOutMessage, command);
+            yield break;
+        }
+
+        //On recupere les logs
+        string log = ReadFile(logPath);
+        string errorLog = ReadFile(errorPath);
+
+        //Processus precedent termine
+        previousProcess = null;
+
+        
+        //On appelle le callback
+        callback.Invoke(log, errorLog, userCommand);
 
         yield break;
+    }
+
+    //Lire un fichier
+    private string ReadFile(string path)
+    {
+        StreamReader reader = new StreamReader(path, true);
+        string data = reader.ReadToEnd();
+        reader.Close();
+
+        return data;
+    }
+
+    //Ecrire un fichier
+    private void WriteFile(string path, string data)
+    {
+        StreamWriter writer = new StreamWriter(path, false);
+        writer.WriteLine(data);
+        writer.Close();
+    }
+
+    //Lancer un script bash en arriere-plan
+    private Process StartBashScript(string scriptPath)
+    {
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.FileName = "C:\\Program Files\\Git\\git-bash.exe";
+        startInfo.Arguments = "--hide  \"" + scriptPath + "\"";
+
+        return Process.Start(startInfo);
     }
 
 }
