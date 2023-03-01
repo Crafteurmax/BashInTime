@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+ligne 1
+ligne 2
+ligne 3
+=======
+>>>>>>> 2d26980c9ebae8e01baa6491538c46e1edf90bbd

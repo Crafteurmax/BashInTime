@@ -16,12 +16,14 @@ public class SelectObject : MonoBehaviour
     {
         RaycastHit2D hit2D;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        /*
         RaycastHit2D hits2D = Physics2D.Raycast(ray, out hit2D, 100);
 
         if (hits2D != null)
         {
             UnityEngine.Debug.Log("On a sélectionner qqch");
-            UnityEngine.Debug.Log(hits2D);
+            //UnityEngine.Debug.Log(hits2D);
         }
+        */
     }
 }

@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-<<<<<<< HEAD
-                    "name": "Position",
-                    "type": "PassThrough",
-                    "id": "6b547660-27e2-40fb-8b13-f2ba0bc88c2c",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-=======
                     "name": "Del",
                     "type": "Button",
                     "id": "0c5e3480-7d85-453f-b204-e86eb612f612",
@@ -49,7 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
->>>>>>> 2d26980c9ebae8e01baa6491538c46e1edf90bbd
+                },
+                {
+                    "name": "ScrollTerminal",
+                    "type": "Button",
+                    "id": "dc3c5e06-2a54-4e8a-9c08-1d77e71459f8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DialogButton",
+                    "type": "Button",
+                    "id": "36d5c5e4-f4d3-4e38-8711-a87a790c2b8f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -77,16 +85,6 @@
                 },
                 {
                     "name": "",
-<<<<<<< HEAD
-                    "id": "c43fa9a6-5dfe-4fad-8199-c59c6078f987",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Position",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-=======
                     "id": "b64d1a98-ded4-4ec8-b2e6-a61c291b393f",
                     "path": "<Keyboard>/numpadEnter",
                     "interactions": "",
@@ -139,7 +137,50 @@
                     "action": "MoveCursor",
                     "isComposite": false,
                     "isPartOfComposite": true
->>>>>>> 2d26980c9ebae8e01baa6491538c46e1edf90bbd
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "11f1f30a-4dfc-4bb2-a1d2-012d0d189801",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b3fbe1e5-6e1f-402d-9b50-43865379f8b6",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "ec0540f8-ae7d-4bea-9aa8-67fbc1ee5f90",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "76b602d4-2820-4316-9c91-997eb82c960b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
