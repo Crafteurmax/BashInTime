@@ -1,0 +1,14 @@
+{
+    "dialogSteps" : [
+        {
+            "characterName":"Test Character",
+            "dialogContent":"Coucou, je suis un dialogue"
+        },
+        {
+            "characterName":"Test Character",
+            "dialogContent":"Coucou, je suis la seconde <color=red>boîte</color> de dialogue et moi je suis une seconde <color=blue>boîte</color> aussi :)      "
+        }
+
+
+    ]
+}
