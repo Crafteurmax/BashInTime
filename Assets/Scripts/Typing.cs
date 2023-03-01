@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Typing : MonoBehaviour
 {
+    //################################ variable en commun ################################ 
+
+    private float delayTouche = 0.05f;
+
+    //################################ input du texte ################################  
     [SerializeField]
     private InputActionReference enter;
-
     [SerializeField]
     private InputActionReference del;
-
     [SerializeField]
     private InputActionReference moveCursor;
 
@@ -20,25 +24,6 @@ public class Typing : MonoBehaviour
 
     // texte qui est actuellement entrain d'etre ecrit
     private String currentText = "";
-
-    protected void OnEnable()
-    {
-        // initialisation des events lors de l'activation
-        Keyboard.current.onTextInput += OnTextInput;
-        enter.action.canceled += OnEnter;
-        del.action.started += OnDel;
-        moveCursor.action.started += OnMoveCursor;
-    }
-
-
-    protected void OnDisable()
-    {
-        // désinitialisation des events si on désactive 
-        Keyboard.current.onTextInput -= OnTextInput;
-        enter.action.canceled -= OnEnter;
-        del.action.started -= OnDel;
-        moveCursor.action.started -= OnMoveCursor;
-    }
 
     // on lance le debut de suppression des charactères
     private void OnDel(InputAction.CallbackContext obj)
@@ -56,7 +41,7 @@ public class Typing : MonoBehaviour
             DisplayText(currentText);
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(delayTouche);
 
         if (del.action.IsPressed())
         {
@@ -66,10 +51,12 @@ public class Typing : MonoBehaviour
 
     private void OnEnter(InputAction.CallbackContext obj)
     {
+        //Debug.Log("enter command");
+        addCommandToFixText(currentText);
+        //on envoie la commande
+        //on reset la commande
         currentText = "";
         cursor = 0;
-        //on envoie la commande
-        Debug.Log("enter command");
     }
 
     private void OnTextInput(char ch)
@@ -104,7 +91,7 @@ public class Typing : MonoBehaviour
             DisplayText(currentText);
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(delayTouche);
 
         if (moveCursor.action.IsPressed())
         {
@@ -136,7 +123,106 @@ public class Typing : MonoBehaviour
         Debug.Log(outputText);
     }
 
+    //################################ affichage du texte ################################  
+
+    [SerializeField]
+    private TextMeshProUGUI textComponent;
+
+    [SerializeField]
+    private InputActionReference scroll;
+
+    String fixText = "<color=green>this is the default text and I'm supposed to be green \n"+
+                     "if it's not the case, I allow you to scream because if ice cream, you scream";
+    [ContextMenu("refresh screen")]
+    private void refreshScreen()
+    {
+        textComponent.text = fixText + "\n" + formatText(currentText);
+    }
+
+    private String formatText(String textToFormat)
+    {
+        String outputText = "";
+        if (cursor != textToFormat.Length && cursor != 0)
+        {
+            outputText += textToFormat.Remove(cursor);
+            outputText += "|";
+            outputText += textToFormat.Substring(cursor);
+        }
+        else if (cursor == 0)
+        {
+            outputText += "|";
+            outputText += textToFormat;
+        }
+        else
+        {
+            outputText += textToFormat;
+            outputText += "|";
+        }
+
+        return outputText;
+    }
+
+    private void addCommandToFixText(String command)
+    {
+        fixText += "\nCurrent\\Directory\\but i don't know it yet > " + currentText;
+    }
+
+    float scrollSpeed = 100.0f;
+    private void OnScroll(InputAction.CallbackContext obj)
+    {
+        StartCoroutine(Scroll(obj.ReadValue<float>()));
+    }
+
+    private IEnumerator Scroll(float direction)
+    {
+        textComponent.rectTransform.SetPositionAndRotation(
+            textComponent.rectTransform.position + new Vector3(0,direction * scrollSpeed * Time.deltaTime,0),
+            textComponent.rectTransform.rotation);
+
+        if (textComponent.rectTransform.position.y < 0)
+        {
+            textComponent.rectTransform.SetPositionAndRotation(
+            new Vector3(0, 0,0),
+            textComponent.rectTransform.rotation);
+        }
+        yield return new WaitForSeconds(delayTouche);
+
+        if (scroll.action.IsPressed())
+        {
+            StartCoroutine(Scroll(direction));
+        }
+    }
+
+    //################################ fonction de unity ################################  
+    void Start()
+    {
+        textComponent.SetText(fixText);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        refreshScreen();
+    }
+
+    protected void OnEnable()
+    {
+        // initialisation des events lors de l'activation
+        Keyboard.current.onTextInput += OnTextInput;
+        enter.action.canceled += OnEnter;
+        del.action.started += OnDel;
+        moveCursor.action.started += OnMoveCursor;
+        scroll.action.started += OnScroll;
+    }
 
 
+    protected void OnDisable()
+    {
+        // désinitialisation des events si on désactive 
+        Keyboard.current.onTextInput -= OnTextInput;
+        enter.action.canceled -= OnEnter;
+        del.action.started -= OnDel;
+        moveCursor.action.started -= OnMoveCursor;
+    }
 }
 
