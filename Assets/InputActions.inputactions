@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DialogButton",
+                    "type": "Button",
+                    "id": "36d5c5e4-f4d3-4e38-8711-a87a790c2b8f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -161,6 +170,17 @@
                     "action": "ScrollTerminal",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "76b602d4-2820-4316-9c91-997eb82c960b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialogButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

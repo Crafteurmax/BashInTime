@@ -7,16 +7,16 @@ using UnityEngine;
 
 public class CommandExecuter : MonoBehaviour
 {
-    public string fileRoot = "Bashwork/root";
-    public string root = "BashWork";
+    [SerializeField] private string fileRoot = "BashWork/root";
+    [SerializeField] private string root = "BashWork";
 
-    public string executeFile = "execute.sh";
-    public string consoleLogsFile = "log.txt";
-    public string errorLogsFile = "log_error.txt";
+    [SerializeField] private string executeFile = "execute.sh";
+    [SerializeField] private string consoleLogsFile = "log.txt";
+    [SerializeField] private string errorLogsFile = "log_error.txt";
 
 
-    public string timedOutMessage = "The Terminal has crashed. Restarting... \n";
-    public float maxWaitingDuration = 5.0f;
+    [SerializeField] private string timedOutMessage = "The Terminal has crashed. Restarting... \n";
+    [SerializeField] private float maxWaitingDuration = 5.0f;
 
     private Process previousProcess = null;
     private float waitingTime;

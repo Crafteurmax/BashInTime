@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class DialogueStep
@@ -19,14 +20,18 @@ public class Dialogue
 public class DialogSystem : MonoBehaviour
 {
 
-    public float characterHappeningSpeed = 5.0f;
-    public TMPro.TextMeshProUGUI dialogText;
-    public TMPro.TextMeshProUGUI characterText;
+    [SerializeField] private InputActionReference dialogButton; 
+
+    [SerializeField] private float characterHappeningSpeed = 5.0f;
+    [SerializeField] private TMPro.TextMeshProUGUI dialogText;
+    [SerializeField] private TMPro.TextMeshProUGUI characterText;
+    [SerializeField] private GameObject dialogUI;
 
     //Debug--------
-    public TextAsset testDialog;
+    [SerializeField] private TextAsset testDialog;
     private void Start()
     {
+        dialogUI.SetActive(true);
         StartDialogue(testDialog);
     }
     //-------------
@@ -43,6 +48,8 @@ public class DialogSystem : MonoBehaviour
     //Coroutine du dialogue
     IEnumerator DialogMethod(Dialogue dialogue)
     {
+        bool pressedPreviously = false;
+
 
         //On deroule les etapes du dialogue
         foreach (DialogueStep step in dialogue.dialogSteps)
@@ -54,7 +61,7 @@ public class DialogSystem : MonoBehaviour
             int showLength = 0;
             bool[] isTextTag = FindTMTags(length, textToDisplay, ref showLength);
 
-
+            
             int previousCompletion = 0;
             int previousRealCompletion = 0;
             //A chaque frame, tant que la boite de dialogue doit continuer de s'executer
@@ -64,12 +71,28 @@ public class DialogSystem : MonoBehaviour
 
                 DisplayFinalDialog(step.characterName, textToDisplay.Substring(0, realCompletion));
 
+                //Permet de skip le dialogue
+                if (dialogButton.action.IsPressed())
+                {
+                    if(!pressedPreviously)break;
+                }
+                else pressedPreviously = false;
+                
                 yield return null;
             }
 
             DisplayFinalDialog(step.characterName, textToDisplay);
+
+            //On bloque le dialogue tant que le jouer n'a pas appuye sur E
+
+            while (dialogButton.action.IsPressed()) yield return null;
+            while (!dialogButton.action.IsPressed()) yield return null;
+
+
+            pressedPreviously = true;
         }
 
+        dialogUI.SetActive(false);
         yield break;
     }
 

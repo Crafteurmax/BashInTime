@@ -326,9 +326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8e50ebde1539d48bceef241fa3a194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogButton: {fileID: 1207520511207566912, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   characterHappeningSpeed: 20
   dialogText: {fileID: 7530837017354853633}
   characterText: {fileID: 7530837019442744685}
+  dialogUI: {fileID: 7530837019267415988}
   testDialog: {fileID: 4900000, guid: 5acda987c01408b4296c5da643a36af7, type: 3}
 --- !u!1 &7530837019267415988
 GameObject:
@@ -348,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7530837019267415987
 RectTransform:
   m_ObjectHideFlags: 0

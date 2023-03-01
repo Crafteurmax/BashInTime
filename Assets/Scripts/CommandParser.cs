@@ -24,9 +24,9 @@ public class CommandParser : MonoBehaviour
     }
 
     
-    public string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail"}; //Contient des arguments principaux qui sont des fichiers
-    public string[] directCommands = { "echo"}; //Contient des arguments principaux qui sont des donnees directes
-    public string[] interpretedCommands = { "cd", "pwd" }; //Commandes interpretees directement
+    [SerializeField] private string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail"}; //Contient des arguments principaux qui sont des fichiers
+    [SerializeField] private string[] directCommands = { "echo"}; //Contient des arguments principaux qui sont des donnees directes
+    [SerializeField] private string[] interpretedCommands = { "cd", "pwd" }; //Commandes interpretees directement
 
 
 
