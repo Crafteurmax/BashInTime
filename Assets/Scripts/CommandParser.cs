@@ -12,7 +12,7 @@ public class CommandParser : MonoBehaviour
     //CD virtuel
     private string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*";
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|"; //Temporaire, sera fait aussi dans la saisie des caractères
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int
@@ -91,7 +91,7 @@ public class CommandParser : MonoBehaviour
     //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
     private string PrepareOutputInputCommand(string command)
     {
-        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ");
+        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ").Replace("|", " | ");
     }
 
 
@@ -161,7 +161,7 @@ public class CommandParser : MonoBehaviour
     {
         if (word.Length == 0) return true;
 
-        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<") return true; //On detecte si c'est pas un symbole entree sortie
+        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<" || word.Trim() == "|") return true; //On detecte si c'est pas un symbole entree sortie
 
         if (word[0] == '-')
         {
@@ -198,11 +198,11 @@ public class CommandParser : MonoBehaviour
     private void DirectExecute(string[] arguments, Action<string, string, string> callback, string userCommand)
     {
         int i = 0;
-        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>") i++;
+        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != " | ") i++;
 
         for (i++; i < arguments.Length; i++)
         {
-            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != "")
+            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i] != " | " && arguments[i].Trim() != "")
             {
                 arguments[i] = GetAbsoluteVirtualPath(arguments[i].Trim());
             }
