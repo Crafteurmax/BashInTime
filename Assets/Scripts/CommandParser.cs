@@ -12,7 +12,7 @@ public class CommandParser : MonoBehaviour
     //CD virtuel
     private string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_";
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|"; //Temporaire, sera fait aussi dans la saisie des caractères
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int
@@ -62,7 +62,7 @@ public class CommandParser : MonoBehaviour
 
 
         //On recupere la commande et on appelle des fonctions differentes en fonction de celle-ci
-        string[] words = line.Split(" ");
+        string[] words = PrepareOutputInputCommand(line).Split(" ");
 
         if (words.Length <= 0) ShowReturnValue("", "Please Input something", line);
 
@@ -75,7 +75,7 @@ public class CommandParser : MonoBehaviour
                 ShowReturnValue("", command + " of type " + type + " executed!", line);
                 break;
             case CommandType.Direct:
-                RawExecute(line, ShowReturnValue, line);
+                DirectExecute(words, ShowReturnValue, line);
                 break;
             case CommandType.File:
                 SafeExecute(words, ShowReturnValue, line);
@@ -87,6 +87,13 @@ public class CommandParser : MonoBehaviour
 
         return;
     }
+
+    //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
+    private string PrepareOutputInputCommand(string command)
+    {
+        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ").Replace("|", " | ");
+    }
+
 
     //Fonction qui recupere le type de commande
     public CommandType GetCommandType(string command)
@@ -154,6 +161,8 @@ public class CommandParser : MonoBehaviour
     {
         if (word.Length == 0) return true;
 
+        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<" || word.Trim() == "|") return true; //On detecte si c'est pas un symbole entree sortie
+
         if (word[0] == '-')
         {
             for (int j = 0; j < word.Length; j++)
@@ -183,6 +192,30 @@ public class CommandParser : MonoBehaviour
         }
 
         RawExecute(newCommand, callback, userCommand);
+    }
+
+    //Fonction intermédiaire pour prendre en charge l'entree/sortie avec la securite sur les fichiers de sortie
+    private void DirectExecute(string[] arguments, Action<string, string, string> callback, string userCommand)
+    {
+        int i = 0;
+        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != " | ") i++;
+
+        for (i++; i < arguments.Length; i++)
+        {
+            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i] != " | " && arguments[i].Trim() != "")
+            {
+                arguments[i] = GetAbsoluteVirtualPath(arguments[i].Trim());
+            }
+        }
+
+        string finalCommand = "";
+
+        for(int j = 0; j < arguments.Length; j++)
+        {
+            finalCommand += arguments[j] + " ";
+        }
+
+        RawExecute(finalCommand, callback, userCommand);
     }
 
     //Execute directement la commande line
