@@ -12,10 +12,9 @@ using System.Windows.Forms;
 
 public class Typing : MonoBehaviour
 {
-
     //################################ variable en commun ################################ 
-
     private float delayTouche = 0.07f;
+
 
     //################################ input du texte ################################  
     [SerializeField]
@@ -24,10 +23,10 @@ public class Typing : MonoBehaviour
     private InputActionReference del;
     [SerializeField]
     private InputActionReference moveCursor;
-    public int releasedMoveCursorCount;
+    private int releasedMoveCursorCount;
     [SerializeField]
     private InputActionReference commandHistory;
-    public int releasedCommandHistoryCount;
+    private int releasedCommandHistoryCount;
 
     // emplacement du curseur dans le texte
     private int cursor;
@@ -40,6 +39,8 @@ public class Typing : MonoBehaviour
 
     // emplacement dans l'historique, -1 si c'est la commande actuel
     private int historyPlacement = -1;
+
+    private bool isCommandRunning;
 
     // on lance le debut de suppression des charactères
     private void OnDel(InputAction.CallbackContext obj)
@@ -67,14 +68,29 @@ public class Typing : MonoBehaviour
 
     private void OnEnter(InputAction.CallbackContext obj)
     {
-        //Debug.Log("enter command");
+        if (!currentText.Trim().Equals("")) StartCoroutine(Enter());
+        else addCommandToFixText("");
+    }
+
+    private IEnumerator Enter()
+    {
         addCommandToFixText(currentText);
-        if(!currentText.Trim().Equals("")) commandHistoryList.Add(currentText); // on ne met pas dans l'historique si la commande est vide
-        //on envoie la commande
-        //on reset la commande
+        commandHistoryList.Add(currentText);
+        parser.ExecuteCommand(currentText);
         currentText = "";
         cursor = 0;
         historyPlacement = -1;
+        isCommandRunning = true;
+        while (isCommandRunning)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    public void PrintOutput(String output)
+    {
+        fixText += output;
+        isCommandRunning = false;
     }
 
     private void OnTextInput(char ch)
@@ -185,19 +201,19 @@ public class Typing : MonoBehaviour
 
     [SerializeField]
     private InputActionReference scroll;
-    public int releasedScrollCount;
+    private int releasedScrollCount;
 
     String fixText = "<color=green>this is the default text and I'm supposed to be green \n"+
-                     "if it's not the case, I allow you to scream because if ice cream, you scream";
+                     "if it's not the case, I allow you to scream because if ice cream, you scream \n";
     [UnityEngine.ContextMenu("refresh screen")]
     private void refreshScreen()
     {
-        textComponent.text = fixText + "\n" + formatText(currentText);
+        textComponent.text = fixText + formatText(currentText);
     }
 
     private String formatText(String textToFormat)
     {
-        String outputText = "";
+        String outputText = parser.currentDirectory + " > " ;
         if (cursor != textToFormat.Length && cursor != 0)
         {
             outputText += textToFormat.Remove(cursor);
@@ -220,7 +236,7 @@ public class Typing : MonoBehaviour
 
     private void addCommandToFixText(String command)
     {
-        fixText += "\nCurrent\\Directory\\but i don't know it yet > " + currentText;
+        fixText += parser.currentDirectory+" > " + currentText + "\n";
     }
 
     float scrollSpeed = 100.0f;
@@ -264,15 +280,20 @@ public class Typing : MonoBehaviour
     }
 
     //################################ fonction de unity ################################  
+    //Lien avec l'executeur de commandes
+    private CommandParser parser;
+    private void Awake()
+    {
+        parser = GetComponent<CommandParser>();
+    }
     void Start()
     {
         textComponent.SetText(fixText);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        refreshScreen();
+        if(!isCommandRunning) refreshScreen();
     }
 
     protected void OnEnable()
@@ -288,7 +309,6 @@ public class Typing : MonoBehaviour
         commandHistory.action.started += OnCommandHistory;
         commandHistory.action.canceled += _ => { releasedCommandHistoryCount++; };
     }
-
 
     protected void OnDisable()
     {

@@ -10,7 +10,7 @@ public class CommandParser : MonoBehaviour
     private string root = "BashWork/root";
 
     //CD virtuel
-    private string currentDirectory = "/";
+    public string currentDirectory = "/";
 
     private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|"; //Temporaire, sera fait aussi dans la saisie des caractères
 
@@ -32,21 +32,27 @@ public class CommandParser : MonoBehaviour
 
     //Lien avec l'executeur de commandes
     private CommandExecuter executer;
+    private Typing keyboard;
     private void Awake()
     {
         executer = GetComponent<CommandExecuter>();
+        keyboard = GetComponent<Typing>();
     }
 
     
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
+        /*
         Debug.Log(textLog); //A changer
         if(errorLog.Trim() != "") Debug.LogError(errorLog);
+        */
+        if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
+        else keyboard.PrintOutput(textLog);
     }
 
     //Fonction Principale d'execution d'une commande
-    void ExecuteCommand(string line)
+    public void ExecuteCommand(string line)
     {
         line = line.Trim();
 
