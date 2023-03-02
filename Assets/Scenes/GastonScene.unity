@@ -336,18 +336,6 @@ PrefabInstance:
       propertyPath: keyboard
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6090874311599351247, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
-      propertyPath: testline
-      value: cd test
-      objectReference: {fileID: 0}
-    - target: {fileID: 6090874311599351247, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
-      propertyPath: fileCommands.Array.data[5]
-      value: cat
-      objectReference: {fileID: 0}
-    - target: {fileID: 6090874311599351247, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
-      propertyPath: interpretedCommands.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6090874311599351280, guid: d5a65a1688df283489b3efe2558b2f15, type: 3}
       propertyPath: m_RootOrder
       value: 5

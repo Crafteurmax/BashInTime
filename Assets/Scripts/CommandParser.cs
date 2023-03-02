@@ -43,10 +43,6 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        
-        Debug.Log(textLog); //A changer
-        if(errorLog.Trim() != "") Debug.LogError(errorLog);
-        
         if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
         else keyboard.PrintOutput(textLog);
     }
@@ -61,7 +57,7 @@ public class CommandParser : MonoBehaviour
         {
             if (!authorizedCharacters.Contains(c))
             {
-                ShowReturnValue("", "Illegal Character : '" + c + "'", line);
+                ShowReturnValue("", "Illegal Character : '" + c + "'\n", line);
                 return;
             }
         }
@@ -70,7 +66,7 @@ public class CommandParser : MonoBehaviour
         //On recupere la commande et on appelle des fonctions differentes en fonction de celle-ci
         string[] words = PrepareOutputInputCommand(line).Split(" ");
 
-        if (words.Length <= 0) ShowReturnValue("", "Please Input something", line);
+        if (words.Length <= 0) ShowReturnValue("", "Please Input something\n", line);
 
         string command = words[0].Trim();
         CommandType type = GetCommandType(command);
@@ -78,7 +74,7 @@ public class CommandParser : MonoBehaviour
         switch (type)
         {
             case CommandType.Error:
-                ShowReturnValue("", "bash: "+command+": command not found", line);
+                ShowReturnValue("", "bash: "+command+": command not found\n", line);
                 break;
             case CommandType.Direct:
                 DirectExecute(words, ShowReturnValue, line);
@@ -265,7 +261,7 @@ public class CommandParser : MonoBehaviour
         switch (command)
         {
             case "pwd":
-                ShowReturnValue(currentDirectory, "", command);
+                ShowReturnValue(currentDirectory+"\n", "", command);
                 break;
             case "cd":
                 SafeExecute(arguments, CdCallback, userLine);

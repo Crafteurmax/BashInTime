@@ -53,7 +53,7 @@ MonoBehaviour:
   - rm
   - ls
   - mkdir
-  - help
+  - cat
   - touch
   - cp
   - find
@@ -64,8 +64,7 @@ MonoBehaviour:
   interpretedCommands:
   - cd
   - pwd
-  keyboard: {fileID: 0}
-  testline: echo coucou
+  testline: cd test
 --- !u!114 &6090874311599351246
 MonoBehaviour:
   m_ObjectHideFlags: 0

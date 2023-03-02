@@ -68,23 +68,19 @@ public class Typing : MonoBehaviour
 
     private void OnEnter(InputAction.CallbackContext obj)
     {
-        if (!currentText.Trim().Equals("")) StartCoroutine(Enter());
+        if (!currentText.Trim().Equals("") && !isCommandRunning) Enter();
         else addCommandToFixText("");
     }
 
-    private IEnumerator Enter()
+    private void Enter()
     {
         addCommandToFixText(currentText);
         commandHistoryList.Add(currentText);
+        isCommandRunning = true;
         parser.ExecuteCommand(currentText);
         currentText = "";
         cursor = 0;
         historyPlacement = -1;
-        isCommandRunning = true;
-        while (isCommandRunning)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     public void PrintOutput(String output)
