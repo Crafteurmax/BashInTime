@@ -43,10 +43,10 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        /*
+        
         Debug.Log(textLog); //A changer
         if(errorLog.Trim() != "") Debug.LogError(errorLog);
-        */
+        
         if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
         else keyboard.PrintOutput(textLog);
     }
@@ -78,7 +78,7 @@ public class CommandParser : MonoBehaviour
         switch (type)
         {
             case CommandType.Error:
-                ShowReturnValue("", command + " of type " + type + " executed!", line);
+                ShowReturnValue("", "bash: "+command+": command not found", line);
                 break;
             case CommandType.Direct:
                 DirectExecute(words, ShowReturnValue, line);

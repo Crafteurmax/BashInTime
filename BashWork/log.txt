@@ -1,0 +1,12 @@
+Bonjour.txt
+fi.txt
+fichier1 - Copie (2).txt
+fichier1 - Copie.txt
+fichier1.txt
+log.text
+log.txt
+log_error.txt
+newfile.txt
+ra.txt
+test/
+tezst/
