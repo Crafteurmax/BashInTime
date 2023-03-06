@@ -10,9 +10,9 @@ public class CommandParser : MonoBehaviour
     private string root = "BashWork/root";
 
     //CD virtuel
-    private string currentDirectory = "/";
+    public string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_";
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|"; //Temporaire, sera fait aussi dans la saisie des caractères
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int
@@ -32,21 +32,23 @@ public class CommandParser : MonoBehaviour
 
     //Lien avec l'executeur de commandes
     private CommandExecuter executer;
+    private Typing keyboard;
     private void Awake()
     {
         executer = GetComponent<CommandExecuter>();
+        keyboard = GetComponent<Typing>();
     }
 
     
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        Debug.Log(textLog); //A changer
-        if(errorLog.Trim() != "") Debug.LogError(errorLog);
+        if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
+        else keyboard.PrintOutput(textLog);
     }
 
     //Fonction Principale d'execution d'une commande
-    void ExecuteCommand(string line)
+    public void ExecuteCommand(string line)
     {
         line = line.Trim();
 
@@ -55,16 +57,16 @@ public class CommandParser : MonoBehaviour
         {
             if (!authorizedCharacters.Contains(c))
             {
-                ShowReturnValue("", "Illegal Character : '" + c + "'", line);
+                ShowReturnValue("", "Illegal Character : '" + c + "'\n", line);
                 return;
             }
         }
 
 
         //On recupere la commande et on appelle des fonctions differentes en fonction de celle-ci
-        string[] words = line.Split(" ");
+        string[] words = PrepareOutputInputCommand(line).Split(" ");
 
-        if (words.Length <= 0) ShowReturnValue("", "Please Input something", line);
+        if (words.Length <= 0) ShowReturnValue("", "Please Input something\n", line);
 
         string command = words[0].Trim();
         CommandType type = GetCommandType(command);
@@ -72,10 +74,10 @@ public class CommandParser : MonoBehaviour
         switch (type)
         {
             case CommandType.Error:
-                ShowReturnValue("", command + " of type " + type + " executed!", line);
+                ShowReturnValue("", "bash: "+command+": command not found\n", line);
                 break;
             case CommandType.Direct:
-                RawExecute(line, ShowReturnValue, line);
+                DirectExecute(words, ShowReturnValue, line);
                 break;
             case CommandType.File:
                 SafeExecute(words, ShowReturnValue, line);
@@ -87,6 +89,13 @@ public class CommandParser : MonoBehaviour
 
         return;
     }
+
+    //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
+    private string PrepareOutputInputCommand(string command)
+    {
+        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ").Replace("|", " | ");
+    }
+
 
     //Fonction qui recupere le type de commande
     public CommandType GetCommandType(string command)
@@ -154,6 +163,8 @@ public class CommandParser : MonoBehaviour
     {
         if (word.Length == 0) return true;
 
+        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<" || word.Trim() == "|") return true; //On detecte si c'est pas un symbole entree sortie
+
         if (word[0] == '-')
         {
             for (int j = 0; j < word.Length; j++)
@@ -183,6 +194,30 @@ public class CommandParser : MonoBehaviour
         }
 
         RawExecute(newCommand, callback, userCommand);
+    }
+
+    //Fonction intermédiaire pour prendre en charge l'entree/sortie avec la securite sur les fichiers de sortie
+    private void DirectExecute(string[] arguments, Action<string, string, string> callback, string userCommand)
+    {
+        int i = 0;
+        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != " | ") i++;
+
+        for (i++; i < arguments.Length; i++)
+        {
+            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i] != " | " && arguments[i].Trim() != "")
+            {
+                arguments[i] = GetAbsoluteVirtualPath(arguments[i].Trim());
+            }
+        }
+
+        string finalCommand = "";
+
+        for(int j = 0; j < arguments.Length; j++)
+        {
+            finalCommand += arguments[j] + " ";
+        }
+
+        RawExecute(finalCommand, callback, userCommand);
     }
 
     //Execute directement la commande line
@@ -226,7 +261,7 @@ public class CommandParser : MonoBehaviour
         switch (command)
         {
             case "pwd":
-                ShowReturnValue(currentDirectory, "", command);
+                ShowReturnValue(currentDirectory+"\n", "", command);
                 break;
             case "cd":
                 SafeExecute(arguments, CdCallback, userLine);

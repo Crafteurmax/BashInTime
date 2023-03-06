@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6090874311599351280}
   - component: {fileID: 6090874311599351247}
   - component: {fileID: 6090874311599351246}
+  - component: {fileID: 7788987526652679570}
   m_Layer: 0
   m_Name: BashLinker
   m_TagString: Untagged
@@ -45,13 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34b56f6fbd6e344481603640a2a57ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDirectory: /
   fileCommands:
   - tail
   - ls
   - rm
   - ls
   - mkdir
-  - help
+  - cat
   - touch
   - cp
   - find
@@ -62,7 +64,7 @@ MonoBehaviour:
   interpretedCommands:
   - cd
   - pwd
-  testline: echo coucou
+  testline: cd test
 --- !u!114 &6090874311599351246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,3 +84,21 @@ MonoBehaviour:
   errorLogsFile: log_error.txt
   timedOutMessage: "The Terminal has crashed. Restarting... \n"
   maxWaitingDuration: 5
+--- !u!114 &7788987526652679570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090874311599351281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12493ef3bfdc72b49881832c8ff4f768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enter: {fileID: -4525805633519001073, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  del: {fileID: 1330351582163037850, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  moveCursor: {fileID: -6515351413352715769, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  commandHistory: {fileID: -2135852282540466728, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  textComponent: {fileID: 0}
+  scroll: {fileID: -1882281496856586963, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
