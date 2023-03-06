@@ -1,29 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SelectObject : MonoBehaviour
 {
-    [SerializeField] private Camera mainCamera;
 
-    // Update is called once per frame
-    void Update()
+
+    public void OnMouseEnter() 
     {
+        //UnityEngine.Debug.Log("ENTER");
     }
 
-    public void detectObject()
+    public void OnMouseExit()
     {
-        RaycastHit2D hit2D;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        /*
-        RaycastHit2D hits2D = Physics2D.Raycast(ray, out hit2D, 100);
+        //UnityEngine.Debug.Log("EXIT");
+    }
 
-        if (hits2D != null)
-        {
-            UnityEngine.Debug.Log("On a sélectionner qqch");
-            //UnityEngine.Debug.Log(hits2D);
-        }
-        */
+    public void OnMouseDown()
+    {
+        // On récupère le nom du script lié à l'object (format nomObject + "Script"), et on transforme ce nom en Type
+        Type scriptType = Type.GetType(gameObject.name + "Script");
+        
+        MonoBehaviour script = GetComponent(scriptType) as MonoBehaviour;   // On récupère le script qui a été attaché à notre object
+        script.SendMessage("start", SendMessageOptions.RequireReceiver);    // On exécute la commande start qui est la commande de base pour lancer le script lié à l'object
+    }
+
+
+
+    public void test()
+    {
+        UnityEngine.Debug.Log("test");
     }
 }
