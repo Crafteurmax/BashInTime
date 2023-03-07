@@ -1,0 +1,7 @@
+fichier1 - Copie (2).txt
+fichier1 - Copie.txt
+fichier1.txt
+log.txt
+log_error.txt
+newfile.txt
+test/
