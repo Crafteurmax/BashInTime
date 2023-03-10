@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 using System.Runtime;
 using System;
 
+//Structures de données pour représenter les dialogues
+
 [System.Serializable]
 public class DialogueChoice
 {
@@ -44,26 +46,6 @@ public class DialogSystem : MonoBehaviour
 
     private int currentChoice = -1;
 
-    //Debug----------------------------------------
-    [SerializeField] private TextAsset testDialog;
-
-    private void coucou()
-    {
-        Debug.Log("coucou1");
-    }
-
-    private void coucou2()
-    {
-        Debug.Log("coucou2");
-    }
-
-    private void Start()
-    {
-        dialogUI.SetActive(true);
-        StartDialogue(testDialog, new Action[] { coucou, coucou2});
-    }
-    //----------------------------------------------
-
     //Fonction a appeler pour lancer un dialogue avec le fichier json correspondant au dialogue
     public void StartDialogue(TextAsset jsonFile, Action[] actions)
     {
@@ -73,48 +55,29 @@ public class DialogSystem : MonoBehaviour
     }
 
 
+    private bool pressedPreviously = false;
     //Coroutine du dialogue
     private IEnumerator DialogMethod(Dialogue dialogue, Action[] actions)
     {
-        bool pressedPreviously = false;
-
-
         //On deroule les etapes du dialogue
         for (int i = 0; i < dialogue.dialogSteps.Length; i++)
         {
             DialogueStep step = dialogue.dialogSteps[i];
 
-            string textToDisplay = step.dialogContent;
-            float beginningTime = Time.time;
-            int length = textToDisplay.Length;
+            //Ecriture progressive et on attend
+            endProgressiveWriting = false;
+            Coroutine courout = StartCoroutine(
+                        ProgressiveWriting(step.dialogContent, step.characterName));
 
-            int showLength = 0;
-            bool[] isTextTag = FindTMTags(length, textToDisplay, ref showLength);
-
-            
-            int previousCompletion = 0;
-            int previousRealCompletion = 0;
-            //A chaque frame, tant que la boite de dialogue doit continuer de s'executer
-            while (Time.time < beginningTime + showLength / characterHappeningSpeed)
+            while (!endProgressiveWriting)
             {
-                int realCompletion = CalculateRealCompletion(beginningTime, showLength, length, isTextTag, ref previousCompletion, ref previousRealCompletion);
-
-                DisplayFinalDialog(step.characterName, textToDisplay.Substring(0, realCompletion), null);
-
-                //Permet de skip le dialogue
-                if (dialogButton.action.IsPressed())
-                {
-                    if(!pressedPreviously)break;
-                }
-                else pressedPreviously = false;
-                
                 yield return null;
             }
 
-            DisplayFinalDialog(step.characterName, textToDisplay, step.dialogChoices);
 
-            //On bloque le dialogue tant que le jouer n'a pas appuye sur E si on attends un choix
+            DisplayFinalDialog(step.characterName, step.dialogContent, step.dialogChoices);
 
+            //On bloque le dialogue tant que le jouer n'a pas appuye sur E si on attend un choix
             if(step.dialogChoices.Length == 0)
             {
                 while (dialogButton.action.IsPressed()) yield return null;
@@ -125,24 +88,8 @@ public class DialogSystem : MonoBehaviour
             {
                 while (currentChoice < 0) yield return null;
 
-                DialogueChoice choice = step.dialogChoices[currentChoice];
-
-                if(choice.nextDialog >= 0)
-                {
-                    i = choice.nextDialog - 1; //On anticipe le i++
-                }
-                
-                
-                if(actions != null)
-                {
-                    if(choice.nextAction >= 0 && choice.nextAction < actions.Length)
-                    {
-                        actions[choice.nextAction]();
-                    }
-                }
+                ManageChoice(ref i, actions, step.dialogChoices[currentChoice]);
             }
-            
-
 
             pressedPreviously = true;
         }
@@ -151,6 +98,54 @@ public class DialogSystem : MonoBehaviour
         yield break;
     }
 
+    //On gère l'execution des choix
+    private void ManageChoice(ref int i, Action[] actions, DialogueChoice choice)
+    {
+        if (choice.nextDialog >= 0)
+        {
+            i = choice.nextDialog - 1; //On anticipe le i++
+        }
+
+        if (actions != null)
+        {
+            if (choice.nextAction >= 0 && choice.nextAction < actions.Length)
+            {
+                actions[choice.nextAction]();
+            }
+        }
+    }
+
+    //Permet d'écrire progressivement le dialogue
+    private bool endProgressiveWriting = false;
+    private IEnumerator ProgressiveWriting(string textToDisplay, string characterName)
+    {
+        float beginningTime = Time.time;
+        int length = textToDisplay.Length;
+        int showLength = 0;
+        bool[] isTextTag = FindTMTags(length, textToDisplay, ref showLength);
+
+        int previousCompletion = 0;
+        int previousRealCompletion = 0;
+
+
+        //A chaque frame, tant que la boite de dialogue doit continuer de s'executer
+        while (Time.time < beginningTime + showLength / characterHappeningSpeed)
+        {
+            int realCompletion = CalculateRealCompletion(beginningTime, showLength, length, isTextTag, ref previousCompletion, ref previousRealCompletion);
+
+            DisplayFinalDialog(characterName, textToDisplay.Substring(0, realCompletion), null);
+
+            //Permet de skip le dialogue
+            if (dialogButton.action.IsPressed())
+            {
+                if (!pressedPreviously) break;
+            }
+            else pressedPreviously = false;
+
+            yield return null;
+        }
+        endProgressiveWriting = true;
+    }
 
     //Permet d'indiquer ou sont les balises, permet afficher le texte colore correctement
     private bool[] FindTMTags(int length, string text, ref int showLength)
@@ -223,9 +218,33 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
+    //Fonction appelée quand on sélectionne le choix en cliquant sur le bouton
     public void ChoiceSelect(int choiceId)
     {
         currentChoice = choiceId;
     }
+
+
+
+
+    //Debug----------------------------------------
+    [SerializeField] private TextAsset testDialog;
+
+    private void coucou()
+    {
+        Debug.Log("coucou1");
+    }
+
+    private void coucou2()
+    {
+        Debug.Log("coucou2");
+    }
+
+    private void Start()
+    {
+        dialogUI.SetActive(true);
+        StartDialogue(testDialog, new Action[] { coucou, coucou2 });
+    }
+    //----------------------------------------------
 
 }
