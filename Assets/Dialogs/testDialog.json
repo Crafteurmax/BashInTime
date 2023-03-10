@@ -2,13 +2,41 @@
     "dialogSteps" : [
         {
             "characterName":"Test Character",
-            "dialogContent":"Coucou, je suis un dialogue"
+            "dialogContent":"Coucou, je suis un dialogue",
+            "dialogChoices": []
         },
         {
             "characterName":"Test Character",
-            "dialogContent":"Coucou, je suis la seconde <color=red>boîte</color> de dialogue et moi je suis une seconde <color=blue>boîte</color> aussi :)      "
-        }
+            "dialogContent":"Coucou, je suis la seconde <color=red>boîte</color> de dialogue et moi je suis une seconde <color=blue>boîte</color> aussi :)      ",
+            "dialogChoices": [
+                {
+                    "name" : "Aller au dialogue 2",
+                    "nextAction" : -1,
+                    "nextDialog" : 2
+                },
+                {
+                    "name" : "Aller au dialogue 3 et print coucou2",
+                    "nextAction" : 1,
+                    "nextDialog" : 3
+                },
+                {
+                    "name" : "Print coucou en debug",
+                    "nextAction" : 0,
+                    "nextDialog" : -1
+                }
 
+            ]
+        },
+        {
+            "characterName":"Test Character2",
+            "dialogContent":"Coucou, je suis le dialogue 2",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"<color=blue>Test Character3</color>",
+            "dialogContent":"Coucou, je suis le dialogue 3",
+            "dialogChoices": []
+        }
 
     ]
 }

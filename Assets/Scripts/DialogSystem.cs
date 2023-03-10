@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Runtime;
+using System;
+
+[System.Serializable]
+public class DialogueChoice
+{
+    public string name;
+    public int nextAction;
+    public int nextDialog;
+}
+
 
 [System.Serializable]
 public class DialogueStep
 {
     public string characterName;
     public string dialogContent;
+    public DialogueChoice[] dialogChoices;
 }
 
 [System.Serializable]
@@ -27,33 +39,51 @@ public class DialogSystem : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI characterText;
     [SerializeField] private GameObject dialogUI;
 
-    //Debug--------
+    [SerializeField] private TMPro.TextMeshProUGUI[] choicesText;
+    [SerializeField] private GameObject[] choicesBox;
+
+    private int currentChoice = -1;
+
+    //Debug----------------------------------------
     [SerializeField] private TextAsset testDialog;
+
+    private void coucou()
+    {
+        Debug.Log("coucou1");
+    }
+
+    private void coucou2()
+    {
+        Debug.Log("coucou2");
+    }
+
     private void Start()
     {
         dialogUI.SetActive(true);
-        StartDialogue(testDialog);
+        StartDialogue(testDialog, new Action[] { coucou, coucou2});
     }
-    //-------------
+    //----------------------------------------------
 
     //Fonction a appeler pour lancer un dialogue avec le fichier json correspondant au dialogue
-    public void StartDialogue(TextAsset jsonFile)
+    public void StartDialogue(TextAsset jsonFile, Action[] actions)
     {
         Dialogue dialogue = JsonUtility.FromJson<Dialogue>(jsonFile.text);
 
-        StartCoroutine(DialogMethod(dialogue));
+        StartCoroutine(DialogMethod(dialogue, actions));
     }
 
 
     //Coroutine du dialogue
-    IEnumerator DialogMethod(Dialogue dialogue)
+    private IEnumerator DialogMethod(Dialogue dialogue, Action[] actions)
     {
         bool pressedPreviously = false;
 
 
         //On deroule les etapes du dialogue
-        foreach (DialogueStep step in dialogue.dialogSteps)
+        for (int i = 0; i < dialogue.dialogSteps.Length; i++)
         {
+            DialogueStep step = dialogue.dialogSteps[i];
+
             string textToDisplay = step.dialogContent;
             float beginningTime = Time.time;
             int length = textToDisplay.Length;
@@ -69,7 +99,7 @@ public class DialogSystem : MonoBehaviour
             {
                 int realCompletion = CalculateRealCompletion(beginningTime, showLength, length, isTextTag, ref previousCompletion, ref previousRealCompletion);
 
-                DisplayFinalDialog(step.characterName, textToDisplay.Substring(0, realCompletion));
+                DisplayFinalDialog(step.characterName, textToDisplay.Substring(0, realCompletion), null);
 
                 //Permet de skip le dialogue
                 if (dialogButton.action.IsPressed())
@@ -81,12 +111,37 @@ public class DialogSystem : MonoBehaviour
                 yield return null;
             }
 
-            DisplayFinalDialog(step.characterName, textToDisplay);
+            DisplayFinalDialog(step.characterName, textToDisplay, step.dialogChoices);
 
-            //On bloque le dialogue tant que le jouer n'a pas appuye sur E
+            //On bloque le dialogue tant que le jouer n'a pas appuye sur E si on attends un choix
 
-            while (dialogButton.action.IsPressed()) yield return null;
-            while (!dialogButton.action.IsPressed()) yield return null;
+            if(step.dialogChoices.Length == 0)
+            {
+                while (dialogButton.action.IsPressed()) yield return null;
+                while (!dialogButton.action.IsPressed()) yield return null;
+            }
+            //On attend pour les choix
+            else
+            {
+                while (currentChoice < 0) yield return null;
+
+                DialogueChoice choice = step.dialogChoices[currentChoice];
+
+                if(choice.nextDialog >= 0)
+                {
+                    i = choice.nextDialog - 1; //On anticipe le i++
+                }
+                
+                
+                if(actions != null)
+                {
+                    if(choice.nextAction >= 0 && choice.nextAction < actions.Length)
+                    {
+                        actions[choice.nextAction]();
+                    }
+                }
+            }
+            
 
 
             pressedPreviously = true;
@@ -95,6 +150,7 @@ public class DialogSystem : MonoBehaviour
         dialogUI.SetActive(false);
         yield break;
     }
+
 
     //Permet d'indiquer ou sont les balises, permet afficher le texte colore correctement
     private bool[] FindTMTags(int length, string text, ref int showLength)
@@ -142,11 +198,34 @@ public class DialogSystem : MonoBehaviour
     }
 
     //On affiche les textes sur la boite de dialogue
-    private void DisplayFinalDialog(string characterName, string finalText)
+    private void DisplayFinalDialog(string characterName, string finalText, DialogueChoice[] dialogChoices)
     {
         dialogText.text = finalText;
         characterText.text = characterName;
+
+        //On clear les choix s'il y en a pas
+        if (dialogChoices == null)
+        {
+            for (int i = 0; i < choicesBox.Length; i++)
+            {
+                choicesBox[i].SetActive(false);
+            }
+
+            return;
+        }
+            
+            
+        //On affiche les choix
+        for(int i = 0; i < Mathf.Min(dialogChoices.Length, choicesBox.Length); i++)
+        {
+            choicesBox[i].SetActive(true);
+            choicesText[i].text = dialogChoices[i].name;
+        }
     }
 
+    public void ChoiceSelect(int choiceId)
+    {
+        currentChoice = choiceId;
+    }
 
 }
