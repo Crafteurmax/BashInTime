@@ -44,7 +44,6 @@ public class DialogSystem : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI[] choicesText;
     [SerializeField] private GameObject[] choicesBox;
 
-    private int currentChoice = -1;
 
     //Fonction a appeler pour lancer un dialogue avec le fichier json correspondant au dialogue
     public void StartDialogue(TextAsset jsonFile, Action[] actions)
@@ -219,6 +218,7 @@ public class DialogSystem : MonoBehaviour
     }
 
     //Fonction appelée quand on sélectionne le choix en cliquant sur le bouton
+    private int currentChoice = -1;
     public void ChoiceSelect(int choiceId)
     {
         currentChoice = choiceId;
