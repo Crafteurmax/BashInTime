@@ -25,7 +25,7 @@ public class SelectObject : MonoBehaviour
         Type scriptType = Type.GetType(gameObject.name + "Script");
         
         MonoBehaviour script = GetComponent(scriptType) as MonoBehaviour;   // On récupère le script qui a été attaché à notre object
-        script.SendMessage("start", SendMessageOptions.RequireReceiver);    // On exécute la commande start qui est la commande de base pour lancer le script lié à l'object
+        script.SendMessage("Interact", SendMessageOptions.RequireReceiver);    // On exécute la commande start qui est la commande de base pour lancer le script lié à l'object
     }
 
 

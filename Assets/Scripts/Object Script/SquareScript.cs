@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SquareScript : MonoBehaviour
 {
-    public void start()
+    public void Interact()
     {
         UnityEngine.Debug.Log("square");
     }
