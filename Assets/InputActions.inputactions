@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GetOut",
+                    "type": "Button",
+                    "id": "9f4b10d3-c39f-41ce-8828-52495caee463",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -278,6 +287,17 @@
                     "action": "CommandHistory",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c590563d-01f1-4382-b727-fc233d6a70af",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

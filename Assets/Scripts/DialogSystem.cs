@@ -50,6 +50,8 @@ public class DialogSystem : MonoBehaviour
     {
         Dialogue dialogue = JsonUtility.FromJson<Dialogue>(jsonFile.text);
 
+
+        dialogUI.SetActive(true);
         StartCoroutine(DialogMethod(dialogue, actions));
     }
 
@@ -228,6 +230,7 @@ public class DialogSystem : MonoBehaviour
 
 
     //Debug----------------------------------------
+    /*
     [SerializeField] private TextAsset testDialog;
 
     private void coucou()
@@ -242,9 +245,9 @@ public class DialogSystem : MonoBehaviour
 
     private void Start()
     {
-        dialogUI.SetActive(true);
         StartDialogue(testDialog, new Action[] { coucou, coucou2 });
     }
+    */
     //----------------------------------------------
 
 }

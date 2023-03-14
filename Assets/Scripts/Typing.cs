@@ -275,7 +275,7 @@ public class Typing : MonoBehaviour
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
         return Control.IsKeyLocked(Keys.NumLock);
 #endif
-
+            
 #pragma warning disable CS0162 // Unreachable code detected
         return true;
 #pragma warning restore CS0162 // Unreachable code detected
