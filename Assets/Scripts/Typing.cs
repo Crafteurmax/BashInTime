@@ -281,9 +281,8 @@ public class Typing : MonoBehaviour
         float canvas_h = textComponent.transform.parent.GetComponent<RectTransform>().rect.height;
         float text_h = textComponent.GetPreferredValues().y;
         Debug.Log(canvas_h + " - "+ text_h+ " = " + (text_h - canvas_h));
-        textComponent.rectTransform.SetPositionAndRotation(
-            new Vector3(0, text_h - canvas_h, 0),
-            textComponent.rectTransform.rotation); ;
+        textComponent.rectTransform.localPosition =
+            new Vector3(0, text_h - canvas_h, 0);
 
     }
 
