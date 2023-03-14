@@ -1,1 +1,17 @@
-hello
+Bonjour.txt
+bonjour
+fi.txt
+fichier1 - Copie (2).txt
+fichier1 - Copie.txt
+fichier1.txt
+hello/
+log.text
+log.txt
+log_error.txt
+lol
+monfichier.txt
+newfile.txt
+ra.txt
+script.sh
+test/
+tezst/
