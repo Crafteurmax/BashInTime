@@ -85,7 +85,9 @@ public class Typing : MonoBehaviour
 
     public void PrintOutput(String output)
     {
-        fixText += output;
+        fixText += output + "\n";
+        //DisplayText(currentText);
+        textComponent.text = fixText;
         updateScroll();
         isCommandRunning = false;
     }
@@ -202,6 +204,9 @@ public class Typing : MonoBehaviour
 
     String fixText = "<color=green>this is the default text and I'm supposed to be green \n"+
                      "if it's not the case, I allow you to scream because if ice cream, you scream \n";
+
+    float textScrollOffset = 100;
+
     [UnityEngine.ContextMenu("refresh screen")]
     private void refreshScreen()
     {
@@ -280,9 +285,9 @@ public class Typing : MonoBehaviour
     {
         float canvas_h = textComponent.transform.parent.GetComponent<RectTransform>().rect.height;
         float text_h = textComponent.GetPreferredValues().y;
-        Debug.Log(canvas_h + " - "+ text_h+ " = " + (text_h - canvas_h));
+        //Debug.Log(canvas_h + " - "+ text_h+ " = " + (text_h - canvas_h));
         textComponent.rectTransform.localPosition =
-            new Vector3(0, text_h - canvas_h, 0);
+            new Vector3(0, Math.Max(0,text_h - (canvas_h - textScrollOffset)), 0);
 
     }
 
