@@ -30,7 +30,24 @@
         {
             "characterName":"Test Character2",
             "dialogContent":"Coucou, je suis le dialogue 2",
-            "dialogChoices": []
+            "dialogChoices": [
+                {
+                    "name" : "Aller au dialogue 2",
+                    "nextAction" : -1,
+                    "nextDialog" : 2
+                },
+                {
+                    "name" : "Aller au dialogue 3 et print coucou2",
+                    "nextAction" : 1,
+                    "nextDialog" : 3
+                },
+                {
+                    "name" : "Print coucou en debug",
+                    "nextAction" : 0,
+                    "nextDialog" : -1
+                }
+
+            ]
         },
         {
             "characterName":"<color=blue>Test Character3</color>",
