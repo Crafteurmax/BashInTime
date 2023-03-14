@@ -27,7 +27,7 @@ public class ChefDorchestre : MonoBehaviour
         Console = 2
     }
 
-    private void Start()
+    private void Awake()
     {
         //Desactive les systems si pas mis en jeu
         foreach (SystemObjects gog in systems)
