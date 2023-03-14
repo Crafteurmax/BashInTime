@@ -6,10 +6,12 @@ using UnityEngine;
 public class ChefDorchestre : MonoBehaviour
 {
     [Serializable]
-    public struct SystemObjects
+    public class SystemObjects
     {
         public string name;
         public GameObject[] objects;
+        public GameSystem parent;
+        public bool escapeAllowed;
     }
 
     private SystemObjects currentSystem;
@@ -62,5 +64,15 @@ public class ChefDorchestre : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    public void OnEscape()
+    {
+        if (currentSystem.escapeAllowed) GetOut();
+    }
+
+    public void GetOut()
+    {
+        SwitchSystem(currentSystem.parent);
     }
 }
