@@ -13,7 +13,7 @@ public class BoutonDialogueScript : MonoBehaviour
     [SerializeField]
     TextAsset dialogTest;
 
-    /*
+    
     private void coucou()
     {
         Debug.Log("coucou1");
@@ -23,12 +23,12 @@ public class BoutonDialogueScript : MonoBehaviour
     {
         Debug.Log("coucou2");
     }
-    */
+    
     public void Interact()
     {
         //new System.Action[] { coucou, coucou2 }
         chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
-        dialogSystem.StartDialogue(dialogTest, null);
+        dialogSystem.StartDialogue(dialogTest, new System.Action[] { coucou, coucou2 });
     }
 
 }

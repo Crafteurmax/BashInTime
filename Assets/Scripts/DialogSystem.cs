@@ -44,6 +44,8 @@ public class DialogSystem : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI[] choicesText;
     [SerializeField] private GameObject[] choicesBox;
 
+    [SerializeField] private ChefDorchestre chef;
+
 
     //Fonction a appeler pour lancer un dialogue avec le fichier json correspondant au dialogue
     public void StartDialogue(TextAsset jsonFile, Action[] actions)
@@ -96,6 +98,7 @@ public class DialogSystem : MonoBehaviour
         }
 
         dialogUI.SetActive(false);
+        chef.GetOut();
         yield break;
     }
 
@@ -106,6 +109,8 @@ public class DialogSystem : MonoBehaviour
         {
             i = choice.nextDialog - 1; //On anticipe le i++
         }
+
+        currentChoice = -1; // reset du choix 
 
         if (actions != null)
         {
