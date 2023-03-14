@@ -86,6 +86,7 @@ public class Typing : MonoBehaviour
     public void PrintOutput(String output)
     {
         fixText += output;
+        updateScroll();
         isCommandRunning = false;
     }
 
@@ -273,6 +274,17 @@ public class Typing : MonoBehaviour
 #pragma warning disable CS0162 // Unreachable code detected
         return true;
 #pragma warning restore CS0162 // Unreachable code detected
+    }
+
+    private void updateScroll()
+    {
+        float canvas_h = textComponent.transform.parent.GetComponent<RectTransform>().rect.height;
+        float text_h = textComponent.GetPreferredValues().y;
+        Debug.Log(canvas_h + " - "+ text_h+ " = " + (text_h - canvas_h));
+        textComponent.rectTransform.SetPositionAndRotation(
+            new Vector3(0, text_h - canvas_h, 0),
+            textComponent.rectTransform.rotation); ;
+
     }
 
     //################################ fonction de unity ################################  

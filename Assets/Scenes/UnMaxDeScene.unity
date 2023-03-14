@@ -357,8 +357,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1128773694}
-  - component: {fileID: 1128773693}
   - component: {fileID: 1128773695}
+  - component: {fileID: 1128773693}
+  - component: {fileID: 1128773697}
+  - component: {fileID: 1128773696}
   m_Layer: 0
   m_Name: Keyboard
   m_TagString: Untagged
@@ -457,3 +459,53 @@ MonoBehaviour:
   m_DefaultActionMap: GameActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1128773696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128773692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d94c4d79ee5f514d8faad52daa0eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileRoot: BashWork/root
+  root: BashWork
+  executeFile: execute.sh
+  consoleLogsFile: log.txt
+  errorLogsFile: log_error.txt
+  timedOutMessage: "The Terminal has crashed. Restarting... \n"
+  maxWaitingDuration: 5
+--- !u!114 &1128773697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128773692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34b56f6fbd6e344481603640a2a57ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: /
+  fileCommands:
+  - ls
+  - rm
+  - grep
+  - mkdir
+  - cat
+  - touch
+  - cp
+  - find
+  - mv
+  - head
+  - tail
+  directCommands:
+  - echo
+  interpretedCommands:
+  - cd
+  - pwd
+  testline: 
