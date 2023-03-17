@@ -63,7 +63,7 @@ public class CommandParser : MonoBehaviour
         string[] lines = command.Split("|");
         foreach (string line in lines)
         {
-            PreparePart(line, lines.Length);
+            if(!PreparePart(line, lines.Length)) return;
         }
 
         System.Text.StringBuilder lineBuilder = new System.Text.StringBuilder(rawCommand);
@@ -83,7 +83,7 @@ public class CommandParser : MonoBehaviour
 
 
     //Prepare l'execution d'une partie de la commande(chaque commande entre les tubes)
-    public void PreparePart(string line, int ncommands)
+    public bool PreparePart(string line, int ncommands)
     {
         line = line.Trim();
 
@@ -93,7 +93,7 @@ public class CommandParser : MonoBehaviour
             if (!authorizedCharacters.Contains(c))
             {
                 ShowReturnValue("", "Illegal Character : '" + c + "'\n", line);
-                return;
+                return false;
             }
         }
 
@@ -110,6 +110,7 @@ public class CommandParser : MonoBehaviour
         {
             case CommandType.Error:
                 ShowReturnValue("", "bash: "+command+": command not found\n", line);
+                return false;
                 break;
             case CommandType.Direct:
                 DirectPrepare(words, ShowReturnValue, line);
@@ -122,7 +123,7 @@ public class CommandParser : MonoBehaviour
                 break;
         }
 
-        return;
+        return true;
     }
 
     //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
