@@ -24,11 +24,15 @@ public class CommandParser : MonoBehaviour
     }
 
     
-    [SerializeField] private string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail"}; //Contient des arguments principaux qui sont des fichiers
+    [SerializeField] private string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail", "wc", "tar"}; //Contient des arguments principaux qui sont des fichiers
     [SerializeField] private string[] directCommands = { "echo"}; //Contient des arguments principaux qui sont des donnees directes
     [SerializeField] private string[] interpretedCommands = { "cd", "pwd" }; //Commandes interpretees directement
 
 
+    //Variable pour la commande finale, pratique avec les tubes
+    private string rawCommand = "";
+    private Action<string, string, string> finalCallback;
+    private string rawUserCommand;
 
     //Lien avec l'executeur de commandes
     private CommandExecuter executer;
@@ -37,6 +41,10 @@ public class CommandParser : MonoBehaviour
     {
         executer = GetComponent<CommandExecuter>();
         keyboard = GetComponent<Typing>();
+
+        rawCommand = "";
+        finalCallback = ShowReturnValue;
+        rawUserCommand = "";
     }
 
     
@@ -47,8 +55,35 @@ public class CommandParser : MonoBehaviour
         else keyboard.PrintOutput(textLog);
     }
 
+    
+
     //Fonction Principale d'execution d'une commande
-    public void ExecuteCommand(string line)
+    public void ExecuteCommand(string command)
+    {
+        string[] lines = command.Split("|");
+        foreach (string line in lines)
+        {
+            PreparePart(line, lines.Length);
+        }
+
+        System.Text.StringBuilder lineBuilder = new System.Text.StringBuilder(rawCommand);
+        lineBuilder[rawCommand.LastIndexOf('|')] = ' ';
+        rawCommand = lineBuilder.ToString(0, rawCommand.Length);
+
+        System.Text.StringBuilder userLineBuilder = new System.Text.StringBuilder(rawUserCommand);
+        userLineBuilder[rawUserCommand.LastIndexOf('|')] = ' ';
+        rawUserCommand = userLineBuilder.ToString(0, rawUserCommand.Length);
+
+        RawExecute();
+
+        rawCommand = "";
+        finalCallback = ShowReturnValue;
+        rawUserCommand = "";
+    }
+
+
+    //Prepare l'execution d'une partie de la commande(chaque commande entre les tubes)
+    public void PreparePart(string line, int ncommands)
     {
         line = line.Trim();
 
@@ -77,13 +112,13 @@ public class CommandParser : MonoBehaviour
                 ShowReturnValue("", "bash: "+command+": command not found\n", line);
                 break;
             case CommandType.Direct:
-                DirectExecute(words, ShowReturnValue, line);
+                DirectPrepare(words, ShowReturnValue, line);
                 break;
             case CommandType.File:
-                SafeExecute(words, ShowReturnValue, line);
+                SafePrepare(words, ShowReturnValue, line);
                 break;
             case CommandType.Interpreted:
-                Interprete(command, words, line);
+                Interprete(command, words, line, ncommands);
                 break;
         }
 
@@ -93,7 +128,7 @@ public class CommandParser : MonoBehaviour
     //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
     private string PrepareOutputInputCommand(string command)
     {
-        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ").Replace("|", " | ");
+        return command.Replace(">", " > ").Replace(">  >", ">>").Replace("<", " < ");
     }
 
 
@@ -163,7 +198,7 @@ public class CommandParser : MonoBehaviour
     {
         if (word.Length == 0) return true;
 
-        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<" || word.Trim() == "|") return true; //On detecte si c'est pas un symbole entree sortie
+        if (word.Trim() == ">" || word.Trim() == ">>" || word.Trim() == "<") return true; //On detecte si c'est pas un symbole entree sortie
 
         if (word[0] == '-')
         {
@@ -178,7 +213,7 @@ public class CommandParser : MonoBehaviour
         return false;
     }
 
-    private void SafeExecute(string[] arguments, Action<string, string, string> callback, string userCommand)
+    private void SafePrepare(string[] arguments, Action<string, string, string> callback, string userCommand)
     {
 
         //Detection d'arguments, safe car chemin relatifs transformés en chemins absolus virtuels
@@ -193,18 +228,18 @@ public class CommandParser : MonoBehaviour
             newCommand += " " + argument;
         }
 
-        RawExecute(newCommand, callback, userCommand);
+        RawPrepare(newCommand, callback, userCommand);
     }
 
     //Fonction intermédiaire pour prendre en charge l'entree/sortie avec la securite sur les fichiers de sortie
-    private void DirectExecute(string[] arguments, Action<string, string, string> callback, string userCommand)
+    private void DirectPrepare(string[] arguments, Action<string, string, string> callback, string userCommand)
     {
         int i = 0;
-        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != " | ") i++;
+        while (i < arguments.Length && arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>") i++;
 
         for (i++; i < arguments.Length; i++)
         {
-            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i] != " | " && arguments[i].Trim() != "")
+            if(arguments[i] != "<" && arguments[i] != ">" && arguments[i] != ">>" && arguments[i].Trim() != "")
             {
                 arguments[i] = GetAbsoluteVirtualPath(arguments[i].Trim());
             }
@@ -217,15 +252,25 @@ public class CommandParser : MonoBehaviour
             finalCommand += arguments[j] + " ";
         }
 
-        RawExecute(finalCommand, callback, userCommand);
+        RawPrepare(finalCommand, callback, userCommand);
     }
 
-    //Execute directement la commande line
-    private void RawExecute(string line, Action<string, string, string> callback, string userCommand)
+
+
+    //Rajoute directement la partie de la commande
+    private void RawPrepare(string line, Action<string, string, string> callback, string userCommand)
     {
-        StartCoroutine(executer.Execute(line, currentDirectory, callback, userCommand));
+        rawCommand += line + " | ";
+        rawUserCommand += userCommand + " | ";
+        finalCallback = callback;
 
         return;
+    }
+
+    //Execute la commande finale
+    private void RawExecute()
+    {
+        StartCoroutine(executer.Execute(rawCommand, currentDirectory, finalCallback, rawUserCommand));
     }
 
     //Callback de la console pour CD, permet de savoir si le dossier existe
@@ -256,15 +301,20 @@ public class CommandParser : MonoBehaviour
     }
 
     //Switch d'interpretation des commandes
-    private void Interprete(string command, string[] arguments, string userLine)
+    private void Interprete(string command, string[] arguments, string userLine, int ncommand)
     {
         switch (command)
         {
             case "pwd":
-                ShowReturnValue(currentDirectory+"\n", "", command);
+                arguments[0] = "echo " + currentDirectory; //SOLUTION DE GENIE POUR LES PIPES!!!!
+                DirectPrepare(arguments, ShowReturnValue, command);
                 break;
             case "cd":
-                SafeExecute(arguments, CdCallback, userLine);
+                if(ncommand != 1)
+                {
+                    ShowReturnValue("", "Using cd with pipes is not allowed\n", "cd"); //Bloquer le cd avec le pipes aucun interet et bugs possibles
+                }
+                SafePrepare(arguments, CdCallback, userLine);
                 break;
         }
     }

@@ -1,0 +1,8 @@
+.
+./ad
+./log.txt
+./log_error.txt
+./newfolder
+./pwd.txt
+./test.txt
+./tr3
