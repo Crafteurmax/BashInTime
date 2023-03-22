@@ -57,7 +57,7 @@ public class TimeManager : MonoBehaviour
             eventCounter++;
         }
 
-        Debug.Log(eventCounter);
+        //Debug.Log(eventCounter);
         //int[] temp = ConvertTime(time);
         //Debug.Log(temp[2] + ":" + temp[1] + ":" + temp[0]);
     }

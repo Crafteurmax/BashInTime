@@ -30,7 +30,9 @@ public class CommandExecuter : MonoBehaviour
         string errorPath = root + "/" + errorLogsFile;
 
         //Commande finale
-        string finalCommand = 
+        string finalCommand =
+            "echo \"\" > BashWork/empty.txt\n" +
+            "exec 0<BashWork/empty.txt\n" +
             "exec 1>" + logPath + "\n" +
             "exec 2>" + errorPath + "\n" +
             "cd " + fileRoot + currentDirectory + "\n" +
@@ -64,6 +66,8 @@ public class CommandExecuter : MonoBehaviour
             callback.Invoke("", timedOutMessage, command);
             yield break;
         }
+
+
 
         //On recupere les logs
         string log = ReadFile(logPath);
