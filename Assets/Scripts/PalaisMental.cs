@@ -22,22 +22,29 @@ public class PalaisMental : MonoBehaviour
     [SerializeField] private float intervalleY;
     [SerializeField] private Vector2 firstButtonPosition;
 
+    [SerializeField] private GameObject defaultText;
+    [SerializeField] private TMPro.TextMeshProUGUI titreText;
+    [SerializeField] private TMPro.TextMeshProUGUI descText;
+
     private int displayedButtonsCount;
 
 
     private List<Button> buttons;
+    private EventDescription[] eventDescs;
 
     void Start()
     {
         buttons = new List<Button>();
+        eventDescs = new EventDescription[100]; //DEBUG
         StartCoroutine(DebugTest());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
-    }
+        defaultText.SetActive(true);
+        titreText.text = "";
+        descText.text = "";
+    }   
 
     bool isEventDisplayed(EventDescription eventDesc)
     {
@@ -70,26 +77,46 @@ public class PalaisMental : MonoBehaviour
         Button button = buttonObject.GetComponent<Button>();
 
         button.name = eventDesc.name;
+        button.onClick.AddListener(delegate { SelectEvent(eventDesc.id); }); //Faire appeler la fonction select event avec l'id
 
         buttonParent.sizeDelta += intervalleY * Vector2.up;
+
+        eventDescs[eventDesc.id] = eventDesc;
+    }
+
+
+    public void SelectEvent(int id)
+    {
+        Debug.Log("Event " + id + " selected");
+
+        EventDescription desc = eventDescs[id];
+
+        if (desc == null) return;
+
+        defaultText.SetActive(false);
+        titreText.text = desc.name;
+        descText.text = desc.description;
     }
 
 
     IEnumerator DebugTest()
     {
-        while (true)
+
+        for (int i = 0; i<100; i++)
         {
             yield return new WaitForSeconds(1);
 
             EventDescription testEvent = new EventDescription()
             {
                 name = "Time debug : " + Time.time,
-                description = "desc",
-                id = -1
+                description = "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time,
+                id = i
             };
 
             AddEventButton(testEvent);
         }
        
     }
+
+    
 }
