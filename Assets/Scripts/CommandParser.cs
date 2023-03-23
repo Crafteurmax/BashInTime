@@ -111,7 +111,6 @@ public class CommandParser : MonoBehaviour
             case CommandType.Error:
                 ShowReturnValue("", "bash: "+command+": command not found\n", line);
                 return false;
-                break;
             case CommandType.Direct:
                 DirectPrepare(words, ShowReturnValue, line);
                 break;
