@@ -15,6 +15,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "DialogButton",
+                    "type": "Button",
+                    "id": "36d5c5e4-f4d3-4e38-8711-a87a790c2b8f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GetOut",
+                    "type": "Button",
+                    "id": "9f4b10d3-c39f-41ce-8828-52495caee463",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Enter",
                     "type": "Button",
                     "id": "e84d2136-9ba5-4617-b1b1-6f50b8e151b5",
@@ -38,7 +56,7 @@
                     "id": "ad7f7d2a-dacb-406f-8aa2-4cee5bf45998",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": true
                 },
                 {
@@ -47,16 +65,7 @@
                     "id": "dc3c5e06-2a54-4e8a-9c08-1d77e71459f8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DialogButton",
-                    "type": "Button",
-                    "id": "36d5c5e4-f4d3-4e38-8711-a87a790c2b8f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -65,16 +74,7 @@
                     "id": "f33c9fa1-b451-4d5b-ac0b-e6fc6dba7dbd",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "GetOut",
-                    "type": "Button",
-                    "id": "9f4b10d3-c39f-41ce-8828-52495caee463",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -147,111 +147,23 @@
                 },
                 {
                     "name": "",
-                    "id": "4581e539-ac4c-4479-8396-ba6bf755e358",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Enter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b64d1a98-ded4-4ec8-b2e6-a61c291b393f",
-                    "path": "<Keyboard>/numpadEnter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Enter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c7569974-a06f-45e0-a87d-a5ce02dcdc6f",
-                    "path": "<Keyboard>/backspace",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Del",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "dd901e14-5d88-4380-ada8-0fed32f6e925",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCursor",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "277df8a3-d840-40fa-8017-c1ecdd729a57",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "6e53d820-02f0-47fd-b5a9-f0ed06899e0f",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCursor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "11f1f30a-4dfc-4bb2-a1d2-012d0d189801",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollTerminal",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "b3fbe1e5-6e1f-402d-9b50-43865379f8b6",
-                    "path": "<Keyboard>/numpad3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollTerminal",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "ec0540f8-ae7d-4bea-9aa8-67fbc1ee5f90",
-                    "path": "<Keyboard>/numpad9",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ScrollTerminal",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
                     "id": "76b602d4-2820-4316-9c91-997eb82c960b",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DialogButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c590563d-01f1-4382-b727-fc233d6a70af",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetOut",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,13 +201,101 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "c590563d-01f1-4382-b727-fc233d6a70af",
-                    "path": "<Keyboard>/escape",
+                    "name": "1D Axis",
+                    "id": "11f1f30a-4dfc-4bb2-a1d2-012d0d189801",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GetOut",
+                    "action": "ScrollTerminal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b3fbe1e5-6e1f-402d-9b50-43865379f8b6",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "ec0540f8-ae7d-4bea-9aa8-67fbc1ee5f90",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "dd901e14-5d88-4380-ada8-0fed32f6e925",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "277df8a3-d840-40fa-8017-c1ecdd729a57",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6e53d820-02f0-47fd-b5a9-f0ed06899e0f",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c7569974-a06f-45e0-a87d-a5ce02dcdc6f",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Del",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4581e539-ac4c-4479-8396-ba6bf755e358",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b64d1a98-ded4-4ec8-b2e6-a61c291b393f",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

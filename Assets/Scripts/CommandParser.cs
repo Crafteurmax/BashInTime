@@ -327,7 +327,7 @@ public class CommandParser : MonoBehaviour
         ExecuteCommand(testline);
     }
 
-
+    /*
     [CustomEditor(typeof(CommandParser))]
     public class testInspector : Editor
     {
@@ -342,4 +342,5 @@ public class CommandParser : MonoBehaviour
             }
         }
     }
+    */
 }
