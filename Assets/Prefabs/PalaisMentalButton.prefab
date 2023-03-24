@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8480531795546395911}
   - component: {fileID: 8480531795546395910}
   m_Layer: 0
-  m_Name: PalaisMentalEvent
+  m_Name: PalaisMentalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

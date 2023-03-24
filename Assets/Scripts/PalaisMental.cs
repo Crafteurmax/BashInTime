@@ -8,35 +8,75 @@ public class PalaisMental : MonoBehaviour
 {
     
     [Serializable]
-    public class EventDescription
+    public class MemoryDescription
     {
+        public int id;
         public string name;
         public string description;
-        public int id;
+        public int[] precedents;
+        public int[] suivants;
     }
 
-    [SerializeField] private TMPro.TextMeshProUGUI description;
-    [SerializeField] private RectTransform buttonParent;
-    [SerializeField] private GameObject buttonPrefab;
+    [Serializable]
+    public class Memories
+    {
+        public MemoryDescription[] memories;
+    }
 
+    [SerializeField] private TextAsset memoriesData;
+    [SerializeField] private string unlockedText = "?????";
+
+    [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private float intervalleY;
+
+    [Header("Memories Interface")]
+    [SerializeField] private RectTransform buttonParent;
     [SerializeField] private Vector2 firstButtonPosition;
 
+    [Header("Predecessor Interface")]
+    [SerializeField] private GameObject predecessorPanel;
+    [SerializeField] private RectTransform predecessorParent;
+    [SerializeField] private Vector2 firstPredecessorButtonPosition;
+
+    [Header("Sucessor Interface")]
+    [SerializeField] private GameObject successorPanel;
+    [SerializeField] private RectTransform successorParent;
+    [SerializeField] private Vector2 firstSuccessorButtonPosition;
+
+    [Header("Memories Description")]
     [SerializeField] private GameObject defaultText;
     [SerializeField] private TMPro.TextMeshProUGUI titreText;
     [SerializeField] private TMPro.TextMeshProUGUI descText;
 
     private int displayedButtonsCount;
+    private int displayedPredecessorsButtonsCount;
+    private int displayedSuccessorsButtonsCount;
 
 
-    private List<Button> buttons;
-    private EventDescription[] eventDescs;
+    private bool[] unlockedMemories;
+    private Memories memories;
+
+    private Dictionary<string, int> ids;
 
     void Start()
     {
-        buttons = new List<Button>();
-        eventDescs = new EventDescription[100]; //DEBUG
+        memories = JsonUtility.FromJson<Memories>(memoriesData.ToString());
+
+        unlockedMemories = new bool[memories.memories.Length];
+
+        InitDictionnary();
+
         StartCoroutine(DebugTest());
+    }
+
+    private void InitDictionnary()
+    {
+        ids = new Dictionary<string, int>();
+
+        foreach(MemoryDescription mem in memories.memories)
+        {
+            ids.Add(mem.name, mem.id);
+        }
     }
 
     private void OnEnable()
@@ -44,76 +84,122 @@ public class PalaisMental : MonoBehaviour
         defaultText.SetActive(true);
         titreText.text = "";
         descText.text = "";
+        predecessorPanel.SetActive(false);
+        successorPanel.SetActive(false);
     }   
 
-    bool isEventDisplayed(EventDescription eventDesc)
+    bool IsMemoryDisplayed(MemoryDescription memDesc)
     {
-        foreach(Button button in buttons){
-            if(button.name == eventDesc.name)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return unlockedMemories[memDesc.id];
     }
 
-
-
-    void AddEventButton(EventDescription eventDesc)
+    private void AppendButton(MemoryDescription memDesc, RectTransform parent, Vector2 position, ref int buttonsCount, bool clickable)
     {
-        if (isEventDisplayed(eventDesc)) return;
+        parent.sizeDelta += intervalleY * Vector2.up;
 
         GameObject buttonObject = Instantiate(buttonPrefab);
 
-        buttonObject.transform.SetParent(buttonParent);
-        
-        buttonObject.transform.localPosition = firstButtonPosition + (intervalleY * displayedButtonsCount) * Vector2.down;
-        displayedButtonsCount++;
+        buttonObject.transform.SetParent(parent);
 
-        TMPro.TextMeshProUGUI textMesh = buttonObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        textMesh.text = eventDesc.name;
+        buttonObject.transform.localPosition = position + (intervalleY * buttonsCount) * Vector2.down;
+        buttonsCount++;
 
         Button button = buttonObject.GetComponent<Button>();
+        button.name = memDesc.name;
 
-        button.name = eventDesc.name;
-        button.onClick.AddListener(delegate { SelectEvent(eventDesc.id); }); //Faire appeler la fonction select event avec l'id
+        TMPro.TextMeshProUGUI textMesh = buttonObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
 
-        buttonParent.sizeDelta += intervalleY * Vector2.up;
-
-        eventDescs[eventDesc.id] = eventDesc;
+        if (clickable)
+        {
+            button.onClick.AddListener(delegate { SelectMemory(memDesc.id); }); //Faire appeler la fonction select event avec l'id
+            textMesh.text = memDesc.name;
+        }
+        else
+        {
+            button.interactable = false;
+            textMesh.text = unlockedText;
+        }
     }
 
-
-    public void SelectEvent(int id)
+    void AddMemory(MemoryDescription memDesc)
     {
-        Debug.Log("Event " + id + " selected");
+        if (IsMemoryDisplayed(memDesc)) return;
 
-        EventDescription desc = eventDescs[id];
+        AppendButton(memDesc, buttonParent, firstButtonPosition, ref displayedButtonsCount, true);
+        unlockedMemories[memDesc.id] = true;
+    }
+
+    private void DisplayPredecessors(MemoryDescription memDesc)
+    {
+        predecessorPanel.SetActive(true);
+
+        foreach (Transform child in predecessorParent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        displayedPredecessorsButtonsCount = 0;
+        predecessorParent.sizeDelta = new Vector2(predecessorParent.sizeDelta.x, firstPredecessorButtonPosition.y);
+
+        foreach (int predecessorId in memDesc.precedents)
+        {
+            MemoryDescription precDesc = memories.memories[predecessorId];
+            AppendButton(precDesc, predecessorParent, firstPredecessorButtonPosition, ref displayedPredecessorsButtonsCount, true);
+        }
+    }
+
+    private void DisplaySucessors(MemoryDescription memDesc)
+    {
+        successorPanel.SetActive(true);
+
+        foreach (Transform child in successorParent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        displayedSuccessorsButtonsCount = 0;
+        successorParent.sizeDelta = new Vector2(successorParent.sizeDelta.x, firstSuccessorButtonPosition.y);
+
+        foreach (int successorId in memDesc.suivants)
+        {
+            MemoryDescription succDesc = memories.memories[successorId];
+            AppendButton(succDesc, successorParent, firstSuccessorButtonPosition, ref displayedSuccessorsButtonsCount, IsMemoryDisplayed(succDesc));
+        }
+    }
+
+    public void SelectMemory(int id)
+    {
+        MemoryDescription desc = memories.memories[id];
 
         if (desc == null) return;
 
         defaultText.SetActive(false);
         titreText.text = desc.name;
         descText.text = desc.description;
+
+        DisplayPredecessors(memories.memories[id]);
+        DisplaySucessors(memories.memories[id]);
     }
 
+    public void AddMemory(int id)
+    {
+        AddMemory(memories.memories[id]);
+    }
+
+    public void AddMemory(string name)
+    {
+        AddMemory(ids[name]);
+    }
 
     IEnumerator DebugTest()
     {
 
-        for (int i = 0; i<100; i++)
+        for (int i = 0; i<4; i++)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
 
-            EventDescription testEvent = new EventDescription()
-            {
-                name = "Time debug : " + Time.time,
-                description = "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time + "Time debug : " + Time.time,
-                id = i
-            };
 
-            AddEventButton(testEvent);
+            AddMemory("MemoryTest" + i);
         }
        
     }
