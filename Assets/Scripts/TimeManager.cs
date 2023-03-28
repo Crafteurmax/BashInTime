@@ -13,12 +13,13 @@ public class TimeManager : MonoBehaviour
     public float t0 = 55200;
     public float timeSpeed = 4;
 
-    public Condition[] eventConditions = { };
+    [SerializeField] ConditionsManager conditionsManager;
 
     private int eventCounter;
     public List<Evenement> listeEvenement = new List<Evenement>();
-    private Action[] ActionList = { null, test, test2 };
+    private Action[] ActionList = { null, test, test2, test3};
     [SerializeField] TextAsset eventsJSON;
+    private bool lastEventHappened = false; 
 
     [SerializeField] private TextMeshProUGUI textComponent;
     void Start()
@@ -38,18 +39,15 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime * timeSpeed;
-        if (listeEvenement[eventCounter].IsMature(time))
+        textComponent.text = formatTime(time);
+
+        if (!lastEventHappened && listeEvenement[eventCounter].IsMature(time))
         {
-            if (listeEvenement[eventCounter].action != null && listeEvenement[eventCounter].IsEventPossible(eventConditions)) listeEvenement[eventCounter].action();
-            if (eventCounter +1 < listeEvenement.Count) eventCounter++;
+            if (listeEvenement[eventCounter].action != null && listeEvenement[eventCounter].IsEventPossible(conditionsManager)) listeEvenement[eventCounter].action();
+            if (eventCounter + 1 == listeEvenement.Count) lastEventHappened = true;
+            else eventCounter++;
+            
         }
-        String temp = formatTime(time);
-        textComponent.text = temp;
-        Debug.Log(temp);
-    
-        //Debug.Log(eventCounter);
-        //int[] temp = ConvertTime(time);
-        //Debug.Log(temp[2] + ":" + temp[1] + ":" + temp[0]);
     }
 
     private string formatTime(float time)
@@ -79,6 +77,8 @@ public class TimeManager : MonoBehaviour
     static void test() { Debug.Log("hello"); }
 
     static void test2() { Debug.Log("hello 2"); }
+
+    static void test3() { Debug.Log("hello 3"); }
 }
 
 [System.Serializable]
@@ -86,7 +86,7 @@ public class Events
 {
     public String eventName;
     public float timeStamp;
-	public int[] conditionsID;
+	public String[] conditionsID;
     public int actionID;
 }
 
@@ -99,13 +99,13 @@ public class Evenement : IComparable
 {
     public String name;
     public float timeStamp;
-    int[] conditionsID;
+    String[] conditions;
     public Action action;
-    public Evenement(String name, float timeStamp, int[] conditionsID, Action action)
+    public Evenement(String name, float timeStamp, String[] conditions, Action action)
     {
         this.name = name;
         this.timeStamp = timeStamp;
-        this.conditionsID = conditionsID;
+        this.conditions = conditions;
         this.action = action;
     }
 
@@ -113,12 +113,12 @@ public class Evenement : IComparable
     {
         return timeStamp.CompareTo(((Evenement)otherEvent).timeStamp);
     }
-    public bool IsEventPossible(Condition[] conditions)
+    public bool IsEventPossible(ConditionsManager conditionsManager)
     {
-        if (conditionsID == null) return true;
-        for (var i = 0; i < this.conditionsID.Length; i++)  
+        if (conditions == null) return true;
+        for (var i = 0; i < this.conditions.Length; i++)  
         {
-            if (!conditions[this.conditionsID[i]].state) return false;
+            if (!conditionsManager.GetConditionState(conditions[i])) return false;
         }
         return true;
     }
@@ -128,11 +128,4 @@ public class Evenement : IComparable
         return actualTime > this.timeStamp;
     }
 
-}
-
-[Serializable]
-public class Condition 
-{
-    public string name;
-    public bool state;
 }
