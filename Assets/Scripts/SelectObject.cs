@@ -11,24 +11,25 @@ public class SelectObject : MonoBehaviour
     public Color outlineColor;
     private Color invisibleColor = new Color(0, 0, 0, 0);
 
+    [SerializeField] float outlineWidth;
+
     public void Start()
     {
         GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
-        //outline.color = ConsoleColor.red;
+        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.0f);
     }
-
-
 
     public void OnMouseEnter() 
     {
         GetComponent<Renderer>().material.SetColor("_OutlineColor", outlineColor);
-        
+        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", outlineWidth);
         UnityEngine.Debug.Log("ENTER");
     }
 
     public void OnMouseExit()
     {
         GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
+        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", outlineWidth);
         UnityEngine.Debug.Log("EXIT");
     }
 
@@ -39,12 +40,5 @@ public class SelectObject : MonoBehaviour
         
         MonoBehaviour script = GetComponent(scriptType) as MonoBehaviour;   // On récupère le script qui a été attaché à notre object
         script.SendMessage("Interact", SendMessageOptions.RequireReceiver);    // On exécute la commande start qui est la commande de base pour lancer le script lié à l'object
-    }
-
-
-
-    public void test()
-    {
-        UnityEngine.Debug.Log("test");
     }
 }

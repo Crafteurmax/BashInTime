@@ -3,7 +3,6 @@ Shader "Sprites/Outline"
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
         _OutlineColor ("Outline", Color) = (0,0,0,0)
         _OutlineWidth ("Outline Width", Float) = 0
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
@@ -53,7 +52,7 @@ Shader "Sprites/Outline"
             #endif
 
             UNITY_INITIALIZE_OUTPUT(Input, o);
-            o.color = v.color * _Color * _RendererColor;
+            o.color = v.color * _RendererColor;
         }
 
         void surf (Input IN, inout SurfaceOutput o)
@@ -68,7 +67,7 @@ Shader "Sprites/Outline"
             float2 rightTextUV = IN.uv_MainTex + float2 (_OutlineWidth, 0.0f);
             
 
-
+            // Ici on gère les couleurs des textures (enfin je crois)
             fixed4 c_main = SampleSpriteTexture (mainTextUV) * IN.color;
 
             fixed4 c_upTextUV = SampleSpriteTexture (upTextUV) * IN.color;
@@ -77,25 +76,23 @@ Shader "Sprites/Outline"
             fixed4 c_leftTextUV = SampleSpriteTexture (leftTextUV) * IN.color;
             fixed4 c_rightTextUV = SampleSpriteTexture (rightTextUV) * IN.color;
            
-
-
-            o.Emission = c_main.rgb * c_main.a;
-                        
+            
+            // Pour finir on s'occuppe de l'affichage des textures
             if(c_main.a == 0) {
+                o.Emission = 0;
                 o.Emission += _OutlineColor.rgb * c_upTextUV.a;
                 o.Emission += _OutlineColor.rgb * c_downTextUV.a;
                 
                 o.Emission += _OutlineColor.rgb * c_leftTextUV.a;
                 o.Emission += _OutlineColor.rgb * c_rightTextUV.a;
-            }
-            
-            if(c_main.a == 0) {
+
+                
                 o.Alpha = c_main.a;
             }
             else {
-                o.Alpha = _OutlineColor.a;
-            }
-            
+                o.Emission = c_main.rgb;
+                o.Alpha = 1;
+            }            
         }
         ENDCG
     }
