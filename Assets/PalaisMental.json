@@ -1,0 +1,53 @@
+{
+    "memories":[
+        {
+            "id":0,
+            "name":"MemoryTest0",
+            "description":"Coucou, il faudra tester ça, c'est juste du contenu test0",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                1,2
+            ]
+        },
+        {
+            "id":1,
+            "name":"MemoryTest1",
+            "description":"Coucou, il faudra tester ça, c'est juste du contenu test1",
+            "precedents":[
+                0
+            ],
+            "suivants":[
+                3
+            ]
+        },
+        {
+            "id":2,
+            "name":"MemoryTest2",
+            "description":"Coucou, il faudra tester ça, c'est juste du contenu test2",
+            "precedents":[
+                0
+            ],
+            "suivants":[
+                3
+            ]
+        },
+        {
+            "id":3,
+            "name":"MemoryTest3",
+            "description":"Coucou, il faudra tester ça, c'est juste du contenu test3",
+            "precedents":[
+                1,2
+            ],
+            "suivants":[
+
+            ]
+        }
+
+
+
+    ]
+
+
+}
