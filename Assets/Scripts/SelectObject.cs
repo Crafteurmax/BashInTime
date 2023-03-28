@@ -2,21 +2,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SelectObject : MonoBehaviour
 {
+    public Color outlineColor;
+    private Color invisibleColor = new Color(0, 0, 0, 0);
+
+    public void Start()
+    {
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
+        //outline.color = ConsoleColor.red;
+    }
+
 
 
     public void OnMouseEnter() 
     {
-        //UnityEngine.Debug.Log("ENTER");
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", outlineColor);
+        
+        UnityEngine.Debug.Log("ENTER");
     }
 
     public void OnMouseExit()
     {
-        //UnityEngine.Debug.Log("EXIT");
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
+        UnityEngine.Debug.Log("EXIT");
     }
 
     public void OnMouseDown()
