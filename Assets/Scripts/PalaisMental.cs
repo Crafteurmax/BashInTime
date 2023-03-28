@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Classe principale qui gère l'interface utilisateur et les interactions avec les souvenirs
 public class PalaisMental : MonoBehaviour
 {
-    
+
+    //Représentation d'un souvenir qui contient un nom, une description et une liste d'identifiants de souvenirs précédents et suivants.
     [Serializable]
     public class MemoryDescription
     {
@@ -17,6 +19,7 @@ public class PalaisMental : MonoBehaviour
         public int[] suivants;
     }
 
+    //Liste des souvenirs
     [Serializable]
     public class Memories
     {
@@ -24,7 +27,7 @@ public class PalaisMental : MonoBehaviour
     }
 
     [SerializeField] private TextAsset memoriesData;
-    [SerializeField] private string unlockedText = "?????";
+    [SerializeField] private string lockedText = "?????";
 
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private float intervalleY;
@@ -58,7 +61,8 @@ public class PalaisMental : MonoBehaviour
 
     private Dictionary<string, int> ids;
 
-    void Start()
+    //Charge les souvenirs en les analysant depuis un fichier JSON et les stocke dans la variable memories.
+    private void Start()
     {
         memories = JsonUtility.FromJson<Memories>(memoriesData.ToString());
 
@@ -66,9 +70,11 @@ public class PalaisMental : MonoBehaviour
 
         InitDictionnary();
 
+        //DEBUG
         StartCoroutine(DebugTest());
     }
 
+    //remplit un dictionnaire qui associe les noms de souvenirs à leurs identifiants dans la liste memories.memories.
     private void InitDictionnary()
     {
         ids = new Dictionary<string, int>();
@@ -79,6 +85,7 @@ public class PalaisMental : MonoBehaviour
         }
     }
 
+    //Est appelée chaque fois que le script est activé et désactive les panneaux de successeurs et de prédécesseurs et affiche un texte par défaut.
     private void OnEnable()
     {
         defaultText.SetActive(true);
@@ -86,13 +93,15 @@ public class PalaisMental : MonoBehaviour
         descText.text = "";
         predecessorPanel.SetActive(false);
         successorPanel.SetActive(false);
-    }   
+    }
 
-    bool IsMemoryDisplayed(MemoryDescription memDesc)
+    //Vérifie si le souvenir est affiché dans l'interface utilisateur.
+    private bool IsMemoryDisplayed(MemoryDescription memDesc)
     {
         return unlockedMemories[memDesc.id];
     }
 
+    //Ajoute un bouton d'interface utilisateur avec du texte et un événement de clic à un parent transform. Si le paramètre clickable est faux, le bouton est désactivé.
     private void AppendButton(MemoryDescription memDesc, RectTransform parent, Vector2 position, ref int buttonsCount, bool clickable)
     {
         parent.sizeDelta += intervalleY * Vector2.up;
@@ -117,11 +126,12 @@ public class PalaisMental : MonoBehaviour
         else
         {
             button.interactable = false;
-            textMesh.text = unlockedText;
+            textMesh.text = lockedText;
         }
     }
 
-    void AddMemory(MemoryDescription memDesc)
+    //Ajoute un bouton pour un souvenir donné à l'interface utilisateur si le souvenir n'a pas encore été ajouté par mesDesc.
+    private void AddMemory(MemoryDescription memDesc)
     {
         if (IsMemoryDisplayed(memDesc)) return;
 
@@ -129,6 +139,8 @@ public class PalaisMental : MonoBehaviour
         unlockedMemories[memDesc.id] = true;
     }
 
+
+    //Les fonctions DisplayPredecessors et DisplaySucessors affichent des boutons pour les souvenirs prédécesseurs et successeurs d'un souvenir donné dans des panneaux dédiés.
     private void DisplayPredecessors(MemoryDescription memDesc)
     {
         predecessorPanel.SetActive(true);
@@ -148,7 +160,7 @@ public class PalaisMental : MonoBehaviour
         }
     }
 
-    private void DisplaySucessors(MemoryDescription memDesc)
+    private void DisplaySuccessors(MemoryDescription memDesc)
     {
         successorPanel.SetActive(true);
 
@@ -167,6 +179,7 @@ public class PalaisMental : MonoBehaviour
         }
     }
 
+    //Est appelée lorsqu'un bouton de souvenir est cliqué. Elle affiche le titre et la description du souvenir sélectionné, ainsi que les boutons de prédécesseurs et de successeurs correspondants.
     public void SelectMemory(int id)
     {
         MemoryDescription desc = memories.memories[id];
@@ -178,19 +191,23 @@ public class PalaisMental : MonoBehaviour
         descText.text = desc.description;
 
         DisplayPredecessors(memories.memories[id]);
-        DisplaySucessors(memories.memories[id]);
+        DisplaySuccessors(memories.memories[id]);
     }
 
+    //Ajoute un bouton pour un souvenir donné à l'interface utilisateur si le souvenir n'a pas encore été ajouté par l'id.
     public void AddMemory(int id)
     {
         AddMemory(memories.memories[id]);
     }
 
+    //Ajoute un bouton pour un souvenir donné à l'interface utilisateur si le souvenir n'a pas encore été ajouté par le nom.
     public void AddMemory(string name)
     {
         AddMemory(ids[name]);
     }
 
+
+    //DEBUG
     IEnumerator DebugTest()
     {
 
