@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memoriesData: {fileID: 4900000, guid: 8d919a95c25f7d64594ef012d7972a47, type: 3}
-  unlockedText: ?????
+  lockedText: ?????
   buttonPrefab: {fileID: 8480531795546396152, guid: 0a02e35df22859346a84eb0ea7c8ff70, type: 3}
   intervalleY: 70
   buttonParent: {fileID: 1627106097844145358}
@@ -6131,7 +6131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627106099191184689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0287, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0287, y: 0, z: -0.001}
   m_LocalScale: {x: 49.945, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6176,9 +6176,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1066618249
   m_SortingLayer: 0
-  m_SortingOrder: -100
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
