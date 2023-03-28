@@ -1,50 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
+
 
 public class TimeManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public float time = 0;
+    public float t0 = 55200;
     public float timeSpeed = 4;
 
-    public Condition[] eventConditions = {};
+    public Condition[] eventConditions = { };
 
     private int eventCounter;
     public List<Evenement> listeEvenement = new List<Evenement>();
+    private Action[] ActionList = { null, test, test2 };
+    [SerializeField] TextAsset eventsJSON;
 
+    [SerializeField] private TextMeshProUGUI textComponent;
     void Start()
     {
-        Evenement e1 = new Evenement(10, new[] { 1}, test);
-        Evenement e2 = new Evenement(1, null, null);
-        Evenement e3 = new Evenement(121684, null, null);
-        Evenement e4 = new Evenement(1982, null, null);
-        Evenement e5 = new Evenement(162, null, test2);
-        Evenement e6 = new Evenement(651, null, null);
-        Evenement e7 = new Evenement(168, null, null);
-        Evenement e8 = new Evenement(3255951, null, null);
+        EventsInfo eventsInfo = JsonUtility.FromJson<EventsInfo>(eventsJSON.text);
 
-        listeEvenement.Add(e1);
-        listeEvenement.Add(e2);
-        listeEvenement.Add(e3);
-        listeEvenement.Add(e4);
-        listeEvenement.Add(e5);
-        listeEvenement.Add(e6);
-        listeEvenement.Add(e7);
-        listeEvenement.Add(e8);
+        for(var i = 0; i<eventsInfo.Events.Length; i++) 
+        {
+            Events _ev = eventsInfo.Events[i];
+            listeEvenement.Add(new Evenement(_ev.eventName, _ev.timeStamp, _ev.conditionsID, ActionList[_ev.actionID]));
+        }
 
         listeEvenement.Sort();
-    }
-
-    void test()
-    {
-        Debug.Log("hello");
-    }
-
-    void test2()
-    {
-        Debug.Log("hello 2");
     }
 
     // Update is called once per frame
@@ -54,12 +41,26 @@ public class TimeManager : MonoBehaviour
         if (listeEvenement[eventCounter].IsMature(time))
         {
             if (listeEvenement[eventCounter].action != null && listeEvenement[eventCounter].IsEventPossible(eventConditions)) listeEvenement[eventCounter].action();
-            eventCounter++;
+            if (eventCounter +1 < listeEvenement.Count) eventCounter++;
         }
-
+        String temp = formatTime(time);
+        textComponent.text = temp;
+        Debug.Log(temp);
+    
         //Debug.Log(eventCounter);
         //int[] temp = ConvertTime(time);
         //Debug.Log(temp[2] + ":" + temp[1] + ":" + temp[0]);
+    }
+
+    private string formatTime(float time)
+    {
+        String heure = "";
+        String minute = "";
+        int[] humanTime = ConvertTime(time + t0);
+        if (humanTime[2] < 10) heure += "0" + humanTime[2]; else heure += humanTime[2];
+        if (humanTime[1] < 10) minute += "0" + humanTime[1]; else minute += humanTime[1];
+        if (humanTime[0] % 2 == 0) return heure + " " + minute; else return heure + ":" + minute;
+
     }
 
     int[] ConvertTime(float time)
@@ -74,15 +75,35 @@ public class TimeManager : MonoBehaviour
         return convertedTime;
 
     }
+
+    static void test() { Debug.Log("hello"); }
+
+    static void test2() { Debug.Log("hello 2"); }
 }
 
+[System.Serializable]
+public class Events
+{
+    public String eventName;
+    public float timeStamp;
+	public int[] conditionsID;
+    public int actionID;
+}
+
+
+[System.Serializable]
+public class EventsInfo {
+    public Events[] Events; 
+}
 public class Evenement : IComparable
 {
+    public String name;
     public float timeStamp;
     int[] conditionsID;
     public Action action;
-    public Evenement(float timeStamp, int[] conditionsID, Action action)
+    public Evenement(String name, float timeStamp, int[] conditionsID, Action action)
     {
+        this.name = name;
         this.timeStamp = timeStamp;
         this.conditionsID = conditionsID;
         this.action = action;

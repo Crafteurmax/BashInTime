@@ -1,0 +1,10 @@
+{
+	"Events" : [
+		{
+			"eventName" : "thisMyName",
+			"timeStamp" : 60.0,
+			"conditionsID" : [],
+			"actionID" : 1
+		}
+	]
+}
