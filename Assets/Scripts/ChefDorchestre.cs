@@ -9,6 +9,7 @@ public class ChefDorchestre : MonoBehaviour
     public class SystemObjects
     {
         public string name;
+        public MonoBehaviour[] components;
         public GameObject[] objects;
         public GameSystem parent;
         public bool escapeAllowed;
@@ -24,7 +25,8 @@ public class ChefDorchestre : MonoBehaviour
     {
         Default = 0,
         Dialogue = 1,
-        Console = 2
+        Console = 2,
+        PalaisMental = 3
     }
 
     private void Awake()
@@ -32,6 +34,11 @@ public class ChefDorchestre : MonoBehaviour
         //Desactive les systems si pas mis en jeu
         foreach (SystemObjects gog in systems)
         {
+            foreach (MonoBehaviour go in gog.components)
+            {
+                go.enabled = false;
+            }
+
             foreach (GameObject go in gog.objects)
             {
                 go.SetActive(false);
@@ -41,25 +48,36 @@ public class ChefDorchestre : MonoBehaviour
         currentSystem = systems[(int)GameSystem.Default];
 
         //On active le nouveau systeme
+        foreach (MonoBehaviour go in currentSystem.components)
+        {
+            go.enabled = true;
+        }
         foreach (GameObject go in currentSystem.objects)
         {
             go.SetActive(true);
         }
-
     }
 
     public void SwitchSystem(GameSystem system)
     {
         //On desactive le systeme precedent
-        foreach(GameObject go in currentSystem.objects)
+        foreach(MonoBehaviour go in currentSystem.components)
+        {
+            go.enabled = false;
+        }
+        foreach (GameObject go in currentSystem.objects)
         {
             go.SetActive(false);
         }
-        
+
         //Switch du systeme actuel
         currentSystem = systems[(int)system];
 
         //On active le nouveau systeme
+        foreach (MonoBehaviour go in currentSystem.components)
+        {
+            go.enabled = true;
+        }
         foreach (GameObject go in currentSystem.objects)
         {
             go.SetActive(true);

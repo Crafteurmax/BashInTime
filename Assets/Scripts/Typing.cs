@@ -26,7 +26,7 @@ public class Typing : MonoBehaviour
     private int releasedMoveCursorCount;
     [SerializeField]
     private InputActionReference commandHistory;
-    private int releasedCommandHistoryCount;
+    public int releasedCommandHistoryCount;
 
     // emplacement du curseur dans le texte
     private int cursor;
@@ -52,7 +52,7 @@ public class Typing : MonoBehaviour
     private IEnumerator DelChar()
     {
         if (cursor > 0)
-        { 
+        {
             cursor--;
             currentText = currentText.Remove(cursor, 1);
             //DisplayText(currentText);
@@ -60,16 +60,12 @@ public class Typing : MonoBehaviour
 
         yield return new WaitForSeconds(delayTouche);
 
-        if (del.action.IsPressed())
-        {
-            StartCoroutine(DelChar());
-        }
+        if (del.action.IsPressed()) StartCoroutine(DelChar());
     }
 
     private void OnEnter(InputAction.CallbackContext obj)
     {
-        if (!currentText.Trim().Equals("") && !isCommandRunning) Enter();
-        else addCommandToFixText("");
+        if (!currentText.Trim().Equals("") && !isCommandRunning) Enter(); else addCommandToFixText("");
     }
 
     private void Enter()
@@ -125,8 +121,8 @@ public class Typing : MonoBehaviour
         }
 
         yield return new WaitForSeconds(delayTouche);
-        if(releasedMoveCursorCount > 0)releasedMoveCursorCount--;
-        else if (moveCursor.action.IsPressed())
+        //if(releasedMoveCursorCount > 0)releasedMoveCursorCount--;
+        if (moveCursor.action.IsPressed())
         {
             StartCoroutine(MoveCursor(direction));
         }
@@ -314,7 +310,7 @@ public class Typing : MonoBehaviour
         Keyboard.current.onTextInput += OnTextInput;
         enter.action.canceled += OnEnter;
         del.action.started += OnDel;
-        moveCursor.action.started += OnMoveCursor;
+        moveCursor.action.performed += OnMoveCursor;
         moveCursor.action.canceled += _ => { releasedMoveCursorCount++; };
         scroll.action.started += OnScroll;
         scroll.action.canceled += _ => { if(!NumLockState())releasedScrollCount++; };

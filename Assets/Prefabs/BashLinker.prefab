@@ -59,6 +59,8 @@ MonoBehaviour:
   - find
   - mv
   - head
+  - wc
+  - tar
   directCommands:
   - echo
   interpretedCommands:

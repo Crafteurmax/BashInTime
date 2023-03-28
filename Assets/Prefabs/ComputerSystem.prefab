@@ -531,6 +531,8 @@ MonoBehaviour:
   - mv
   - head
   - tail
+  - wc
+  - tar
   directCommands:
   - echo
   interpretedCommands:
