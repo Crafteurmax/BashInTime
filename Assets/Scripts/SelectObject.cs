@@ -15,22 +15,20 @@ public class SelectObject : MonoBehaviour
 
     public void Start()
     {
-        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
-        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", 1.0f);
+        GetComponent<Renderer>().material.SetFloat("_OutlineWidth", outlineWidth); // On défini une epaisseur d'outline pour l'objet
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor); // En position de départ on passe l'outline en invisible
     }
 
     public void OnMouseEnter() 
     {
-        GetComponent<Renderer>().material.SetColor("_OutlineColor", outlineColor);
-        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", outlineWidth);
-        UnityEngine.Debug.Log("ENTER");
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", outlineColor); // Quand la souris passe sur l'object on rend l'outline visible
+        //UnityEngine.Debug.Log("ENTER");
     }
 
     public void OnMouseExit()
     {
-        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor);
-        //GetComponent<Renderer>().material.SetFloat("_OutlineWidth", outlineWidth);
-        UnityEngine.Debug.Log("EXIT");
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor); // Quand on quitte l'objet on rend l'outline invisible
+        //UnityEngine.Debug.Log("EXIT");
     }
 
     public void OnMouseDown()
