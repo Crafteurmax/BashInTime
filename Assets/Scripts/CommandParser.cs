@@ -8,7 +8,6 @@ public class CommandParser : MonoBehaviour
 {
     //Racine reelle des commandes
     private string root = "BashWork/root";
-
     //CD virtuel
     public string currentDirectory = "/";
 
@@ -39,6 +38,7 @@ public class CommandParser : MonoBehaviour
     private Typing keyboard;
     private void Awake()
     {
+        Debug.Log(root);
         executer = GetComponent<CommandExecuter>();
         keyboard = GetComponent<Typing>();
 

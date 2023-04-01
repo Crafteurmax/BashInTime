@@ -234,8 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   t0: 55200
-  timeSpeed: 4
-  eventConditions: []
+  timeSpeed: 1
+  conditionsManager: {fileID: 0}
   eventsJSON: {fileID: 4900000, guid: 7df472ca588fc11408a839b30726b6cc, type: 3}
   textComponent: {fileID: 3198048490171327794}
 --- !u!1 &3198048490171327797
