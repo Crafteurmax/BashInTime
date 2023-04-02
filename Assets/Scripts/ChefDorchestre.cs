@@ -26,7 +26,8 @@ public class ChefDorchestre : MonoBehaviour
         Default = 0,
         Dialogue = 1,
         Console = 2,
-        PalaisMental = 3
+        PalaisMental = 3,
+        Lock = 4,
     }
 
     private void Awake()
