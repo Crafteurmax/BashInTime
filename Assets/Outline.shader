@@ -47,6 +47,8 @@ Shader "Sprites/Outline"
         {
             v.vertex = UnityFlipSprite(v.vertex, _Flip);
 
+            v.vertex = (1.0f + 2*_OutlineWidth) * v.vertex; 
+
             #if defined(PIXELSNAP_ON)
             v.vertex = UnityPixelSnap (v.vertex);
             #endif
@@ -55,16 +57,23 @@ Shader "Sprites/Outline"
             o.color = v.color * _RendererColor;
         }
 
+        float2 factRed(float2 vec) {
+            float fr = (1.0f + 2*_OutlineWidth);
+            return (vec - float2(0.5f, 0.5f)) * fr + float2(0.5f, 0.5f);
+        }
+
         void surf (Input IN, inout SurfaceOutput o)
         {
-            float2 mainTextUV = IN.uv_MainTex;
+            float2 mainTextUV = factRed(IN.uv_MainTex);
+
+            
             
             // On créer 4 copies des textures avec un décalage haut/bas/gauche/droite
-            float2 upTextUV = IN.uv_MainTex - float2 (0.0f, _OutlineWidth);
-            float2 downTextUV = IN.uv_MainTex + float2 (0.0f, _OutlineWidth);
+            float2 upTextUV = factRed(IN.uv_MainTex - float2 (0.0f, _OutlineWidth));
+            float2 downTextUV = factRed(IN.uv_MainTex + float2 (0.0f, _OutlineWidth));
             
-            float2 leftTextUV = IN.uv_MainTex - float2 (_OutlineWidth, 0.0f);
-            float2 rightTextUV = IN.uv_MainTex + float2 (_OutlineWidth, 0.0f);
+            float2 leftTextUV = factRed(IN.uv_MainTex - float2 (_OutlineWidth, 0.0f));
+            float2 rightTextUV = factRed(IN.uv_MainTex + float2 ( _OutlineWidth, 0.0f));
             
 
             // Ici on gère les couleurs des textures (enfin je crois)
@@ -78,7 +87,7 @@ Shader "Sprites/Outline"
            
             
             // Pour finir on s'occuppe de l'affichage des textures
-            if(c_main.a == 0) {
+            if (c_main.a == 0 || mainTextUV.x < 0 || mainTextUV.x > 1 || mainTextUV.y < 0 || mainTextUV.y > 1) {
                 o.Emission = 0;
                 o.Emission += _OutlineColor.rgb * c_upTextUV.a;
                 o.Emission += _OutlineColor.rgb * c_downTextUV.a;
@@ -86,8 +95,14 @@ Shader "Sprites/Outline"
                 o.Emission += _OutlineColor.rgb * c_leftTextUV.a;
                 o.Emission += _OutlineColor.rgb * c_rightTextUV.a;
 
-                
-                o.Alpha = c_main.a;
+                o.Alpha = 0;
+                o.Alpha += _OutlineColor.a * c_upTextUV.a;
+                o.Alpha += _OutlineColor.a * c_downTextUV.a;
+
+                o.Alpha += _OutlineColor.a * c_leftTextUV.a;
+                o.Alpha += _OutlineColor.a * c_rightTextUV.a;
+
+                o.Alpha = min(o.Alpha, 1);
             }
             else {
                 o.Emission = c_main.rgb;
