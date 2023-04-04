@@ -34,7 +34,7 @@ public class Lock : MonoBehaviour
             
             Instantiate(ArrowPrefab, Vector3.zero, transform.rotation, arrowsObjectTransform);
             arrowsObjectTransform.GetChild(i).transform.SetLocalPositionAndRotation(new Vector3((arrowWidth * i) - AtotalWidth / 2,0,0), transform.rotation);
-            int blackMagicThingButVeryImportantPleaseDontDeletIt = i; // don't know why but if you just you i then it pass a reference instead of value even if it's an int, unusable for delegate function, took so much time to figure it out please kiiiiiilllllll me
+            int blackMagicThingButVeryImportantPleaseDontDeletIt = i; // don't know why but if you just put i then it pass a reference instead of value even if it's an int, unusable for delegate function, took so much time to figure it out please kiiiiiilllllll me
             arrowsObjectTransform.GetChild(i).GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
             arrowsObjectTransform.GetChild(i).GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(-1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
             arrowsObjectTransform.GetChild(i).name = "Arrow" + (NumOfNum - (i + 1));
