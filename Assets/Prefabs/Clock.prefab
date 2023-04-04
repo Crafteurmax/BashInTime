@@ -144,7 +144,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1470234317
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3198048488626034019
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 6977363788849568345}
   - component: {fileID: 1276303464332999305}
   m_Layer: 5
-  m_Name: BackgrounfTime
+  m_Name: BackgroundTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

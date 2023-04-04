@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Clock
+    uniqueID: 1470234317
+    locked: 0
