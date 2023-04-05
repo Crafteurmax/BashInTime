@@ -17,6 +17,12 @@
 			"timeStamp" : 60.0,
 			"conditionsID" : ["Cond0","Cond1"],
 			"actionID" : 3
+		},
+		{
+			"eventName" : "EndOfTheWorld",
+			"timeStamp" : 3000.0,
+			"conditionsID" : [],
+			"actionID" : 4
 		}
 	]
 }

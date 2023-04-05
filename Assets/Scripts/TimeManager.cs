@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class TimeManager : MonoBehaviour
 
     private int eventCounter;
     public List<Evenement> listeEvenement = new List<Evenement>();
-    private Action[] ActionList = { null, test, test2, test3};
+    private Action[] ActionList = { null, test, test2, test3, GameOver};
     [SerializeField] TextAsset eventsJSON;
     private bool lastEventHappened = false; 
 
@@ -74,36 +73,13 @@ public class TimeManager : MonoBehaviour
 
     }
 
-    [SerializeField] GameObject Explosion;
-    [SerializeField] GameObject Explosions;
-    void TheEndOfTheWorld()
-    {
-        foreach (GameObject child in transform)
-        {
-            if (child.name == "Explosions")
-            {
-                GameObject Explosions = child;
-            }
-        }
-
-        //SummonExplosion(Vector3.up,Explosion.transform);
-    }
-
-    [ContextMenu("generate explose")]
-    void SummonExplosion(/*Vector3 pos, Transform explosionTrans*/)
-    {
-        Vector3 pos = Vector3.zero;
-        GameObject explosion = Instantiate(Explosion, pos, Explosion.transform.rotation, Explosions.transform);
-        //while(explosion.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !Animator.IsInTransition(0))
-        Destroy(explosion,0.583f*5);
-    }
-
-
     static void test() { Debug.Log("hello"); }
 
     static void test2() { Debug.Log("hello 2"); }
 
     static void test3() { Debug.Log("hello 3"); }
+
+    static void GameOver() { SceneManager.LoadScene("GameOver"); }
 }
 
 [System.Serializable]
