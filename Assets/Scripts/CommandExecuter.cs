@@ -21,6 +21,12 @@ public class CommandExecuter : MonoBehaviour
     private Process previousProcess = null;
     private float waitingTime;
 
+    private void Awake() { 
+    
+        EnableLinuxPermissions(executeFile);
+
+    }
+
     //Execution d'une commande
     public IEnumerator Execute(string command, string currentDirectory, Action<string, string, string> callback, string userCommand)
     {
@@ -101,7 +107,9 @@ public class CommandExecuter : MonoBehaviour
         writer.Close();
     }
 
-    //Lancer un script bash en arriere-plan
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+
+    //Lancer un script bash en arriere-plan sur Windows
     private Process StartBashScript(string scriptPath)
     {
         ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -111,4 +119,30 @@ public class CommandExecuter : MonoBehaviour
         return Process.Start(startInfo);
     }
 
-}
+    private void EnableLinuxPermissions(string scriptPath)
+    {
+        return;
+    }
+
+#elif UNITY_EDITOR_LINUX || UNITY_STANDALONE_LINUX
+    //Lancer un script bash en arriere-plan sur Linux
+    private Process StartBashScript(string scriptPath)
+    {
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.FileName = "/bin/bash";
+        startInfo.Arguments = "\"" + scriptPath + "\"";
+
+        return Process.Start(startInfo);
+    }
+
+    private void EnableLinuxPermissions(string scriptPath){
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.FileName = "/bin/bash";
+        startInfo.Arguments = "chmod u+x \"" + scriptPath + "\"";
+
+        return;
+    }
+
+#endif
+
+    }
