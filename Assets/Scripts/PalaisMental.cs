@@ -62,7 +62,7 @@ public class PalaisMental : MonoBehaviour
     private Dictionary<string, int> ids;
 
     //Charge les souvenirs en les analysant depuis un fichier JSON et les stocke dans la variable memories.
-    private void Start()
+    private void Awake()
     {
         memories = JsonUtility.FromJson<Memories>(memoriesData.ToString());
 

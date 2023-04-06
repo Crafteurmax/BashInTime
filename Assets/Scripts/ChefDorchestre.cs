@@ -64,6 +64,7 @@ public class ChefDorchestre : MonoBehaviour
 
     public void OpenPalaisMental()
     {
+        if (currentSystem != systems[(int)GameSystem.Default]) return;
         SwitchSystem(GameSystem.PalaisMental);
     }
 
