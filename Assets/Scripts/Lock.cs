@@ -17,6 +17,7 @@ public class Lock : MonoBehaviour
     private float numberHeight = 58.98f;
     private float numberWidth = 30f;
     private float arrowWidth = 1.53f;
+    private bool isInAnimation = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,8 @@ public class Lock : MonoBehaviour
             Instantiate(ArrowPrefab, Vector3.zero, transform.rotation, arrowsObjectTransform);
             arrowsObjectTransform.GetChild(i).transform.SetLocalPositionAndRotation(new Vector3((arrowWidth * i) - AtotalWidth / 2,0,0), transform.rotation);
             int blackMagicThingButVeryImportantPleaseDontDeletIt = i; // don't know why but if you just put i then it pass a reference instead of value even if it's an int, unusable for delegate function, took so much time to figure it out please kiiiiiilllllll me
-            arrowsObjectTransform.GetChild(i).GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
-            arrowsObjectTransform.GetChild(i).GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(-1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
+            arrowsObjectTransform.GetChild(i).GetChild(0).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(-1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
+            arrowsObjectTransform.GetChild(i).GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { ChangeNumber(1, blackMagicThingButVeryImportantPleaseDontDeletIt); });
             arrowsObjectTransform.GetChild(i).name = "Arrow" + (NumOfNum - (i + 1));
             
         }
@@ -49,30 +50,45 @@ public class Lock : MonoBehaviour
 
     private void ChangeNumber(int delta, int numID)
     {
+        if (isInAnimation) return;
         actualCode[numID] += delta;
         Vector3 pos = codeVisu[numID].transform.localPosition;
-        if (actualCode[numID] <= 9  && actualCode[numID] >= 0)
+        Vector3 dest;
+        if (actualCode[numID] <= 9 && actualCode[numID] >= 0)
         {
-            codeVisu[numID].transform.SetLocalPositionAndRotation(
-                new Vector3(pos.x + (delta * numberHeight), pos.y, pos.z),
-                codeVisu[numID].transform.localRotation);
+            dest = new Vector3(pos.x + (delta * numberHeight), pos.y, pos.z);
         }
-        else if(actualCode[numID] > 9)
+        else if (actualCode[numID] > 9)
         {
-            codeVisu[numID].transform.SetLocalPositionAndRotation(
-                new Vector3(pos.x + ((delta - 10) * numberHeight), pos.y, pos.z),
-                codeVisu[numID].transform.localRotation);
+            dest = new Vector3(pos.x + ((delta - 10) * numberHeight), pos.y, pos.z);
+            pos = new Vector3(pos.x + ((delta - 11) * numberHeight), pos.y, pos.z);
         }
         else if (actualCode[numID] < 0)
         {
-            codeVisu[numID].transform.SetLocalPositionAndRotation(
-                new Vector3(pos.x + ((delta + 10) * numberHeight), pos.y, pos.z),
-                codeVisu[numID].transform.localRotation);
+            dest = new Vector3(pos.x + ((delta + 10) * numberHeight), pos.y, pos.z);
+            pos = new Vector3(pos.x + ((delta + 11) * numberHeight), pos.y, pos.z);
         }
+        else dest = Vector3.zero;
 
+        codeVisu[numID].transform.SetLocalPositionAndRotation(pos, codeVisu[numID].transform.localRotation);
+        StartCoroutine( Translate(codeVisu[numID].transform, dest,0.5f));
         actualCode[numID] = actualCode[numID] % 10;
         if (actualCode[numID] < 0) actualCode[numID] += 10;
         
+    }
+
+    private IEnumerator Translate(Transform transObj, Vector3 destination, float duration)
+    {
+        isInAnimation = true;
+        float beginTime = Time.time;
+        Vector3 depart = transObj.localPosition;
+        while(Time.time < beginTime + duration)
+        {
+            transObj.SetLocalPositionAndRotation(Vector3.Lerp(depart, destination, Mathf.SmoothStep(0,1,(Time.time - beginTime)/duration)), transObj.localRotation) ;
+            yield return null;
+        }
+        transObj.SetLocalPositionAndRotation(destination, transObj.localRotation);
+        isInAnimation = false;
     }
 
     private bool isCodeValide()

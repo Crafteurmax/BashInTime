@@ -268,7 +268,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3198048488701100468, guid: 3656b539cc905ab409f84c6947118709, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 3583581365875643874, guid: 57573aefe79ce74429043952e16cd101, type: 3}
+    - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
+      propertyPath: Explosions
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
       propertyPath: conditionsManager
@@ -514,6 +522,10 @@ PrefabInstance:
     - target: {fileID: 4383571676173663351, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
       propertyPath: m_Name
       value: Padlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383571676173663351, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
