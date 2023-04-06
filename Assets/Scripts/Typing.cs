@@ -310,7 +310,7 @@ public class Typing : MonoBehaviour
         Keyboard.current.onTextInput += OnTextInput;
         enter.action.canceled += OnEnter;
         del.action.started += OnDel;
-        moveCursor.action.performed += OnMoveCursor;
+        moveCursor.action.started += OnMoveCursor;
         moveCursor.action.canceled += _ => { releasedMoveCursorCount++; };
         scroll.action.started += OnScroll;
         scroll.action.canceled += _ => { if(!NumLockState())releasedScrollCount++; };

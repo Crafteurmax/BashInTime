@@ -11,7 +11,7 @@ public class CommandParser : MonoBehaviour
     //CD virtuel
     public string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|"; //Temporaire, sera fait aussi dans la saisie des caractères
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|\"\'"; //Temporaire, sera fait aussi dans la saisie des caractères
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int
@@ -190,7 +190,10 @@ public class CommandParser : MonoBehaviour
 
         new_path = "." + new_path;
 
-        return new_path;
+        if (new_path == "./" || new_path == ".") return new_path;
+         
+
+        return new_path.Substring(2,new_path.Length-2);
     }
 
     //Permet de savoir si une fonction est une option du type -blabla ou un argument principal
