@@ -17,8 +17,6 @@ public class BoutonPadlockScript : MonoBehaviour
     ConditionsManager conditionsManager;
     public void Interact()
     {
-
-
         if (!conditionsManager.GetConditionState("Cond0"))
         {
             if (gameObject.transform.position.x < 0)
@@ -28,6 +26,9 @@ public class BoutonPadlockScript : MonoBehaviour
             }
             chef.SwitchSystem(ChefDorchestre.GameSystem.Lock);
         }
-        else dialogSystem.StartDialogue(dialog, null);
+        else {
+            chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
+            dialogSystem.StartDialogue(dialog, null);
+        }
     }
 }
