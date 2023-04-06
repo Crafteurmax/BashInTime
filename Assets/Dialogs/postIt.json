@@ -1,0 +1,25 @@
+{
+    "dialogSteps" : [
+        {
+            "characterName":"Chell",
+            "dialogContent":"Qui a bien pu noter ca sur ce post-it...",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"",
+            "dialogContent":"fichier des codes : C0de[code de quoi].txt",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"Chell",
+            "dialogContent":"Je suppose que c'est mieux que d'avoir noté le mot de passe directement sur le post-it...",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"Chell",
+            "dialogContent":"Je pourrais surrement retrouver le fichier en utilisant la commande grep",
+            "dialogChoices": []
+        }
+
+    ]
+}

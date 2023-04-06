@@ -52,9 +52,9 @@
                 },
                 {
                     "name": "MoveCursor",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "ad7f7d2a-dacb-406f-8aa2-4cee5bf45998",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": true
