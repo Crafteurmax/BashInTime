@@ -30,6 +30,7 @@ public class ChefDorchestre : MonoBehaviour
         PalaisMental = 3,
         Lock = 4,
         EndOfTheWorld = 5,
+        Pave = 6
     }
 
     private void Awake()
