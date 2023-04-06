@@ -4,16 +4,32 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 [Serializable]
 public class Code
 {
+    public string name;
     public string[] code;
+    public UnityEvent events;
 }
 
 
-public class CodeTipping : MonoBehaviour
+public class CodeManager : MonoBehaviour
 {
+    /*
+     * Permet de gérer un pavé numérique permettant de saisir un code. 
+     * Il peut y avoir plusieurs code
+     * Cependant il ne faut pas que plusieur code soit inclus l'un dans l'autre où la fin de l'un 
+     * correspond à la fin de l'autre
+     * 
+     * Il peut être interessant d'avoir à terme 3 script :
+     * - 1 pour la gestion des bouttons qui envois le boutton pressé à un qui gère la detection des codes 
+     * et également leur positionnement, leur nom, couleurs ... (il est dans l'objets Buttons)
+     * - 1 qui sert uniquement à détecter les code saisis (il est dans le père suprême) 
+     * - 1 qui gère l'affichage des codes qui ont été correctement saisis (il est dans LEDmanager)
+     */
+
     //[SerializeField] string[] buttonValues;
     public string[] tippedCode;
     [SerializeField] Code[] rightCodes;
@@ -23,7 +39,6 @@ public class CodeTipping : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // il faudra les écrire à la main :( cela pose problème si il y a plusieur utilisation de ce scripte
         /*
         rightCodes = new Code[] 
         
@@ -44,11 +59,13 @@ public class CodeTipping : MonoBehaviour
         tippedCode = Enumerable.Repeat("", maxLenghCode).ToArray();
         
         // Ajouter des événements de clic aux boutons
+        /*
         Button[] buttons = GetComponentsInChildren<Button>();
         foreach (Button button in buttons)
         {
             button.onClick.AddListener(delegate { AddFigure(button.gameObject.name); });
         }
+        */
         
 
 
@@ -82,7 +99,8 @@ public class CodeTipping : MonoBehaviour
         //Debug.Log("le code n° " + codeState + "a été saisi");
         if (codeState >=0)
         {
-            Debug.Log("le code n° " + codeState + " a été saisi");
+            //Debug.Log("le code n° " + codeState + " a été saisi");
+            rightCodes[codeState].events.Invoke();
         }
     }
 
@@ -99,22 +117,25 @@ public class CodeTipping : MonoBehaviour
     public int CheckCode (string[] tippedCode)
     {
         /*
-         * regarde si l'un des codes posssible a été saisis
+         * regarde si le dernier bouton appuyer valide un code
+         * revois n'indice du code si celui-ci a été saisis
+         * -1 si la séquence ne correspond à rien
          */
+
+        int Mod(int a, int n) => (a % n + n) % n;
+
         foreach (Code rightCode in rightCodes)
         {
-            for (int i=0; i<maxLenghCode; i++)
+            // Itère sur chaque caractère du code
+            int indiceCode;
+            for (indiceCode = 0; indiceCode< rightCode.code.Length; indiceCode++)
             {
-                int j;
-                for (j=0; j<rightCode.code.Length; j++)
-                {
-                    if (rightCode.code[j % maxLenghCode] != tippedCode[(i + j)%maxLenghCode])
-                        break;
-                }
-                if (j== rightCode.code.Length)
-                    return Array.IndexOf(rightCodes, rightCode);
+                //Debug.Log("Le code n°" + Array.IndexOf(rightCodes, rightCode) + " a fait vérifier le caractère n°" + Mod(nextInputLoc - rightCode.code.Length + indiceCode, maxLenghCode) + " ("+ tippedCode[Mod(nextInputLoc - rightCode.code.Length + indiceCode, maxLenghCode)] + ") au caractère " + rightCode.code[Mod(indiceCode, maxLenghCode)]);
+                if (rightCode.code[indiceCode] != tippedCode[Mod(nextInputLoc - rightCode.code.Length + indiceCode, maxLenghCode)])
+                    break;
             }
-
+            if (indiceCode == rightCode.code.Length)
+                return Array.IndexOf(rightCodes, rightCode);
         }
         return -1; // mettre null si ça s'avère plus pratique
     }
