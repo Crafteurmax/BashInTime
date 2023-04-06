@@ -18,6 +18,10 @@ public class BoutonPadlockScript : MonoBehaviour
     public void Interact()
     {
         if (!conditionsManager.GetConditionState("Cond0")) chef.SwitchSystem(ChefDorchestre.GameSystem.Lock);
-        else dialogSystem.StartDialogue(dialog, null);
+        else
+        {
+            chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
+            dialogSystem.StartDialogue(dialog, null);
+        }
     }
 }

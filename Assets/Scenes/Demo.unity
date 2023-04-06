@@ -835,7 +835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chef: {fileID: 1686581876}
-  dialog: {fileID: 0}
+  dialog: {fileID: 4900000, guid: 6ea3d4c822640ff4a81431e349d962fb, type: 3}
   dialogSystem: {fileID: 1532173415}
   conditionsManager: {fileID: 1678503055}
 --- !u!114 &618289482
