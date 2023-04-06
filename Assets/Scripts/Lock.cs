@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 public class Lock : MonoBehaviour
 {
+    [SerializeField] ChefDorchestre chef;
     [SerializeField] ConditionsManager conditionsManager;
     public String conditionLockName;
 
@@ -43,7 +44,11 @@ public class Lock : MonoBehaviour
 
     public void OnDisable()
     {
-        if (isCodeValide()) conditionsManager.SetCondition(conditionLockName, true) ;
+        if (isCodeValide())
+        {
+            chef.palais.AddMemory(3);
+            conditionsManager.SetCondition(conditionLockName, true);
+        }
     }
 
     private void ChangeNumber(int delta, int numID)

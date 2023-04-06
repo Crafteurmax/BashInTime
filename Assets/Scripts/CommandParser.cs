@@ -22,6 +22,7 @@ public class CommandParser : MonoBehaviour
         Interpreted = 2
     }
 
+    [SerializeField] private ChefDorchestre chef;
     
     [SerializeField] private string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail", "wc", "tar"}; //Contient des arguments principaux qui sont des fichiers
     [SerializeField] private string[] directCommands = { "echo"}; //Contient des arguments principaux qui sont des donnees directes
@@ -51,6 +52,10 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
+        //PROTOTYPE 
+        chef.palais.AddMemory(1);
+        chef.palais.AddMemory(2);
+
         if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
         else keyboard.PrintOutput(textLog);
     }

@@ -68,7 +68,7 @@ public class PalaisMental : MonoBehaviour
 
         unlockedMemories = new bool[memories.memories.Length];
 
-        InitDictionnary();   
+        InitDictionnary();  
     }
 
     //remplit un dictionnaire qui associe les noms de souvenirs à leurs identifiants dans la liste memories.memories.

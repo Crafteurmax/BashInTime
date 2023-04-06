@@ -19,7 +19,7 @@ public class ChefDorchestre : MonoBehaviour
     private SystemObjects currentSystem;
 
     [SerializeField] private SystemObjects[] systems;
-
+    public PalaisMental palais;
     
 
     public enum GameSystem : int
