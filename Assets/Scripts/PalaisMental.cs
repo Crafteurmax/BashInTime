@@ -68,10 +68,7 @@ public class PalaisMental : MonoBehaviour
 
         unlockedMemories = new bool[memories.memories.Length];
 
-        InitDictionnary();
-
-        //DEBUG
-        StartCoroutine(DebugTest());
+        InitDictionnary();   
     }
 
     //remplit un dictionnaire qui associe les noms de souvenirs à leurs identifiants dans la liste memories.memories.
@@ -208,7 +205,7 @@ public class PalaisMental : MonoBehaviour
 
 
     //DEBUG
-    IEnumerator DebugTest()
+    /*IEnumerator DebugTest()
     {
 
         for (int i = 0; i<4; i++)
@@ -219,7 +216,7 @@ public class PalaisMental : MonoBehaviour
             AddMemory("MemoryTest" + i);
         }
        
-    }
+    }*/
 
     
 }

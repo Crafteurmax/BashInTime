@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChefDorchestre : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class ChefDorchestre : MonoBehaviour
         Console = 2,
         PalaisMental = 3,
         Lock = 4,
+        EndOfTheWorld = 5,
     }
 
     private void Awake()
@@ -59,6 +61,11 @@ public class ChefDorchestre : MonoBehaviour
         }
     }
 
+    public void OpenPalaisMental()
+    {
+        SwitchSystem(GameSystem.PalaisMental);
+    }
+
     public void SwitchSystem(GameSystem system)
     {
         //On desactive le systeme precedent
@@ -70,6 +77,8 @@ public class ChefDorchestre : MonoBehaviour
         {
             go.SetActive(false);
         }
+
+        Debug.Log(systems.Length);
 
         //Switch du systeme actuel
         currentSystem = systems[(int)system];
@@ -93,5 +102,19 @@ public class ChefDorchestre : MonoBehaviour
     public void GetOut()
     {
         SwitchSystem(currentSystem.parent);
+    }
+
+    public void RestartSceneDelay(float duration)
+    {
+        StartCoroutine(_RestartSceneDelay(duration));
+    }
+
+    private IEnumerator _RestartSceneDelay(float duration)
+    {
+        float beginTime = Time.time;
+
+        while (Time.time < beginTime + duration) yield return null;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

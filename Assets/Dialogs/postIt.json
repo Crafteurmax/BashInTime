@@ -2,12 +2,12 @@
     "dialogSteps" : [
         {
             "characterName":"Chell",
-            "dialogContent":"Qui a bien pu noter ca sur ce post-it...",
+            "dialogContent":"Qui a bien pu noter ça sur ce post-it...",
             "dialogChoices": []
         },
         {
-            "characterName":"",
-            "dialogContent":"fichier des codes : C0de[code de quoi].txt",
+            "characterName":"[Post-it]",
+            "dialogContent":"Fichier contenant le code : <color=green>C0de[<color=red>???????</color>].txt</color>",
             "dialogChoices": []
         },
         {
@@ -17,7 +17,7 @@
         },
         {
             "characterName":"Chell",
-            "dialogContent":"Je pourrais surrement retrouver le fichier en utilisant la commande grep",
+            "dialogContent":"Je pourrais surrement retrouver le fichier en utilisant la commande <color=green>find</color>...",
             "dialogChoices": []
         }
 

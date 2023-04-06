@@ -21,6 +21,7 @@ public class SelectObject : MonoBehaviour
 
     public void OnMouseEnter() 
     {
+        if (!this.enabled) return;
         GetComponent<Renderer>().material.SetColor("_OutlineColor", outlineColor); // Quand la souris passe sur l'object on rend l'outline visible
         //UnityEngine.Debug.Log("ENTER");
     }
@@ -33,6 +34,7 @@ public class SelectObject : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (!this.enabled) return;
         // On récupère le nom du script lié à l'object (format nomObject + "Script"), et on transforme ce nom en Type
         Type scriptType = Type.GetType(gameObject.name + "Script");
         
