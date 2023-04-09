@@ -1510,6 +1510,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 3.4}
   m_SizeDelta: {x: 7.68, y: 5.12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &976818137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 724186906568013751, guid: b6c0b089381d0d242997146bfdf49287, type: 3}
+  m_PrefabInstance: {fileID: 1524995833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &976818140
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976818137}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eef9bf489b42fb448a86a0f7223349e9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &1170555430
 PrefabInstance:
   m_ObjectHideFlags: 0
