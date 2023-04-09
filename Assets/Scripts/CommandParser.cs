@@ -11,7 +11,7 @@ public class CommandParser : MonoBehaviour
     //CD virtuel
     public string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|\"\'"; //Temporaire, sera fait aussi dans la saisie des caractères
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|\"\'[](){}"; //Temporaire, sera fait aussi dans la saisie des caractères
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int

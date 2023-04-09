@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo.unity
     guid: 00231917452b7894cb628353adc9c6ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UnMaxDeScene.unity
     guid: 9896f6ec5a90d374e9f74dac01c06c25
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scenes Serieuse/GameOver.unity
     guid: d6233f6695d997b4d83e71af8c69e7b5
   m_configObjects: {}
