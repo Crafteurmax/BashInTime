@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class SelectObject : MonoBehaviour
 {
     public Color outlineColor;
-    private Color invisibleColor = new Color(0, 0, 0, 0);
+    public Color invisibleColor = new Color(0, 0, 0, 0);
 
     [SerializeField] float outlineWidth;
 
