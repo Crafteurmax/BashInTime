@@ -34,6 +34,7 @@ public class SelectObject : MonoBehaviour
 
     public void OnMouseDown()
     {
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", invisibleColor); // Quand on quitte l'objet on rend l'outline invisible
         if (!this.enabled) return;
         // On récupère le nom du script lié à l'object (format nomObject + "Script"), et on transforme ce nom en Type
         Type scriptType = Type.GetType(gameObject.name + "Script");
