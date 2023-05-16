@@ -12,6 +12,7 @@ public class Code
     public string name;
     public string[] code;
     public UnityEvent events;
+    [NonSerialized] public bool used = false;
 }
 
 
@@ -33,6 +34,7 @@ public class CodeManager : MonoBehaviour
     //[SerializeField] string[] buttonValues;
     public string[] tippedCode;
     [SerializeField] Code[] rightCodes;
+    [SerializeField] bool onlyOnce;
     private int maxLenghCode;
     private int nextInputLoc=0;
 
@@ -79,12 +81,6 @@ public class CodeManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddFigure(string tippedValue)
     {
 
@@ -97,10 +93,12 @@ public class CodeManager : MonoBehaviour
         // Check si un code a été trouvé
         int codeState = CheckCode(tippedCode);
         //Debug.Log("le code n° " + codeState + "a été saisi");
-        if (codeState >=0)
+        if (codeState >=0 && (rightCodes[codeState].used == false || onlyOnce == false ) )
         {
             //Debug.Log("le code n° " + codeState + " a été saisi");
             rightCodes[codeState].events.Invoke();
+            rightCodes[codeState].used = true;
+
         }
     }
 
@@ -139,4 +137,15 @@ public class CodeManager : MonoBehaviour
         }
         return -1; // mettre null si ça s'avère plus pratique
     }
+
+    public void bigRESET()
+    {
+        /*
+         * à appeler lors du reset du jeux
+         */
+        foreach (Code code in rightCodes)
+            code.used = false;
+        DeleteCode();
+    }
+
 }
