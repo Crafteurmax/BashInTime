@@ -504,8 +504,13 @@ MonoBehaviour:
   del: {fileID: 1330351582163037850, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   moveCursor: {fileID: -6515351413352715769, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   commandHistory: {fileID: -2135852282540466728, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  cursor: 0
   textComponent: {fileID: 3463424025856371700}
   scroll: {fileID: -1882281496856586963, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  startHighlight: -1
+  copy: {fileID: 9194596458515121130, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  paste: {fileID: 9018697194869825099, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  shift: {fileID: -8071582910794598934, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
 --- !u!114 &5601336509800039356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: /
+  chef: {fileID: 0}
   fileCommands:
   - ls
   - rm

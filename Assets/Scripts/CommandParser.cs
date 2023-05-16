@@ -53,8 +53,8 @@ public class CommandParser : MonoBehaviour
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
         //PROTOTYPE 
-        chef.palais.AddMemory(1);
-        chef.palais.AddMemory(2);
+        //chef.palais.AddMemory(1);
+        //chef.palais.AddMemory(2);
 
         if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
         else keyboard.PrintOutput(textLog);
