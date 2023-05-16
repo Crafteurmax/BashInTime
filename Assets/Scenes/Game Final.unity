@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPoweredOn: 0
   chef: {fileID: 1686581876}
-  cannotPlaySound: {fileID: 0}
+  cannotPlaySound: {fileID: 1062931743}
 --- !u!114 &258187505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1448,7 +1448,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 02ced988c9c69aa44af4a2dd35cf8f85, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1796,7 +1796,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dc698f90a844e6f46b4b3d6ea104b8d5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
