@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class BoutonOrdiScript: MonoBehaviour
 {
+    public bool isPoweredOn = false;
 
     [SerializeField]
     ChefDorchestre chef;
+
+    [SerializeField] private AudioSource cannotPlaySound;
+    
+    
     public void Interact()
     {
-        chef.SwitchSystem(ChefDorchestre.GameSystem.Console);
+        if (isPoweredOn)
+        {
+            chef.SwitchSystem(ChefDorchestre.GameSystem.Console);
+        }
+        else cannotPlaySound.Play();
     }
 
 
