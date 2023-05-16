@@ -58,8 +58,8 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
-        else keyboard.PrintOutput(textLog);
+        if (errorLog.Trim() != "") keyboard.PrintOutput("<color=red>" + errorLog + "</color>");
+        else keyboard.PrintOutput("<color=#00FFFF>" + textLog + "</color>");
     }
 
     
@@ -355,7 +355,7 @@ public class CommandParser : MonoBehaviour
         {
             if (currentDirectory.StartsWith("/" + forbiden))
             {
-                ShowReturnValue("", currentDirectory + " : Forbidden", command);
+                ShowReturnValue("", currentDirectory + " : Access Forbidden", command);
                 currentDirectory = oldCurrentDirectory;
                 return;
             }

@@ -3011,7 +3011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
       propertyPath: currentDirectory
-      value: /
+      value: /home/chell/
       objectReference: {fileID: 0}
     - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
       propertyPath: forbidenDir.Array.size
