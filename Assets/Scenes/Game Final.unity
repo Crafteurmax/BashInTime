@@ -3011,7 +3011,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
       propertyPath: currentDirectory
-      value: /home/chell/
+      value: /
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
+      propertyPath: forbidenDir.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
+      propertyPath: forbidenDir.Array.data[0]
+      value: bin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601336509800039356, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
+      propertyPath: forbidenDir.Array.data[1]
+      value: sys
       objectReference: {fileID: 0}
     - target: {fileID: 5601336509800039362, guid: 30dcdb20c5477dd40bd3b2dc053b9c53, type: 3}
       propertyPath: m_ActionEvents.Array.size

@@ -10,6 +10,8 @@ public class CommandParser : MonoBehaviour
     [SerializeField] private string specialCommand = "echo Bonjour";
     [SerializeField] [TextArea] private string specialOutput = "Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
 
+    [SerializeField] private string[] forbidenDir;
+
     //Racine reelle des commandes
     private string root = "BashWork/root";
     //CD virtuel
@@ -168,19 +170,48 @@ public class CommandParser : MonoBehaviour
     //Fonction qui recupere un chemin absolu virtuel (et relatif reel) a partir d'un chemin relatif virtuel (supprime les ..)
     private string GetAbsoluteVirtualPath(string path)
     {
+        path = path.Trim();
+
+        bool isAbsolutePath = path[0] == '/';
+
+        int maxCountBack = -1;
+
+        foreach (char character in currentDirectory)
+        {
+            if (character == '/') maxCountBack++;
+        }
+
+        if (isAbsolutePath)
+        {
+
+            for (int i = 0; i < maxCountBack; i++)
+            {
+                path = "../" + path;
+            }
+        }
+
         Stack<string> pathStack = new Stack<string>();
         string[] elements = path.Replace("\\","/").Split("/");
-        
-        //On utilise une pile pour resoudre les ..
 
-        foreach(string element in elements)
+        //On utilise une pile pour resoudre les ..
+        int backCount = 0;
+
+        foreach (string element in elements)
         {
             switch (element)
             {
                 case "":
                     break;
                 case "..":
-                    if(pathStack.Count > 0) pathStack.Pop();
+                    if (pathStack.Count > backCount) pathStack.Pop();
+                    else
+                    {
+                        if(backCount < maxCountBack)
+                        {
+                            backCount++;
+                            pathStack.Push("..");
+                        }
+                    }
                     break;
                 case ".":
                     break;
@@ -200,12 +231,13 @@ public class CommandParser : MonoBehaviour
             new_path = "/" + pathStack.Pop() + new_path;
         }
 
-        new_path = "." + new_path;
+        
 
-        if (new_path == "./" || new_path == ".") return new_path;
-         
+        new_path = "." + new_path + "/";
 
-        return new_path.Substring(2,new_path.Length-2);
+        if (new_path == "." || new_path == "./") return new_path;
+
+        return new_path;
     }
 
     //Permet de savoir si une fonction est une option du type -blabla ou un argument principal
@@ -291,6 +323,9 @@ public class CommandParser : MonoBehaviour
     //Callback de la console pour CD, permet de savoir si le dossier existe
     public void CdCallback(string log, string errorLog, string command)
     {
+        string oldCurrentDirectory = currentDirectory;
+
+
         if (errorLog.Trim() != "")
         {
             ShowReturnValue(log, errorLog, command);
@@ -309,8 +344,23 @@ public class CommandParser : MonoBehaviour
             //On recupere l'argument correspondant au fichier, et on le met sous la forme d'un chemin virtuel absolu.
             int fileIndex = 1;
             while (fileIndex < arguments.Length && IsOption(arguments[fileIndex])) fileIndex++;
-            currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/");
+            if(arguments[fileIndex].Trim()[0] == '/')
+            {
+                currentDirectory = ("/" + GetAbsoluteVirtualPath("/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "");
+            }
+            else currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "");
         }
+
+        foreach(string forbiden in forbidenDir)
+        {
+            if (currentDirectory.StartsWith("/" + forbiden))
+            {
+                ShowReturnValue("", currentDirectory + " : Forbidden", command);
+                currentDirectory = oldCurrentDirectory;
+                return;
+            }
+        }
+        
 
         ShowReturnValue(log, errorLog, command);
     }
