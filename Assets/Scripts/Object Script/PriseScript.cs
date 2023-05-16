@@ -19,6 +19,6 @@ public class PriseScript : MonoBehaviour
         ordiScript.isPoweredOn = true;
         cableImage.SetActive(true);
 
-        GetComponent<SelectObject>().enabled = false;
+        GetComponent<SelectObject>().outlineColor = new Color(0,0,0,0);
     }
 }
