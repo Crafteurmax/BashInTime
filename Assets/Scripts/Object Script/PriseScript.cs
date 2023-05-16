@@ -10,14 +10,16 @@ public class PriseScript : MonoBehaviour
 
     [SerializeField] private BoutonOrdiScript ordiScript;
 
-    [SerializeField] private GameObject cableImage;
+    [SerializeField] private Sprite spritePlugged;
+
+    
 
     public void Interact()
     {
         etincelleSound.SetActive(false);
         etincellesParticle.SetActive(false);
         ordiScript.isPoweredOn = true;
-        cableImage.SetActive(true);
+        GetComponent<SpriteRenderer>().sprite = spritePlugged;
 
         GetComponent<SelectObject>().outlineColor = new Color(0,0,0,0);
     }
