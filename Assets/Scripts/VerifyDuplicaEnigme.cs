@@ -72,7 +72,7 @@ public class VerifyDuplicaEnigme : MonoBehaviour
     }
 
     [ContextMenu("keyPlaced")]
-    void testKey()
+    void unlock()
     {
         Debug.Log(IsKeyPlaced());
         Directory.CreateDirectory(forlderAdresse+ "/corridor");
