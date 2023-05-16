@@ -80,8 +80,6 @@ public class ChefDorchestre : MonoBehaviour
             go.SetActive(false);
         }
 
-        Debug.Log(systems.Length);
-
         //Switch du systeme actuel
         currentSystem = systems[(int)system];
 

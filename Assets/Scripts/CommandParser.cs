@@ -6,6 +6,10 @@ using System;
 
 public class CommandParser : MonoBehaviour
 {
+    //Special selection Command
+    [SerializeField] private string specialCommand = "echo Bonjour";
+    [SerializeField] [TextArea] private string specialOutput = "Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
+
     //Racine reelle des commandes
     private string root = "BashWork/root";
     //CD virtuel
@@ -52,10 +56,6 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        //PROTOTYPE 
-        //chef.palais.AddMemory(1);
-        //chef.palais.AddMemory(2);
-
         if (errorLog.Trim() != "") keyboard.PrintOutput(errorLog);
         else keyboard.PrintOutput(textLog);
     }
@@ -91,6 +91,13 @@ public class CommandParser : MonoBehaviour
     public bool PreparePart(string line, int ncommands)
     {
         line = line.Trim();
+
+        //Exception
+        if (line.Equals(specialCommand))
+        {
+            ShowReturnValue(specialOutput, "", specialCommand);
+            return false;
+        }
 
         //On supprime les caracteres illegaux
         foreach(char c in line)

@@ -18,7 +18,6 @@ public class PostItScript : MonoBehaviour
         //new System.Action[] { coucou, coucou2 }
         chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
         dialogSystem.StartDialogue(dialog, null);
-        chef.palais.AddMemory(0); //temp
     }
 
 }
