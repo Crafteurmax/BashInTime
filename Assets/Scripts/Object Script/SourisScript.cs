@@ -11,12 +11,27 @@ public class SourisScript : MonoBehaviour
     DialogSystem dialogSystem;
 
     [SerializeField]
-    TextAsset dialog;
+    TextAsset dialog1;
+
+    [SerializeField]
+    ConditionsManager conditionsManager;
 
     public void Interact()
     {
-        //new System.Action[] { coucou, coucou2 }
-        chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
-        dialogSystem.StartDialogue(dialog, null);
+        if (conditionsManager.GetConditionState("gotCheese"))
+        {
+            chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
+            dialogSystem.StartDialogue(dialog1, new System.Action[] { giveCheese, killMouse });
+        }
+    }
+
+    private void giveCheese()
+    {
+
+    }
+
+    private void killMouse()
+    {
+
     }
 }

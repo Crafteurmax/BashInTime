@@ -15,10 +15,10 @@ public class Souris : MonoBehaviour
     {
         if (isMoving)
         {
-            if (transform.position.x >= 10) {
+            if (transform.position.x >= 6) {
                 speed = -speed;
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-            } else if (transform.position.x <= -10)
+            } else if (transform.position.x <= -5)
             {
                 speed = -speed;
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
