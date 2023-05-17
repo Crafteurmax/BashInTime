@@ -2,32 +2,7 @@
     "dialogSteps" : [
         {
             "characterName":"Chell",
-            "dialogContent":"Il y a une note dans ce tirroir...",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"",
-            "dialogContent":"Le rouge passion enflamme mes joues",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"",
-            "dialogContent":"Comme les profondeurs bleues du cyan",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"",
-            "dialogContent":"Les feuilles vertes bruissent sous mes pieds",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"",
-            "dialogContent":"Et la blanche neige tombe en silence",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"",
-            "dialogContent":"Révélant un horizon violet dans la nuit.",
+            "dialogContent":"Il y a du <color=yellow>FROMAGE</color> dans ce tirroir",
             "dialogChoices": []
         }
 

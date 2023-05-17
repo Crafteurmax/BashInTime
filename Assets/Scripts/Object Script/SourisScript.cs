@@ -18,7 +18,10 @@ public class SourisScript : MonoBehaviour
 
     [SerializeField]
     ConditionsManager conditionsManager;
-    
+
+    [SerializeField]
+    GameObject cheese;
+
     private bool isAlive = true;
     public void Interact()
     {
@@ -41,6 +44,7 @@ public class SourisScript : MonoBehaviour
     {
         conditionsManager.SetCondition("gotCheese", false); 
         conditionsManager.SetCondition("doorIsUnlock", true);
+        cheese.SetActive(false);
     }
 
     private void killMouse()

@@ -15,6 +15,9 @@ public class BoutonPadlockScript : MonoBehaviour
 
     [SerializeField]
     ConditionsManager conditionsManager;
+
+    [SerializeField]
+    GameObject cheese;
     public void Interact()
     {
         if (gameObject.transform.position.x < 0)
@@ -23,7 +26,7 @@ public class BoutonPadlockScript : MonoBehaviour
             return;
         }
 
-        if (!conditionsManager.GetConditionState("Cond2"))
+        if (!conditionsManager.GetConditionState("gotCheese"))
         {
            
             chef.SwitchSystem(ChefDorchestre.GameSystem.Lock);
@@ -31,6 +34,8 @@ public class BoutonPadlockScript : MonoBehaviour
         else {
             chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
             dialogSystem.StartDialogue(dialog, null);
+            cheese.SetActive(true);
+
         }
     }
 }
