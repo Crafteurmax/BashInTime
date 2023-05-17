@@ -59,6 +59,8 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
+        DetectPalais(textLog).
+
         if (errorLog.Trim() != "") keyboard.PrintOutput("<color=red>" + errorLog + "</color>");
         else keyboard.PrintOutput("<color=#00FFFF>" + textLog + "</color>");
     }
@@ -499,4 +501,13 @@ public class CommandParser : MonoBehaviour
         }
     }
     */
+
+
+    public void DetectPalais(string detectString)
+    {
+        if (detectString.Contains("Voici une liste de commandes pour m'aider à me retrouver"))
+        {
+            PalaisMental.current.AddMemory(3);
+        }
+    }
 }

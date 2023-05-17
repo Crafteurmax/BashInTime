@@ -68,7 +68,7 @@ public class PalaisMental : MonoBehaviour
     //Charge les souvenirs en les analysant depuis un fichier JSON et les stocke dans la variable memories.
     private void Awake()
     {
-        
+        current = this;
 
         memories = JsonUtility.FromJson<Memories>(memoriesData.ToString());
 
@@ -79,10 +79,6 @@ public class PalaisMental : MonoBehaviour
         InitDictionnary();  
     }
 
-    private void Start()
-    {
-        current = this;
-    }
 
     //remplit un dictionnaire qui associe les noms de souvenirs à leurs identifiants dans la liste memories.memories.
     private void InitDictionnary()
@@ -241,11 +237,13 @@ public class PalaisMental : MonoBehaviour
             saveString += b ? 1 : 0;
         }
 
-        PlayerPrefs.SetString(unlockedMemoriesLoc, saveString)
+        PlayerPrefs.SetString(unlockedMemoriesLoc, saveString);
+        PlayerPrefs.Save();
 ;    }
 
     public void Load()
     {
+
         string saveString = PlayerPrefs.GetString(unlockedMemoriesLoc);
 
         if (saveString == null || saveString == "") return;
@@ -255,7 +253,11 @@ public class PalaisMental : MonoBehaviour
         for(int i = 0; i < saveString.Length; i++)
         {
             char c = saveString[i];
-            unlockedMemories[i] = (c == '1');
+
+            if(c == '1')
+            {
+                AddMemory(i);
+            }
         }
     }
 
