@@ -2,7 +2,7 @@
        ls - list directory contents
 
 <b>SYNOPSIS</b>
-       ls [OPTION]... [FILE]...
+       ls [<u>OPTION</u>]... [<u>FILE</u>]...
 
 <b>DESCRIPTION</b>
        List  information  about  the FILEs (the current directory by default).
@@ -22,7 +22,7 @@
        <b>-h</b>, <b>--human-readable</b>
               with -l and -s, print sizes like 1K 234M 2G etc.
 
-       <b>-R</b>, <b>--recursive
+       <b>-R</b>, <b>--recursive</b>
               list subdirectories recursively
 
        <b>-s</b>, <b>--size</b>

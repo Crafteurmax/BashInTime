@@ -398,7 +398,7 @@ public class CommandParser : MonoBehaviour
                 if (arguments.Length == 2)
                 {
                     arguments[0] = "cat ";
-                    arguments[1] = root + "/usr/share/man/" + arguments[1] + ".txt";
+                    arguments[1] = "/usr/share/man/" + arguments[1];
                     command = arguments[0] + arguments[1];
                     SafePrepare(arguments, ShowReturnValue, command);
                 }
