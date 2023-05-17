@@ -21,11 +21,21 @@ public class DoorScript : MonoBehaviour
         
     }
 
+
+    [SerializeField]
+    ConditionsManager conditionsManager;
     public void Interact()
     {
         Debug.Log("Open the DOOOOOOOR");
-        chef.RestartSceneDelay(duration);
-        chef.SwitchSystem(ChefDorchestre.GameSystem.EndOfTheWorld);
+        if(!conditionsManager.GetConditionState("doorIsUnlock"))
+        { 
+            chef.RestartSceneDelay(duration);
+            chef.SwitchSystem(ChefDorchestre.GameSystem.EndOfTheWorld);
+        }
+        else
+        {
+            Debug.Log("win");
+        }
 
        
     }

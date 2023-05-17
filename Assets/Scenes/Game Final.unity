@@ -187,9 +187,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4900000, guid: eff1b2a01f9d0b048be6169fe3b6a532, type: 3}
     - target: {fileID: 3012000318873536023, guid: 272cdb198eea79d428e903c7e2f9eec0, type: 3}
+      propertyPath: dialog1
+      value: 
+      objectReference: {fileID: 4900000, guid: eff1b2a01f9d0b048be6169fe3b6a532, type: 3}
+    - target: {fileID: 3012000318873536023, guid: 272cdb198eea79d428e903c7e2f9eec0, type: 3}
+      propertyPath: dialog2
+      value: 
+      objectReference: {fileID: 4900000, guid: 5ad16133769693443bca1802a5dd86ba, type: 3}
+    - target: {fileID: 3012000318873536023, guid: 272cdb198eea79d428e903c7e2f9eec0, type: 3}
       propertyPath: dialogSystem
       value: 
       objectReference: {fileID: 1532173415}
+    - target: {fileID: 3012000318873536023, guid: 272cdb198eea79d428e903c7e2f9eec0, type: 3}
+      propertyPath: conditionsManager
+      value: 
+      objectReference: {fileID: 1678503055}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 272cdb198eea79d428e903c7e2f9eec0, type: 3}
 --- !u!1 &197574756
@@ -731,6 +743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chef: {fileID: 1686581876}
   duration: 5
+  conditionsManager: {fileID: 1678503055}
 --- !u!1001 &328124566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -781,6 +794,14 @@ PrefabInstance:
     - target: {fileID: 6274473379029865796, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274473379029865797, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
+      propertyPath: eventConditions.Array.data[0].name
+      value: gotCheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274473379029865797, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
+      propertyPath: eventConditions.Array.data[1].name
+      value: doorIsUnlock
       objectReference: {fileID: 0}
     - target: {fileID: 6274473379029865914, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
       propertyPath: m_Name
@@ -2993,12 +3014,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1686581876}
     - target: {fileID: 4383571676173663345, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
+      propertyPath: NumOfNum
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383571676173663345, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
       propertyPath: trueCode
-      value: 1234
+      value: 327656
       objectReference: {fileID: 0}
     - target: {fileID: 4383571676173663345, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
       propertyPath: conditionLockName
-      value: Cond0
+      value: Cond2
       objectReference: {fileID: 0}
     - target: {fileID: 4383571676173663345, guid: bb7229f2089aa1a4badba6ac50f79c89, type: 3}
       propertyPath: conditionsManager

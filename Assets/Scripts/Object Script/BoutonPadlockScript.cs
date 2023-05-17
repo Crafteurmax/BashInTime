@@ -23,7 +23,7 @@ public class BoutonPadlockScript : MonoBehaviour
             return;
         }
 
-        if (!conditionsManager.GetConditionState("Cond0"))
+        if (!conditionsManager.GetConditionState("Cond2"))
         {
            
             chef.SwitchSystem(ChefDorchestre.GameSystem.Lock);
