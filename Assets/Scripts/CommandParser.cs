@@ -33,7 +33,7 @@ public class CommandParser : MonoBehaviour
     
     [SerializeField] private string[] fileCommands = {"ls", "rm", "grep", "mkdir", "cat", "touch", "cp", "find", "mv", "head", "tail", "wc", "tar"}; //Contient des arguments principaux qui sont des fichiers
     [SerializeField] private string[] directCommands = { "echo"}; //Contient des arguments principaux qui sont des donnees directes
-    [SerializeField] private string[] interpretedCommands = { "cd", "pwd", "unlock" }; //Commandes interpretees directement
+    [SerializeField] private string[] interpretedCommands = { "cd", "pwd", "unlock", "man" }; //Commandes interpretees directement
 
 
     //Variable pour la commande finale, pratique avec les tubes
@@ -375,6 +375,7 @@ public class CommandParser : MonoBehaviour
                 arguments[0] = "echo " + currentDirectory; //SOLUTION DE GENIE POUR LES PIPES!!!!
                 DirectPrepare(arguments, ShowReturnValue, command);
                 break;
+
             case "cd":
                 if(ncommand != 1)
                 {
@@ -382,10 +383,25 @@ public class CommandParser : MonoBehaviour
                 }
                 SafePrepare(arguments, CdCallback, userLine);
                 break;
+
             case "unlock":
                 unlock();
                 arguments[0] = "echo ";
                 DirectPrepare(arguments, ShowReturnValue, command);
+                break;
+
+            case "man":
+                if (arguments.Length == 2)
+                {
+                    arguments[0] = "cat ";
+                    arguments[1] = root + "/usr/share/man/" + arguments[1];
+                    command = arguments[0] + arguments[1];
+                    SafePrepare(arguments, ShowReturnValue, command);
+                }
+                else
+                {
+                    ShowReturnValue("", "man needs only 1 argument", command);
+                }
                 break;
         }
     }

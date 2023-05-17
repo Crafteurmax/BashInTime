@@ -1,0 +1,55 @@
+<b>NAME</b>
+       ls - list directory contents
+
+<b>SYNOPSIS</b>
+       ls [OPTION]... [FILE]...
+
+<b>DESCRIPTION</b>
+       List  information  about  the FILEs (the current directory by default).
+       Sort entries alphabetically if none of <b>-cftuvSUX</b> nor <b>--sort</b>  is  specified.
+
+       Mandatory  arguments  to  long  options are mandatory for short options too.
+
+<b>OPTIONS</b>
+       <b>-a</b>, <b>--all</b>
+              do not ignore entries starting with .
+
+       <b>-A</b>, <b>--almost-all</b>
+              do not list implied . and ..
+
+       <b>-l</b>    use a long listing format, that shows more information about files and directories
+
+       <b>-h</b>, <b>--human-readable</b>
+              with -l and -s, print sizes like 1K 234M 2G etc.
+
+       <b>-R</b>, <b>--recursive
+              list subdirectories recursively
+
+       <b>-s</b>, <b>--size</b>
+              print the allocated size of each file, in blocks
+
+       <b>-S</b>    sort by file size, largest first
+
+
+<b>EXIT STATUS</b>
+       0      if OK,
+
+       1      if minor problems (e.g., cannot access subdirectory),
+
+       2      if serious trouble (e.g., cannot access command-line argument).
+
+<b>AUTHOR</b>
+       Written by Richard M. Stallman and David MacKenzie.
+
+<b>COPYRIGHT</b>
+       Copyright © 2020 Free Software Foundation, Inc.   License  GPLv3+:  GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This  is  free  software:  you  are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO</b>
+       Full documentation <https://www.gnu.org/software/coreutils/ls>
+       or available locally via: info '(coreutils) ls invocation'
+
+GNU coreutils 8.32               February 2022                           LS(1)
+
