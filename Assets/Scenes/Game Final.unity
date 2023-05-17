@@ -501,7 +501,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 188c97ca3ab93fb488204adad57f8b4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6cc004f33486620458ad4d94b5d19b02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2334,6 +2334,8 @@ MonoBehaviour:
   etincellesParticle: {fileID: 1221099071}
   ordiScript: {fileID: 258187504}
   spritePlugged: {fileID: 21300000, guid: 3a4e060bdb6817a4bb09aec4be0ff4e6, type: 3}
+  computer: {fileID: 258187501}
+  computerOn: {fileID: 21300000, guid: 188c97ca3ab93fb488204adad57f8b4d, type: 3}
 --- !u!1001 &1279829642
 PrefabInstance:
   m_ObjectHideFlags: 0

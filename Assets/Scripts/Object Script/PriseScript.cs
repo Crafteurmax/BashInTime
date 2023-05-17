@@ -12,7 +12,10 @@ public class PriseScript : MonoBehaviour
 
     [SerializeField] private Sprite spritePlugged;
 
-    
+    [SerializeField] private GameObject computer;
+    [SerializeField] private Sprite computerOn;
+
+
 
     public void Interact()
     {
@@ -20,6 +23,7 @@ public class PriseScript : MonoBehaviour
         etincellesParticle.SetActive(false);
         ordiScript.isPoweredOn = true;
         GetComponent<SpriteRenderer>().sprite = spritePlugged;
+        computer.GetComponent<SpriteRenderer>().sprite = computerOn;
 
         GetComponent<SelectObject>().outlineColor = new Color(0,0,0,0);
     }
