@@ -1,0 +1,61 @@
+<b>NAME</b>
+       rm - remove files or directories
+
+<b>SYNOPSIS</b>
+       rm [<u>OPTION</u>]... [<u>FILE</u>]...
+
+<b>DESCRIPTION</b>
+       This  manual page documents the GNU version of <b>rm</b>.  <b>rm</b> removes each specified file.
+       By default, it does not remove directories.
+
+       If the <b>-I</b> or <b>--interactive</b>=<u>once</u> option is given, and there are more than three files or the <b>-r</b>,  <b>-R</b>,
+       or <b>--recursive</b> are given, then <b>rm</b> prompts the user for whether to proceed with the entire
+       operation.  If the response is not affirmative, the entire command is aborted.
+
+option  is  not
+       given, or the <b>-i</b> or <b>--interactive</b>=<u>always</u> option is given, <b>rm</b> prompts the user for whether to
+       remove the file.  If the response is not affirmative, the file is skipped.
+
+<b>OPTIONS</b>
+       Remove (unlink) the FILE(s).
+
+       <b>-f</b>, <b>--force</b>
+              ignore nonexistent files and arguments, never prompt
+
+       <b>-i</b>, <b>--interactive</b>
+              prompt before every removal
+
+       <b>-I</b>     prompt once before removing more than three files, or when removing recursively;
+              less intrusive than <b>-i</b>, while still giving protection against most mistakes
+
+       <b>-r</b>, <b>-R</b>, <b>--recursive</b>
+              remove directories and their contents recursively
+
+
+       By default, rm does not remove directories.  Use the <b>--recursive</b> (<b>-r</b> or <b>-R</b>) option  to  remove
+       each listed directory, too, along with all of its contents.
+
+       To  remove  a  file whose name starts with a '-', for example '-foo', use one of these commands:
+
+              rm <b>-- -foo</b>
+
+              rm ./-foo
+
+       Note that if you use rm to remove a file, it might be possible to recover some of its  contents,
+       given sufficient expertise and/or time.  For greater assurance that the contents are truly
+       unrecoverable, consider using shred.
+
+<b>AUTHOR</b>
+       Written by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering.
+
+<b>COPYRIGHT</b>
+       Copyright © 2020 Free Software Foundation, Inc.  License GPLv3+: GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This  is  free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO</b>
+       Full documentation <https://www.gnu.org/software/coreutils/rm>
+
+GNU coreutils 8.32                         February 2022                                     RM(1)
+
