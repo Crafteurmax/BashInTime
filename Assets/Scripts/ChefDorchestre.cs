@@ -118,7 +118,7 @@ public class ChefDorchestre : MonoBehaviour
 
     private IEnumerator fadeout()
     {
-        Transform fadingScreen = mainCamera.transform.GetChild(2);
+        Transform fadingScreen = mainCamera.transform.GetChild(2); //A éviter SVP
         SpriteRenderer sr = fadingScreen.GetComponent<SpriteRenderer>();
 
         float beginTime = Time.time;

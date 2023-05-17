@@ -2,24 +2,20 @@
     "dialogSteps" : [
         {
             "characterName":"Chell",
-            "dialogContent":"Qui a bien pu noter ça sur ce post-it...",
+            "dialogContent":"Ah voici un post-it, voyons ce qu'il y a d'écrit dessus.",
             "dialogChoices": []
         },
         {
             "characterName":"[Post-it]",
-            "dialogContent":"Fichier contenant le code : <color=green>C0de[<color=red>???????</color>].txt</color>",
+            "dialogContent":"Tu peux me parler grâce à la commande <color=#0099FF>echo</color>, commence par me montrer ta présence en disant <color=#0099FF>\"Bonjour\"</color>.",
             "dialogChoices": []
         },
         {
             "characterName":"Chell",
-            "dialogContent":"Je suppose que c'est mieux que d'avoir noté le mot de passe directement sur le post-it...",
-            "dialogChoices": []
-        },
-        {
-            "characterName":"Chell",
-            "dialogContent":"Je pourrais surrement retrouver le fichier en utilisant la commande <color=green>find</color>...",
+            "dialogContent":"C'est intéressant, écrire <color=#0099FF>echo \"Bonjour\"</color> devrait faire quelque chose, mais où l'écrire...",
             "dialogChoices": []
         }
+
 
     ]
 }
