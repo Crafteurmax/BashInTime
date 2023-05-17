@@ -3,48 +3,135 @@
         {
             "id":0,
             "name":"Première note",
-            "description":"Une note trouvée me dit d'utiliser la commande find. Peut-être pourrais-je trouver le fichier avec find ./ -name \"C0de*.txt\"",
+            "description":"",
             "precedents":[
                 
             ],
             "suivants":[
-                1,2
+                
             ]
         },
         {
             "id":1,
-            "name":"Code 1",
-            "description":"J'ai trouvé le code 1234 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "name":"Porte piègeuse",
+            "description":"",
             "precedents":[
-                0
+                
             ],
             "suivants":[
-                3
+                
             ]
         },
         {
             "id":2,
-            "name":"Code 2",
-            "description":"J'ai trouvé le code 110 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "name":"PC allumé",
+            "description":"",
             "precedents":[
-                0
+                
             ],
             "suivants":[
-                3
+                
             ]
         },
         {
             "id":3,
-            "name":"La fin du prototype",
-            "description":"Bien joué vous avez fini le prototype",
+            "name":"Premières commandes",
+            "description":"",
             "precedents":[
-                1,2
+                
             ],
             "suivants":[
-
+                
+            ]
+        },
+        {
+            "id":4,
+            "name":"Commandes Duplicat-Réplicat",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
             ]
         }
-
+        {
+            "id":5,
+            "name":"Commandes Mais quel bazar?",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":6,
+            "name":"Commandes Mon Roman",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":7,
+            "name":"Codes Duplicat-Réplicat",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        }
+        {
+            "id":8,
+            "name":"Codes Mais quel bazar?",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":9,
+            "name":"Codes Mon Roman",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":10,
+            "name":"Code total",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":11,
+            "name":"Infromage",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        }
 
 
     ]

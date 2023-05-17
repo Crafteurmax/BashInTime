@@ -14,6 +14,11 @@
             "characterName":"Chell",
             "dialogContent":"C'est intéressant, écrire <color=#0099FF>echo \"Bonjour\"</color> devrait faire quelque chose, mais où l'écrire...",
             "dialogChoices": []
+        },
+        {
+            "characterName":"Chell",
+            "dialogContent":"Je devrais aussi pouvoir m'en souvenir grâce aux mémoires en appuyant sur <color=#0099FF>P</color>.",
+            "dialogChoices": []
         }
 
 
