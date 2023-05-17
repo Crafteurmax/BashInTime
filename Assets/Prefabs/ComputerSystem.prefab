@@ -527,6 +527,7 @@ MonoBehaviour:
   cursor: 0
   textComponent: {fileID: 3463424025856371700}
   scroll: {fileID: -1882281496856586963, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  scrollVerNum: {fileID: 6482304234650860926, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   startHighlight: -1
   copy: {fileID: 9194596458515121130, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   paste: {fileID: 9018697194869825099, guid: 14a8988f015546e479e71b3193d5e809, type: 3}

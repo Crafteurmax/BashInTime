@@ -198,6 +198,8 @@ public class Typing : MonoBehaviour
 
     [SerializeField]
     private InputActionReference scroll;
+    [SerializeField]
+    private InputActionReference scrollVerNum;
     private int releasedScrollCount;
 
     String fixText = "<color=green>this is the default text and I'm supposed to be green \n"+
@@ -265,15 +267,43 @@ public class Typing : MonoBehaviour
     }
 
     float scrollSpeed = 100.0f;
+    private void OnScrollVerNum(InputAction.CallbackContext obj)
+    {
+        if(!NumLockState()) StartCoroutine(ScrollVerNum(obj.ReadValue<float>()));
+    }
+
     private void OnScroll(InputAction.CallbackContext obj)
     {
-        if(!NumLockState()) StartCoroutine(Scroll(obj.ReadValue<float>()));
+        StartCoroutine(Scroll(obj.ReadValue<float>()));
+    }
+
+    private IEnumerator ScrollVerNum(float direction)
+    {
+        textComponent.rectTransform.SetPositionAndRotation(
+            textComponent.rectTransform.position + new Vector3(0, -direction * scrollSpeed * Time.deltaTime, 0),
+            textComponent.rectTransform.rotation);
+
+        //Debug.Log(NumLockState());
+
+        if (textComponent.rectTransform.position.y < 0)
+        {
+            textComponent.rectTransform.SetPositionAndRotation(
+            new Vector3(0, 0, 0),
+            textComponent.rectTransform.rotation);
+        }
+        yield return new WaitForSeconds(delayTouche);
+
+        if (releasedScrollCount > 0 && !NumLockState()) releasedScrollCount--;
+        else if (scroll.action.IsPressed() && !NumLockState())
+        {
+            StartCoroutine(ScrollVerNum(direction));
+        }
     }
 
     private IEnumerator Scroll(float direction)
     {
         textComponent.rectTransform.SetPositionAndRotation(
-            textComponent.rectTransform.position + new Vector3(0,direction * scrollSpeed * Time.deltaTime,0),
+            textComponent.rectTransform.position + new Vector3(0,-direction * scrollSpeed * Time.deltaTime,0),
             textComponent.rectTransform.rotation);
 
         //Debug.Log(NumLockState());
@@ -286,8 +316,8 @@ public class Typing : MonoBehaviour
         }
         yield return new WaitForSeconds(delayTouche);
 
-        if (releasedScrollCount > 0 && !NumLockState()) releasedScrollCount--;
-        else if (scroll.action.IsPressed() && !NumLockState())
+        if (releasedScrollCount > 0) releasedScrollCount--;
+        else if (scroll.action.IsPressed())
         {
             StartCoroutine(Scroll(direction));
         }
@@ -393,8 +423,10 @@ public class Typing : MonoBehaviour
         del.action.started += OnDel;
         moveCursor.action.started += OnMoveCursor;
         moveCursor.action.canceled += _ => { releasedMoveCursorCount++; };
+        scrollVerNum.action.started += OnScrollVerNum;
+        scrollVerNum.action.canceled += _ => { if(!NumLockState())releasedScrollCount++; };
         scroll.action.started += OnScroll;
-        scroll.action.canceled += _ => { if(!NumLockState())releasedScrollCount++; };
+        scroll.action.canceled += _ => { releasedScrollCount++; };
         commandHistory.action.started += OnCommandHistory;
         commandHistory.action.canceled += _ => { releasedCommandHistoryCount++; };
         paste.action.started += PasteClipboard;
@@ -410,6 +442,7 @@ public class Typing : MonoBehaviour
         del.action.started -= OnDel;
         moveCursor.action.started -= OnMoveCursor;
         scroll.action.started -= OnScroll;
+        scrollVerNum.action.started -= OnScrollVerNum;
         commandHistory.action.started -= OnCommandHistory;
         paste.action.started -= PasteClipboard;
         shift.action.started -= SetHighlightStart;

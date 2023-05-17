@@ -26,15 +26,17 @@ public class DoorScript : MonoBehaviour
     ConditionsManager conditionsManager;
     public void Interact()
     {
-        Debug.Log("Open the DOOOOOOOR");
-        if(!conditionsManager.GetConditionState("doorIsUnlock"))
-        { 
+        
+        if (!conditionsManager.GetConditionState("doorIsUnlock"))
+        {
+            PalaisMental.current.AddMemory(1);
             chef.RestartSceneDelay(duration);
             chef.SwitchSystem(ChefDorchestre.GameSystem.EndOfTheWorld);
         }
         else
         {
             Debug.Log("win");
+            PalaisMental.current.AddMemory(12); //VICTOIRE
         }
 
        

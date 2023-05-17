@@ -26,7 +26,7 @@ public class BoutonDialogueScript : MonoBehaviour
     
     public void Interact()
     {
-        //new System.Action[] { coucou, coucou2 }
+
         chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
         dialogSystem.StartDialogue(dialogTest, new System.Action[] { coucou, coucou2 });
     }
