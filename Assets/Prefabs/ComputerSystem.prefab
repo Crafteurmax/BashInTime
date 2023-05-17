@@ -571,6 +571,7 @@ MonoBehaviour:
   - cd
   - pwd
   - unlock
+  - man
   forlderAdresse: testCopyPaste/
   testline: 
 --- !u!114 &5601336509800039357
