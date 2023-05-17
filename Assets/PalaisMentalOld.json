@@ -1,0 +1,53 @@
+{
+    "memories":[
+        {
+            "id":0,
+            "name":"Première note",
+            "description":"Une note trouvée me dit d'utiliser la commande find. Peut-être pourrais-je trouver le fichier avec find ./ -name \"C0de*.txt\"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                1,2
+            ]
+        },
+        {
+            "id":1,
+            "name":"Code 1",
+            "description":"J'ai trouvé le code 1234 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "precedents":[
+                0
+            ],
+            "suivants":[
+                3
+            ]
+        },
+        {
+            "id":2,
+            "name":"Code 2",
+            "description":"J'ai trouvé le code 110 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "precedents":[
+                0
+            ],
+            "suivants":[
+                3
+            ]
+        },
+        {
+            "id":3,
+            "name":"La fin du prototype",
+            "description":"Bien joué vous avez fini le prototype",
+            "precedents":[
+                1,2
+            ],
+            "suivants":[
+
+            ]
+        }
+
+
+
+    ]
+
+
+}

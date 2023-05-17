@@ -3,48 +3,146 @@
         {
             "id":0,
             "name":"Première note",
-            "description":"Une note trouvée me dit d'utiliser la commande find. Peut-être pourrais-je trouver le fichier avec find ./ -name \"C0de*.txt\"",
+            "description":"",
             "precedents":[
                 
             ],
             "suivants":[
-                1,2
+                
             ]
         },
         {
             "id":1,
-            "name":"Code 1",
-            "description":"J'ai trouvé le code 1234 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "name":"Porte piègeuse",
+            "description":"",
             "precedents":[
-                0
+                
             ],
             "suivants":[
-                3
+                
             ]
         },
         {
             "id":2,
-            "name":"Code 2",
-            "description":"J'ai trouvé le code 110 sur l'ordinateur, mais où pourrais-je l'utiliser?",
+            "name":"PC allumé",
+            "description":"",
             "precedents":[
-                0
+                
             ],
             "suivants":[
-                3
+                
             ]
         },
         {
             "id":3,
-            "name":"La fin du prototype",
-            "description":"Bien joué vous avez fini le prototype",
+            "name":"Premières commandes",
+            "description":"",
             "precedents":[
-                1,2
+                
             ],
             "suivants":[
-
+                
+            ]
+        },
+        {
+            "id":4,
+            "name":"Commandes Duplicat-Réplicat",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
             ]
         }
-
+        {
+            "id":5,
+            "name":"Commandes Mais quel bazar?",
+            "description":"",
+            "precedents":[
+                
+            ],
+            "suivants":[
+                
+            ]
+        },
+        {
+            "id":6,
+            "name":"Commandes Mon Roman",
+            "description":"Je me souviens, j'avais noté le code au début du chapitre qui s'appelait \"sens[...]Fusion\" je crois. Avec la commande grep je devrais pouvoir le retrouver.",
+            "precedents":[
+                3
+            ],
+            "suivants":[
+                9
+            ]
+        },
+        {
+            "id":7,
+            "name":"Codes Duplicat-Réplicat",
+            "description":"le code était 32XXXX",
+            "precedents":[
+               4 
+            ],
+            "suivants":[
+                10
+            ]
+        }
+        {
+            "id":8,
+            "name":"Codes Mais quel bazar?",
+            "description":"le code était XX76XX",
+            "precedents":[
+                5
+            ],
+            "suivants":[
+                10
+            ]
+        },
+        {
+            "id":9,
+            "name":"Codes Mon Roman",
+            "description":"le code était XXXX56",
+            "precedents":[
+                6
+            ],
+            "suivants":[
+                10
+            ]
+        },
+        {
+            "id":10,
+            "name":"Code total",
+            "description":"j'ai l'ensemble des 3 codes !!! C'est 327656",
+            "precedents":[
+                7,8,9
+            ],
+            "suivants":[
+                11
+            ]
+        },
+        {
+            "id":11,
+            "name":"Infromage",
+            "description":"Une souris qui parle ? Je dois vraiment aller voir un psy... Mais si elle m'aide a sortir d'ici...",
+            "precedents":[
+                10
+            ],
+            "suivants":[
+                12
+            ]
+        },
+        {
+            "id":12,
+            "name":"winner winner chicken dinner",
+            "description":"Je suis vivante !!!! Je suis vivante !!!!!",
+            "precedents":[
+                10
+            ],
+            "suivants":[
+                12
+            ]
+        }
 
 
     ]

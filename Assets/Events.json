@@ -1,24 +1,6 @@
 {
 	"Events" : [
 		{
-			"eventName" : "thisMyName0",
-			"timeStamp" : 60.0,
-			"conditionsID" : [],
-			"actionID" : 1
-		},
-		{
-			"eventName" : "thisMyName1",
-			"timeStamp" : 60.0,
-			"conditionsID" : ["Cond0"],
-			"actionID" : 2
-		},
-		{
-			"eventName" : "thisMyName2",
-			"timeStamp" : 60.0,
-			"conditionsID" : ["Cond0","Cond1"],
-			"actionID" : 3
-		},
-		{
 			"eventName" : "EndOfTheWorld",
 			"timeStamp" : 3000.0,
 			"conditionsID" : [],
