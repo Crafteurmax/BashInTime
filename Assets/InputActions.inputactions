@@ -64,7 +64,7 @@
                     "type": "Button",
                     "id": "dc3c5e06-2a54-4e8a-9c08-1d77e71459f8",
                     "expectedControlType": "Button",
-                    "processors": "",
+                    "processors": "Clamp(min=-1,max=1)",
                     "interactions": "Hold",
                     "initialStateCheck": false
                 },
@@ -273,6 +273,39 @@
                     "name": "positive",
                     "id": "ec0540f8-ae7d-4bea-9aa8-67fbc1ee5f90",
                     "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "e934534d-af40-4f5f-9b5b-aa8ab624b1e3",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ab85fb63-3e9d-4aa6-b211-d69f430081a8",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollTerminal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cd0e1905-6c0a-48da-b63c-9f2f69c6ce98",
+                    "path": "<Mouse>/scroll/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
