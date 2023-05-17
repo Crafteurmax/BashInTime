@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class PalaisMental : MonoBehaviour
 {
 
+    public static PalaisMental current;
+
     //Représentation d'un souvenir qui contient un nom, une description et une liste d'identifiants de souvenirs précédents et suivants.
     [Serializable]
     public class MemoryDescription
@@ -25,6 +27,8 @@ public class PalaisMental : MonoBehaviour
     {
         public MemoryDescription[] memories;
     }
+
+    [SerializeField] private string unlockedMemoriesLoc = "UnlockedMemories";
 
     [SerializeField] private TextAsset memoriesData;
     [SerializeField] private string lockedText = "?????";
@@ -64,11 +68,20 @@ public class PalaisMental : MonoBehaviour
     //Charge les souvenirs en les analysant depuis un fichier JSON et les stocke dans la variable memories.
     private void Awake()
     {
+        
+
         memories = JsonUtility.FromJson<Memories>(memoriesData.ToString());
 
         unlockedMemories = new bool[memories.memories.Length];
 
+        Load();
+
         InitDictionnary();  
+    }
+
+    private void Start()
+    {
+        current = this;
     }
 
     //remplit un dictionnaire qui associe les noms de souvenirs à leurs identifiants dans la liste memories.memories.
@@ -134,6 +147,7 @@ public class PalaisMental : MonoBehaviour
 
         AppendButton(memDesc, buttonParent, firstButtonPosition, ref displayedButtonsCount, true);
         unlockedMemories[memDesc.id] = true;
+        Save();
     }
 
 
@@ -218,5 +232,31 @@ public class PalaisMental : MonoBehaviour
        
     }*/
 
-    
+
+    public void Save()
+    {
+        string saveString = "";
+        foreach (bool b in unlockedMemories)
+        {
+            saveString += b ? 1 : 0;
+        }
+
+        PlayerPrefs.SetString(unlockedMemoriesLoc, saveString)
+;    }
+
+    public void Load()
+    {
+        string saveString = PlayerPrefs.GetString(unlockedMemoriesLoc);
+
+        if (saveString == null || saveString == "") return;
+
+        if (saveString.Length != unlockedMemories.Length) return;
+
+        for(int i = 0; i < saveString.Length; i++)
+        {
+            char c = saveString[i];
+            unlockedMemories[i] = (c == '1');
+        }
+    }
+
 }

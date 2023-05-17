@@ -15,7 +15,7 @@ public class PostItScript : MonoBehaviour
     
     public void Interact()
     {
-        //new System.Action[] { coucou, coucou2 }
+        PalaisMental.current.AddMemory(0);
         chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
         dialogSystem.StartDialogue(dialog, null);
     }
