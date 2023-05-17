@@ -33,8 +33,10 @@ public class ChefDorchestre : MonoBehaviour
         Pave = 6
     }
 
+    [SerializeField] private Camera mainCamera;
     private void Awake()
     {
+
         //Desactive les systems si pas mis en jeu
         foreach (SystemObjects gog in systems)
         {
@@ -60,6 +62,11 @@ public class ChefDorchestre : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine( fadeout());
     }
 
     public void OpenPalaisMental()
@@ -109,11 +116,44 @@ public class ChefDorchestre : MonoBehaviour
         StartCoroutine(_RestartSceneDelay(duration));
     }
 
+    private IEnumerator fadeout()
+    {
+        Transform fadingScreen = mainCamera.transform.GetChild(2);
+        SpriteRenderer sr = fadingScreen.GetComponent<SpriteRenderer>();
+
+        float beginTime = Time.time;
+        float fadingTime = 1.0f;
+
+        Color temp;
+        while (Time.time < beginTime + fadingTime)
+        {
+            temp = sr.color;
+            temp.a = Mathf.SmoothStep(1, 0, (Time.time - beginTime) / fadingTime);
+            sr.color = temp;
+            yield return null;
+        }
+    }
+
     private IEnumerator _RestartSceneDelay(float duration)
     {
         float beginTime = Time.time;
 
         while (Time.time < beginTime + duration) yield return null;
+
+        Transform fadingScreen = mainCamera.transform.GetChild(2);
+        SpriteRenderer sr = fadingScreen.GetComponent<SpriteRenderer>();
+
+        beginTime = Time.time;
+        float fadingTime = 1.0f;
+
+        Color temp;
+        while (Time.time < beginTime + fadingTime)
+        {
+            temp = sr.color;
+            temp.a = Mathf.SmoothStep(0, 1, (Time.time - beginTime) / fadingTime);
+            sr.color = temp;
+            yield return null;
+        }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
