@@ -234,9 +234,11 @@ public class CommandParser : MonoBehaviour
 
         
 
-        new_path = "." + new_path + "/";
+        new_path = "." + new_path;
 
-        if (new_path == "." || new_path == "./") return new_path;
+        if (new_path == "." || new_path == "./" || new_path == "/") return "";
+
+        if (new_path == "/." || new_path == "/./") return "/";
 
         return new_path;
     }
@@ -347,9 +349,11 @@ public class CommandParser : MonoBehaviour
             while (fileIndex < arguments.Length && IsOption(arguments[fileIndex])) fileIndex++;
             if(arguments[fileIndex].Trim()[0] == '/')
             {
-                currentDirectory = ("/" + GetAbsoluteVirtualPath("/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "");
+                currentDirectory = ("/" + GetAbsoluteVirtualPath("/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "") +"/";
             }
-            else currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "");
+            else currentDirectory = ("/" + GetAbsoluteVirtualPath(currentDirectory + "/" + arguments[fileIndex])).Replace("/.", "/").Replace("//", "/").Replace("./", "").Replace("./", "") + "/";
+
+            if (currentDirectory == "//" || currentDirectory == "/./") currentDirectory = "/";
         }
 
         foreach(string forbiden in forbidenDir)
