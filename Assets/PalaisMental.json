@@ -3,18 +3,18 @@
         {
             "id":0,
             "name":"Première note",
-            "description":"",
+            "description":"Où-suis-je ?",
             "precedents":[
                 
             ],
-            "suivants":[
+            "suivants":[1,3
                 
             ]
         },
         {
             "id":1,
             "name":"Porte piègeuse",
-            "description":"",
+            "description":"Je suis enfermé dans cette chambre. La porte déclenche une explosion.",
             "precedents":[
                 
             ],
@@ -25,22 +25,22 @@
         {
             "id":2,
             "name":"PC allumé",
-            "description":"",
+            "description":"Il faut allumer l'ordinateur avant de pouvoir s'en servir.",
             "precedents":[
                 
             ],
-            "suivants":[
+            "suivants":[3
                 
             ]
         },
         {
             "id":3,
             "name":"Premières commandes",
-            "description":"",
-            "precedents":[
+            "description":"\t - man permet d'obtenir le manuel d'une commande \n \t - ls permet de récupérer la liste de fichiers. \n \t - cd permet de changer de repertoire courant. \n \t - cat permet de lire le contenu d'un fichier'",
+            "precedents":[2
                 
             ],
-            "suivants":[
+            "suivants":[4,5,6
                 
             ]
         },
@@ -48,21 +48,21 @@
             "id":4,
             "name":"Commandes Duplicat-Réplicat",
             "description":"",
-            "precedents":[
+            "precedents":[3
                 
             ],
-            "suivants":[
+            "suivants":[7
                 
             ]
         }
         {
             "id":5,
-            "name":"Commandes Mais quel bazar?",
+            "name":"Commandes Mais quel bazar ?",
             "description":"",
-            "precedents":[
+            "precedents":[3
                 
             ],
-            "suivants":[
+            "suivants":[8
                 
             ]
         },
