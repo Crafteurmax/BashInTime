@@ -14,24 +14,39 @@ public class SourisScript : MonoBehaviour
     TextAsset dialog1;
 
     [SerializeField]
-    ConditionsManager conditionsManager;
+    TextAsset dialog2;
 
+    [SerializeField]
+    ConditionsManager conditionsManager;
+    
+    private bool isAlive = true;
     public void Interact()
     {
-        if (conditionsManager.GetConditionState("gotCheese"))
+        if (isAlive)
         {
             chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
-            dialogSystem.StartDialogue(dialog1, new System.Action[] { giveCheese, killMouse });
+            if (conditionsManager.GetConditionState("gotCheese"))
+            {
+                dialogSystem.StartDialogue(dialog1, new System.Action[] { giveCheese, killMouse });
+            }
+            else
+            {
+                dialogSystem.StartDialogue(dialog2, new System.Action[] { giveCheese, killMouse });
+            }
         }
+        
     }
 
     private void giveCheese()
     {
-
+        conditionsManager.SetCondition("gotCheese", false); 
+        conditionsManager.SetCondition("doorIsUnlock", true);
     }
 
     private void killMouse()
     {
-
+        transform.GetComponent<SpriteRenderer>().flipY = true;
+        transform.GetComponent<Souris>().isMoving = false;
+        isAlive = false;
     }
 }

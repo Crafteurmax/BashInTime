@@ -1,0 +1,37 @@
+{
+    "dialogSteps" : [
+        {
+            "characterName":"Souris",
+            "dialogContent":"Krrr Krrrr, je suis une souris",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"Souris",
+            "dialogContent":"Ne me fais pas de mal !!",
+            "dialogChoices": [
+                {
+                    "name" : "Tuer la souris",
+                    "nextAction" : 1,
+                    "nextDialog" : 10
+                },
+                {
+                    "name" : "La laisser vivre sa vie",
+                    "nextAction" : -1,
+                    "nextDialog" : 3
+                }
+
+            ]
+        },
+        {
+            "characterName":"Souris",
+            "dialogContent":"Je m'en vais ronger le cable'",
+            "dialogChoices": []
+        },
+        {
+            "characterName":"Souris",
+            "dialogContent":"Merci de me laisser la vie sauve",
+            "dialogChoices": []
+        }
+
+    ]
+}
