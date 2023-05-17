@@ -2158,8 +2158,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221745255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7, y: -0.04, z: 0.0001}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -2.669, y: 0.274, z: 0.0001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1221099072}
@@ -2181,7 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   invisibleColor: {r: 0, g: 0, b: 0, a: 0}
-  outlineWidth: 0.1
+  outlineWidth: 0.05
 --- !u!61 &1221745260
 BoxCollider2D:
   m_ObjectHideFlags: 0
