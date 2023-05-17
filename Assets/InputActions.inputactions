@@ -261,7 +261,7 @@
                 {
                     "name": "negative",
                     "id": "b3fbe1e5-6e1f-402d-9b50-43865379f8b6",
-                    "path": "<Keyboard>/numpad3",
+                    "path": "<Keyboard>/pageDown",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -272,7 +272,7 @@
                 {
                     "name": "positive",
                     "id": "ec0540f8-ae7d-4bea-9aa8-67fbc1ee5f90",
-                    "path": "<Keyboard>/numpad9",
+                    "path": "<Keyboard>/pageUp",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
