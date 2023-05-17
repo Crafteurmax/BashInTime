@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChefDorchestre : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class ChefDorchestre : MonoBehaviour
     private SystemObjects currentSystem;
 
     [SerializeField] private SystemObjects[] systems;
-
+    public PalaisMental palais;
     
 
     public enum GameSystem : int
@@ -28,6 +29,8 @@ public class ChefDorchestre : MonoBehaviour
         Console = 2,
         PalaisMental = 3,
         Lock = 4,
+        EndOfTheWorld = 5,
+        Pave = 6
     }
 
     private void Awake()
@@ -57,6 +60,12 @@ public class ChefDorchestre : MonoBehaviour
         {
             go.SetActive(true);
         }
+    }
+
+    public void OpenPalaisMental()
+    {
+        if (currentSystem != systems[(int)GameSystem.Default]) return;
+        SwitchSystem(GameSystem.PalaisMental);
     }
 
     public void SwitchSystem(GameSystem system)
@@ -93,5 +102,19 @@ public class ChefDorchestre : MonoBehaviour
     public void GetOut()
     {
         SwitchSystem(currentSystem.parent);
+    }
+
+    public void RestartSceneDelay(float duration)
+    {
+        StartCoroutine(_RestartSceneDelay(duration));
+    }
+
+    private IEnumerator _RestartSceneDelay(float duration)
+    {
+        float beginTime = Time.time;
+
+        while (Time.time < beginTime + duration) yield return null;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

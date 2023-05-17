@@ -483,6 +483,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f33c9fa1-b451-4d5b-ac0b-e6fc6dba7dbd
     m_ActionName: GameActionMap/CommandHistory[/Keyboard/downArrow,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f4b10d3-c39f-41ce-8828-52495caee463
+    m_ActionName: GameActionMap/GetOut[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e5a2c944-5dd8-43cf-adbc-2e3f48f7882e
+    m_ActionName: GameActionMap/PalaisMental[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1725ff76-8968-4075-b678-7ad33753842d
+    m_ActionName: GameActionMap/Copy[/Keyboard/ctrl,/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e5b2ca3-c15c-448f-9b9f-97011225c114
+    m_ActionName: GameActionMap/Paste[/Keyboard/ctrl,/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 270cfc1d-b4cd-4e2f-ba31-a947bd3fa730
+    m_ActionName: GameActionMap/Shift[/Keyboard/shift,/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameActionMap
@@ -504,8 +524,13 @@ MonoBehaviour:
   del: {fileID: 1330351582163037850, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   moveCursor: {fileID: -6515351413352715769, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
   commandHistory: {fileID: -2135852282540466728, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  cursor: 0
   textComponent: {fileID: 3463424025856371700}
   scroll: {fileID: -1882281496856586963, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  startHighlight: -1
+  copy: {fileID: 9194596458515121130, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  paste: {fileID: 9018697194869825099, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
+  shift: {fileID: -8071582910794598934, guid: 14a8988f015546e479e71b3193d5e809, type: 3}
 --- !u!114 &5601336509800039356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +543,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34b56f6fbd6e344481603640a2a57ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialCommand: echo Bonjour
+  specialOutput: 'Bonjour
+
+    Bonjour Chell, je dois rester discret, retrouve mes
+    infos avec "cat info.txt"'
+  forbidenDir: []
   currentDirectory: /
+  chef: {fileID: 0}
   fileCommands:
   - ls
   - rm
@@ -538,6 +570,8 @@ MonoBehaviour:
   interpretedCommands:
   - cd
   - pwd
+  - unlock
+  forlderAdresse: testCopyPaste/
   testline: 
 --- !u!114 &5601336509800039357
 MonoBehaviour:

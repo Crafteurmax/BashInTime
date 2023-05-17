@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
@@ -17,11 +16,19 @@ public class TimeManager : MonoBehaviour
 
     private int eventCounter;
     public List<Evenement> listeEvenement = new List<Evenement>();
-    private Action[] ActionList = { null, test, test2, test3};
+    private Action[] ActionList = { null, test, test2, test3, null}; //le dernier c'est gameover
     [SerializeField] TextAsset eventsJSON;
     private bool lastEventHappened = false; 
 
     [SerializeField] private TextMeshProUGUI textComponent;
+
+    [SerializeField] DoorScript door;
+
+    void Awake()
+    {
+        ActionList[^1] = GameOver;
+    }
+
     void Start()
     {
         EventsInfo eventsInfo = JsonUtility.FromJson<EventsInfo>(eventsJSON.text);
@@ -79,6 +86,8 @@ public class TimeManager : MonoBehaviour
     static void test2() { Debug.Log("hello 2"); }
 
     static void test3() { Debug.Log("hello 3"); }
+
+    void GameOver() { door.Interact();  }
 }
 
 [System.Serializable]

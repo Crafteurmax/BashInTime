@@ -15,6 +15,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private SpriteRenderer ChellSprite;
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = ChellSprite.gameObject.GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +36,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 position = transform.position;
         float deplacement = playerInput.actions["Move"].ReadValue<float>() * caracterSpeed * Time.deltaTime;
 
-        if (deplacement == 0) return;
-
+        if (deplacement == 0)
+        {
+            animator.speed = 0;
+            return;
+        }
+        animator.speed = 1;
         // Calcule le déplacmeent gauche/droite de l'objet auquel ce scripte est attaché
         position.x += deplacement;
         ChellSprite.flipX = deplacement > 0;
         // On ne dépasse pas les bords de la pièce ...
+
+        if(Mathf.Abs(position.x) > roomWidth / 2)
+        {
+            animator.speed = 0;
+        }
+
         position.x = Mathf.Clamp(position.x, -roomWidth / 2, roomWidth / 2);
         transform.position = position;
 
