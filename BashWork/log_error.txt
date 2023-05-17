@@ -1,1 +1,0 @@
-bash: cd: BashWork/root/home/chell/: No such file or directory
