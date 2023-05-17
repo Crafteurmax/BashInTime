@@ -205,6 +205,11 @@ public class PalaisMental : MonoBehaviour
     public void AddMemory(int id)
     {
         AddMemory(memories.memories[id]);
+
+        if(unlockedMemories[7] && unlockedMemories[8] && unlockedMemories[9])
+        {
+            AddMemory(10);
+        }
     }
 
     //Ajoute un bouton pour un souvenir donné à l'interface utilisateur si le souvenir n'a pas encore été ajouté par le nom.

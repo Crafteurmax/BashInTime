@@ -59,7 +59,7 @@ public class CommandParser : MonoBehaviour
     //Fonction Callback qui est appelee et recoit le message a afficher sur la console
     public void ShowReturnValue(string textLog, string errorLog, string command)
     {
-        DetectPalais(textLog).
+        DetectPalais(textLog);
 
         if (errorLog.Trim() != "") keyboard.PrintOutput("<color=red>" + errorLog + "</color>");
         else keyboard.PrintOutput("<color=#00FFFF>" + textLog + "</color>");
@@ -508,6 +508,30 @@ public class CommandParser : MonoBehaviour
         if (detectString.Contains("Voici une liste de commandes pour m'aider à me retrouver"))
         {
             PalaisMental.current.AddMemory(3);
+        }
+        else if (detectString.Contains("a clé blue pour la porte blue"))
+        {
+            PalaisMental.current.AddMemory(4);
+        }
+        else if (detectString.Contains("je suis chargé de fouiller une liste de dossiers à sa recherche"))
+        {
+            PalaisMental.current.AddMemory(5);
+        }
+        else if (detectString.Contains("j'avais noté le code au début du chapitre qui s'appelait"))
+        {
+            PalaisMental.current.AddMemory(6);
+        }
+        else if (detectString.Length < 20 && detectString.Contains("32XXXX"))
+        {
+            PalaisMental.current.AddMemory(7);
+        }
+        else if (detectString.Length < 20 && detectString.Contains("XX76XX"))
+        {
+            PalaisMental.current.AddMemory(8);
+        }
+        else if (detectString.Length < 20 && detectString.Contains("XXXX56"))
+        {
+            PalaisMental.current.AddMemory(9);
         }
     }
 }

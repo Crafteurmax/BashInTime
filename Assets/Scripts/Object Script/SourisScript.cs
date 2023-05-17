@@ -42,6 +42,7 @@ public class SourisScript : MonoBehaviour
 
     private void giveCheese()
     {
+        PalaisMental.current.AddMemory(11);
         conditionsManager.SetCondition("gotCheese", false); 
         conditionsManager.SetCondition("doorIsUnlock", true);
         cheese.SetActive(false);
