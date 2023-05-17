@@ -1,0 +1,7 @@
+Voici une liste de commandes pour m'aider à me retrouver :
+- <color=#00AAFF>man <Commande> </color>: permet de savoir à quoi sert la commande
+- <color=#00AAFF>ls </color>: permet de récupérer la liste de fichiers
+- <color=#00AAFF>cd <chemin> </color>: permet de se déplacer dans <chemin>
+- <color=#00AAFF>cat <fichier> </color>: affiche le contenu de <fichier>
+
+Explore des indices dans le bureau pour me retrouver...
