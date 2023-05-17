@@ -54,7 +54,7 @@
             "suivants":[7
                 
             ]
-        }
+        },
         {
             "id":5,
             "name":"Commandes Mais quel bazar ?",
@@ -129,7 +129,7 @@
                 10
             ],
             "suivants":[
-                12
+                11
             ]
         },
         {
@@ -137,10 +137,10 @@
             "name":"winner winner chicken dinner",
             "description":"Je suis vivante !!!! Je suis vivante !!!!!",
             "precedents":[
-                10
+                10,11
             ],
             "suivants":[
-                12
+
             ]
         }
 

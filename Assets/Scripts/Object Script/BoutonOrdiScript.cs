@@ -16,7 +16,7 @@ public class BoutonOrdiScript: MonoBehaviour
     {
         if (isPoweredOn)
         {
-            //PalaisMental.current.AddMemory(2);
+            PalaisMental.current.AddMemory(2);
             chef.SwitchSystem(ChefDorchestre.GameSystem.Console);
         }
         else cannotPlaySound.Play();
