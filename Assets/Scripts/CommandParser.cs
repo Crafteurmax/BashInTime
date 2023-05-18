@@ -242,7 +242,7 @@ public class CommandParser : MonoBehaviour
 
         if (new_path == "/." || new_path == "/./") return "/";
 
-        return new_path;
+        return new_path.Substring(2,new_path.Length-2);
     }
 
     //Permet de savoir si une fonction est une option du type -blabla ou un argument principal
