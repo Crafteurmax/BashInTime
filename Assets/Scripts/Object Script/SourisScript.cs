@@ -27,25 +27,32 @@ public class SourisScript : MonoBehaviour
     {
         if (isAlive)
         {
+            transform.GetComponent<Souris>().isMoving = false;
             chef.SwitchSystem(ChefDorchestre.GameSystem.Dialogue);
             if (conditionsManager.GetConditionState("gotCheese"))
             {
-                dialogSystem.StartDialogue(dialog1, new System.Action[] { giveCheese, killMouse });
+                dialogSystem.StartDialogue(dialog1, new System.Action[] { giveCheese, killMouse , letLive});
             }
             else
             {
-                dialogSystem.StartDialogue(dialog2, new System.Action[] { giveCheese, killMouse });
+                dialogSystem.StartDialogue(dialog2, new System.Action[] { giveCheese, killMouse , letLive });
             }
         }
-        
+
+
     }
 
     private void giveCheese()
     {
         PalaisMental.current.AddMemory(11);
-        conditionsManager.SetCondition("gotCheese", false); 
+        conditionsManager.SetCondition("gotCheese", false);
         conditionsManager.SetCondition("doorIsUnlock", true);
         cheese.SetActive(false);
+        transform.GetComponent<Souris>().isMoving = true;
+    }
+    private void letLive()
+    {
+        transform.GetComponent<Souris>().isMoving = true;
     }
 
     private void killMouse()

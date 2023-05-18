@@ -9,7 +9,7 @@ public class CommandParser : MonoBehaviour
 {
     //Special selection Command
     [SerializeField] private string specialCommand = "echo Bonjour";
-    [SerializeField] [TextArea] private string specialOutput = "Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
+    [SerializeField] [TextArea] private string specialOutput = "[System] Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
 
     [SerializeField] private string[] forbidenDir;
 
@@ -151,7 +151,6 @@ public class CommandParser : MonoBehaviour
 
         for(var i =0;i<rawWords.Length;i++)
         {
-            Debug.Log(rawWords[i]);
             if (rawWords[i].Length <= 0)
             {
                 words.Add(rawWords[i]);

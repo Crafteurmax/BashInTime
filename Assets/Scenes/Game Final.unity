@@ -811,6 +811,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6274473379029865797, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
+      propertyPath: eventConditions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274473379029865797, guid: e0b561a9da29bf7418f94951a81d970d, type: 3}
       propertyPath: eventConditions.Array.data[0].name
       value: gotCheese
       objectReference: {fileID: 0}

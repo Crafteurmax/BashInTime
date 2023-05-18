@@ -3,11 +3,11 @@
         {
             "id":0,
             "name":"Première note",
-            "description":"Où-suis-je ?",
+            "description":"Où-suis-je ? Qui est cette personne ? On dirait mon écriture mais je ne me souviens pas d'avoir écrit ça...",
             "precedents":[
                 
             ],
-            "suivants":[1,3
+            "suivants":[3
                 
             ]
         },
@@ -37,7 +37,7 @@
             "id":3,
             "name":"Premières commandes",
             "description":"\t - man permet d'obtenir le manuel d'une commande \n \t - ls permet de récupérer la liste de fichiers. \n \t - cd permet de changer de repertoire courant. \n \t - cat permet de lire le contenu d'un fichier'",
-            "precedents":[2
+            "precedents":[0,2
                 
             ],
             "suivants":[4,5,6

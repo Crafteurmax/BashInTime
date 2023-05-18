@@ -25,11 +25,6 @@ public class Souris : MonoBehaviour
             }
 
             transform.position = new Vector3(transform.position.x + speed, transform.position.y);
+            }
         }
-        }
-
-    void Interact()
-    {
-        isMoving = !isMoving;
-    }
 }
