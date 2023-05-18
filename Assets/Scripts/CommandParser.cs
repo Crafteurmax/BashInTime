@@ -151,7 +151,12 @@ public class CommandParser : MonoBehaviour
 
         for(var i =0;i<rawWords.Length;i++)
         {
-            //Debug.Log(rawWords[i]);
+            Debug.Log(rawWords[i]);
+            if (rawWords[i].Length <= 0)
+            {
+                words.Add(rawWords[i]);
+                continue;
+            }
             switch (rawWords[i][0])
             {
                 case '\'' :
@@ -314,8 +319,8 @@ public class CommandParser : MonoBehaviour
 
         if (new_path == "/." || new_path == "/./") return "/";
 
-        Debug.Log(new_path);
-        return new_path;
+        return new_path.Substring(2,new_path.Length-2); //To avoid non file arguments to be invalid
+
     }
 
     //Permet de savoir si une fonction est une option du type -blabla ou un argument principal

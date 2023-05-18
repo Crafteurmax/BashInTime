@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2184964496227825930}
   - component: {fileID: 2184964496227825933}
   - component: {fileID: 2184964496227825934}
-  - component: {fileID: 2666106902566801648}
   - component: {fileID: 3012000318873536023}
   m_Layer: 0
   m_Name: Souris
@@ -144,21 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -0.01
   isMoving: 1
---- !u!114 &2666106902566801648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2184964496227825929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4c21dac88c32994aad4f3883ecd0451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineColor: {r: 0, g: 0, b: 0, a: 0}
-  invisibleColor: {r: 0, g: 0, b: 0, a: 0}
-  outlineWidth: 0
 --- !u!114 &3012000318873536023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +160,4 @@ MonoBehaviour:
   dialog1: {fileID: 0}
   dialog2: {fileID: 0}
   conditionsManager: {fileID: 0}
+  cheese: {fileID: 0}
