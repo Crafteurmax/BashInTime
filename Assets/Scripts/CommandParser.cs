@@ -116,8 +116,10 @@ public class CommandParser : MonoBehaviour
 
 
         //On recupere la commande et on appelle des fonctions differentes en fonction de celle-ci
-        string[] words = PrepareOutputInputCommand(line).Split(" ");
+        //autruche
 
+        //string[] words = PrepareOutputInputCommand(line).Split(" ");
+        string[] words = SeparateWord(PrepareOutputInputCommand(line));
         if (words.Length <= 0) ShowReturnValue("", "Please Input something\n", line);
 
         string command = words[0].Trim();
@@ -140,6 +142,76 @@ public class CommandParser : MonoBehaviour
         }
 
         return true;
+    }
+
+    private String[] SeparateWord(String line)
+    {
+        List<String> words = new List<string>();
+        String[] rawWords = line.Split(" ");
+
+        for(var i =0;i<rawWords.Length;i++)
+        {
+            //Debug.Log(rawWords[i]);
+            switch (rawWords[i][0])
+            {
+                case '\'' :
+                    // Si le mot et lui meme entier ou le dernier de la liste de mot
+                    if (rawWords[i][rawWords[i].Length - 1] == '\'' || i == rawWords.Length - 1)
+                    {
+                        words.Add(rawWords[i]);
+                        break;
+                    }
+
+                    // sinon on teste tout les mots qui suivent pour savoir si ils terminent le mot
+                    String tmp1 = rawWords[i];
+                    for (var j = i + 1; j < rawWords.Length; j++)
+                    {
+                        Debug.Log(rawWords[j]);
+                        tmp1 += " " + rawWords[j];
+                        if (tmp1[tmp1.Length - 1] == '\'')
+                        {
+                            words.Add(tmp1);
+                            i += j;
+                            break;
+                        }
+                    }
+                    break;
+                case '"':
+
+
+
+                    // Si le mot et lui meme entier ou le dernier de la liste de mot
+                    if (rawWords[i][rawWords[i].Length - 1] == '"' || i == rawWords.Length - 1)
+                    {
+                        words.Add(rawWords[i]);
+                        break;
+                    }
+
+                    // sinon on teste tout les mots qui suivent pour savoir si ils terminent le mot
+                    String tmp2 = rawWords[i];
+                    for (var j = i + 1; j < rawWords.Length; j++)
+                    {
+                        Debug.Log(rawWords[j]);
+                        tmp2 += " " + rawWords[j];
+                        if (tmp2[tmp2.Length-1] == '"')
+                        {
+                            words.Add(tmp2);
+                            i += j;
+                            break;
+                        }
+                    }
+                    break;
+
+
+
+                default:
+                    words.Add(rawWords[i]);
+                    break;
+            }
+            
+        }
+
+        return words.ToArray();
     }
 
     //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
@@ -242,6 +314,7 @@ public class CommandParser : MonoBehaviour
 
         if (new_path == "/." || new_path == "/./") return "/";
 
+        Debug.Log(new_path);
         return new_path;
     }
 
@@ -406,6 +479,8 @@ public class CommandParser : MonoBehaviour
                 }
                 else
                 {
+                    arguments[0] = "echo ";
+                    DirectPrepare(arguments, ShowReturnValue, command);
                     ShowReturnValue("", "man needs only 1 argument", command);
                 }
                 break;

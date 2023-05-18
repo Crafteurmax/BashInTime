@@ -84,6 +84,15 @@ public class Typing : MonoBehaviour
         fixText += output + "\n";
         //DisplayText(currentText);
         textComponent.text = fixText;
+        float remplissage = 0.9f;
+        if(textComponent.textInfo.lineCount > remplissage*textComponent.maxVisibleLines 
+        || textComponent.textInfo.wordCount > remplissage*textComponent.maxVisibleWords 
+        || textComponent.textInfo.characterCount > remplissage*textComponent.maxVisibleCharacters)
+        {
+            fixText = fixText.Substring((fixText.Length / 2) );
+            textComponent.text = fixText;
+        }
+
         updateScroll();
         isCommandRunning = false;
     }
