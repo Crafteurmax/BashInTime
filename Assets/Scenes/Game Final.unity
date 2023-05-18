@@ -237,7 +237,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &197574758
 MonoBehaviour:
@@ -932,7 +932,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &484186469
 Transform:
@@ -1019,7 +1019,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &618289481
 MonoBehaviour:
@@ -2679,7 +2679,7 @@ PrefabInstance:
     - target: {fileID: 7580010349977193950, guid: b6c0b089381d0d242997146bfdf49287, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c0b089381d0d242997146bfdf49287, type: 3}
 --- !u!114 &1524995834 stripped
@@ -3684,6 +3684,10 @@ PrefabInstance:
     - target: {fileID: 2396475587310512280, guid: cb1c71420d8b06e489c4e77e1048b0a5, type: 3}
       propertyPath: m_Name
       value: Etincelles
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396475587310512280, guid: cb1c71420d8b06e489c4e77e1048b0a5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396475587310512357, guid: cb1c71420d8b06e489c4e77e1048b0a5, type: 3}
       propertyPath: lengthInSec

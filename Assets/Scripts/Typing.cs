@@ -84,13 +84,19 @@ public class Typing : MonoBehaviour
         fixText += output + "\n";
         //DisplayText(currentText);
         textComponent.text = fixText;
-        float remplissage = 0.9f;
-        if(textComponent.textInfo.lineCount > remplissage*textComponent.maxVisibleLines 
-        || textComponent.textInfo.wordCount > remplissage*textComponent.maxVisibleWords 
-        || textComponent.textInfo.characterCount > remplissage*textComponent.maxVisibleCharacters)
+
+        float remplissage = 0.5f;
+        if(textComponent.textInfo.lineCount > remplissage*textComponent.maxVisibleLines)
         {
-            fixText = fixText.Substring((fixText.Length / 2) );
-            textComponent.text = fixText;
+            textComponent.maxVisibleLines *= 2;
+        }
+        if (textComponent.textInfo.wordCount > remplissage * textComponent.maxVisibleWords)
+        {
+            textComponent.maxVisibleWords *= 2;
+        }
+        if (textComponent.textInfo.characterCount > remplissage * textComponent.maxVisibleCharacters)
+        {
+            textComponent.maxVisibleCharacters *= 2;
         }
 
         updateScroll();
@@ -241,7 +247,6 @@ public class Typing : MonoBehaviour
         {
             String[] firstCut = cutString(textToFormat, startHighlight);
             String[] secondCut = cutString(firstCut[0], cursor);
-            Debug.Log(firstCut[0]);
             return parser.currentDirectory + " > " + secondCut[0] +  "|" + "<mark=FFFFFF80>" + secondCut[1] + "</mark>" + firstCut[1];
         }
     }

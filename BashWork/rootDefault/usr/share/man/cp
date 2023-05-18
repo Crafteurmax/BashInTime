@@ -1,0 +1,52 @@
+<b>NAME</b>
+       cp - copy files and directories
+
+<b>SYNOPSIS</b>
+       cp [<u>OPTION</u>]... [<u>-T</u>] <u>SOURCE DEST</u>
+       cp [<u>OPTION</u>]... <u>SOURCE</u>... <u>DIRECTORY</u>
+       cp [<u>OPTION</u>]... -t <u>DIRECTORY SOURCE</u>...
+
+<b>DESCRIPTION</b>
+       Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       <b>-i, --interactive</b>
+              prompt before overwrite (overrides a previous -n option)
+
+       <b>-l, --link</b>
+              hard link files instead of copying
+
+       <b>-n, --no-clobber</b>
+              do not overwrite an existing file (overrides a previous -i option)
+
+       <b>-R, -r, --recursive</b>
+              copy directories recursively
+
+       <b>-s, --symbolic-link</b>
+              make symbolic links instead of copying
+
+       <b>-t, --target-directory=DIRECTORY</b>
+              copy all SOURCE arguments into DIRECTORY
+
+       <b>-T, --no-target-directory</b>
+              treat DEST as a normal file
+
+       <b>-u, --update</b>
+              copy only when the SOURCE file is newer than the destination file or when the destination file is missing
+
+<b>AUTHOR</b>
+       Written by Torbjorn Granlund, David MacKenzie, and Jim Meyering.
+
+<b>COPYRIGHT</b>
+       Copyright © 2020 Free Software Foundation, Inc.  License GPLv3+: GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This is free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO
+       Full documentation <https://www.gnu.org/software/coreutils/cp>
+       or available locally via: info '(coreutils) cp invocation'
+
+GNU coreutils 8.32                         February 2022                                     CP(1)
+
