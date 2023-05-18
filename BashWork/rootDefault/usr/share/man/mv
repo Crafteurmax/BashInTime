@@ -1,0 +1,41 @@
+<b>NAME</b>
+       mv - move (rename) files
+
+<b>SYNOPSIS</b>
+       mv [<u>OPTION</u>]... [<u>-T</u>] <u>SOURCE DEST</u>
+       mv [<u>OPTION</u>]... <u>SOURCE</u>... <u>DIRECTORY</u>
+       mv [<u>OPTION</u>]... -t <u>DIRECTORY SOURCE</u>...
+
+<b>DESCRIPTION</b>
+       Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       <b>-n, --no-clobber</b>
+              do not overwrite an existing file
+
+       <b>-t, --target-directory=DIRECTORY</b>
+              move all SOURCE arguments into DIRECTORY
+
+       <b>-T, --no-target-directory</b>
+              treat DEST as a normal file
+
+       <b>-u, --update</b>
+              move only when the SOURCE file is newer than the destination file or when the
+              destination file is missing
+
+<b>AUTHOR</b>
+       Written by Mike Parker, David MacKenzie, and Jim Meyering.
+
+<b>COPYRIGHT</b>
+       Copyright © 2020 Free Software Foundation, Inc.  License GPLv3+: GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This  is  free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO</b>
+       Full documentation <https://www.gnu.org/software/coreutils/mv>
+       or available locally via: info '(coreutils) mv invocation'
+
+GNU coreutils 8.32                         February 2022                                     MV(1)
+

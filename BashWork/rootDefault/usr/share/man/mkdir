@@ -1,0 +1,32 @@
+<b>NAME</b>
+       mkdir - make directories
+
+<b>SYNOPSIS</b>
+       mkdir [<u>OPTION</u>]... <u>DIRECTORY</u>...
+
+<b>DESCRIPTION</b>
+       Create the DIRECTORY(ies), if they do not already exist.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       <b>-m, --mode=MODE</b>
+              set file mode (as in chmod), not a=rwx - umask
+
+       <b>-p, --parents</b>
+              no error if existing, make parent directories as needed
+
+<b>AUTHOR</b>
+       Written by David MacKenzie.
+
+<b>COPYRIGHT</b>
+       Copyright © 2020 Free Software Foundation, Inc.  License GPLv3+: GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This  is  free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO</b>
+       Full documentation <https://www.gnu.org/software/coreutils/mkdir>
+       or available locally via: info '(coreutils) mkdir invocation'
+
+GNU coreutils 8.32                         February 2022                                  MKDIR(1)
+

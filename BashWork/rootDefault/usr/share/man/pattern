@@ -86,7 +86,7 @@
        In basic regular expressions the meta-characters ?, +, {, |, (, and )  lose  their  special
        meaning; instead use the backslashed versions \?, \+, \{, \|, \(, and \).
 
-COPYRIGHT
+<b>COPYRIGHT</b>
        Copyright 1998-2000, 2002, 2005-2021 Free Software Foundation, Inc.
 
        This  is  free  software; see the source for copying conditions.  There is NO warranty; not

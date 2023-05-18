@@ -1,0 +1,206 @@
+<b>NAME</b>
+       find - search for files in a directory hierarchy
+
+<b>SYNOPSIS</b>
+       find [<u>-H</u>] [<u>-L</u>] [<u>-P</u>] [<u>-Olevel</u>] [<u>starting-point...</u>] [<u>expression</u>]
+
+<b>DESCRIPTION</b>
+       find searches the directory tree rooted at each given starting-point by evaluating the given
+       expression from left to right, according to the rules of precedence (see section OPERATORS),
+       until the outcome is known, at which point find moves on to the next file name. If no
+       starting-point is specified, ‘.’ is assumed.
+
+<b>OPTIONS</b>
+      These options control the behaviour of find but are specified immediately after the last path
+       name. The four ‘real' options -H, -L, and -P must appear before the first path name, if at all.
+
+       <b>-P</b>     Never follow symbolic links. This is the default behaviour. When find examines or prints
+       information about files, and the file is a symbolic link, the information used shall be taken from
+       the properties of the symbolic link itself.
+
+       <b>-L</b>     Follow symbolic links. When find examines or prints information about files, the
+       information used shall be taken from the properties of the file to which the link points, not from
+       the link itself (unless it is a broken symbolic link or find is unable to examine the file to which
+       the link points).
+
+       <b>-H</b>     Do not follow symbolic links, except while processing the command line arguments.
+       When find examines or prints information about files, the information used shall be taken from
+       the properties of the symbolic link itself.
+
+       If more than one of -H, -L and -P is specified, the last one appearing on the command line
+       takes effect.
+
+<b>EXPRESSION
+       The part of the command line after the list of starting points is the expression. This is a kind of
+       query specification describing how we match files and what we do with the files that were
+       matched.  An expression is composed of a sequence of things:
+
+       Tests 
+              Tests return a true or false value, usually on the basis of some property of a file we are
+              considering.
+
+       Actions
+              Actions have side effects (such as printing something on the standard output) and return
+              either true or false, usually based on whether or not they are successful.
+
+       Global options
+              Global options affect the operation of tests and actions specified on any part of the
+              command line. Global options always return true.
+
+       Operators
+              Operators join together the other items within the expression. Where an operator is
+              missing, -a (meaning logical AND) is assumed.
+
+   GLOBAL OPTIONS
+       Global options always return true. Global options take effect even for tests which occur earlier
+       on the command line. To prevent confusion, global options should specified on the
+       commandline after the list of start points, just before the first test, positional option or action.
+
+       <b>-d</b>     A synonym for -depth
+
+       <b>-depth</b> Process each directory's contents before the directory itself.
+
+       <b>-maxdepth [levels]</b>
+              Descend at most levels (a non-negative integer) levels of directories below the
+              starting-points. Using -maxdepth 0 means only apply the tests and actions to the 
+              starting-points themselves.
+
+       <b>-mindepth [levels]</b>
+              Do not apply any tests or actions at levels less than levels (a non-negative integer). Using
+              -mindepth 1 means process all files except the starting-points.
+
+   TESTS
+       A numeric argument <b>n</b> can be specified to tests (like -amin, -mtime, -gid, -inum, -links, -size,
+       -uid and -used) as
+
+       <b>+n</b>     for greater than n,
+
+       <b>-n</b>     for less than n,
+
+       <b>n</b>      for exactly n.
+
+       Supported tests:
+
+       <b>-amin n</b>
+              File was last accessed n minutes ago.
+
+       <b>-atime n</b>
+              File  was last accessed n*24 hours ago.  When find figures out how many 24-hour periods
+       ago the file was last accessed, any fractional part is ignored, so to match -atime +1, a file has
+       to have been accessed at least two days ago.
+
+       <b>-cmin n</b>
+              File's status was last changed n minutes ago.
+
+       <b>-ctime n</b>
+              File's status was last changed n*24 hours ago. See the comments for -atime
+
+       <b>-empty</b> File is empty and is either a regular file or a directory.
+
+       <b>-executable</b>
+              Matches files which are executable and directories which are searchable (in a file name
+              resolution sense) by the current user.
+
+       <b>-false</b> Always false.
+
+       <b>-links n</b>
+              File has n hard links.
+
+       <b>-mmin n</b>
+              File's data was last modified n minutes ago.
+
+       <b>-mtime n</b>
+              File's data was last modified h*24 hours ago. See the comments for -atime
+
+       <b>-newer reference</b>
+              Time of the last data modification of the current file is more recent than that of the last data
+              modification of the reference file.
+
+       <b>-newerXY reference</b>
+              Succeeds if timestamp X of the file being considered is newer than timestamp Y of the file
+              reference.  The letters X and Y can be any of the following letters:
+
+              a   The access time of the file reference
+              B   The birth time of the file reference
+              c   The inode status change time of reference
+              m   The modification time of the file reference
+              t   reference is interpreted directly as a time
+
+              Some  combinations  are invalid
+
+       <b>-path pattern</b>
+              File name matches shell pattern pattern.
+
+       <b>-readable</b>
+              Matches files which are readable by the current user.
+
+       <b>-regex pattern</b>
+              File name matches regular expression pattern. This is a match on the whole path, not a
+              search.
+
+       <b>-samefile name</b>
+              File refers to the same inode as name.
+
+       <b>-size n[cwbkMG]</b>
+              File uses n units of space, rounding up. The following suffixes can be used:
+
+              `b'    for 512-byte blocks (this is the default if no suffix is used)
+              `c'    for bytes
+              `w'    for two-byte words
+              `k'    for kibibytes (KiB, units of 1024 bytes)
+              `M'    for mebibytes (MiB, units of 1024 * 1024 = 1048576 bytes)
+              `G'    for gibibytes (GiB, units of 1024 * 1024 * 1024 = 1073741824 bytes)
+
+       <b>-true</b>  Always true.
+
+       <b>-uid n</b> File's numeric user ID is n.
+
+       <b>-user uname</b>
+              File is owned by user uname (numeric user ID allowed).
+
+       <b>-writable</b>
+              Matches files which are writable by the current user.
+
+   ACTIONS
+       <b>-delete</b>
+              Delete  files; true if removal succeeded. Automatically turns on the `-depth' option.
+
+              Warnings: Don't forget that the find command line is evaluated as an expression, so
+              putting -delete first will make find try to delete everything below the starting points you 
+              specified. When testing a find command line that you later intend to use with -delete, you
+              should explicitly specify -depth in order to avoid later surprises.
+
+       <b>-prune True</b>;  If the file is a directory, do not descend into it. If -depth is given, then -prune has
+              no effect.  Because -delete implies -depth, you cannot usefully use -prune and -delete
+              together.
+
+
+   OPERATORS
+       <b>! expr</b> True if expr is false.  This character will usually need protection from interpretation by
+              the shell.
+
+       <b>expr1 expr2</b>
+              Two expressions in a row are taken to be joined with an implied -a; expr2 is not evaluated
+              if expr1 is false.
+
+       <b>expr1 -a expr2</b>
+              Same as expr1 expr2.
+
+       <b>expr1 -o expr2</b>
+              Or; expr2 is not evaluated if expr1 is true.
+
+       <b>expr1 , expr2</b>
+              List;  both  expr1  and  expr2 are always evaluated.
+
+<b>COPYRIGHT</b>
+       Copyright © 1990-2021 Free Software Foundation, Inc.  License GPLv3+: GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This is free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+<b>SEE ALSO</b>
+       Full documentation <https://www.gnu.org/software/findutils/find>
+       or available locally via: info find
+
+                                                                                                                    FIND(1)
+

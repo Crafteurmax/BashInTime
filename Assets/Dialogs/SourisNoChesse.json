@@ -16,7 +16,7 @@
                 },
                 {
                     "name" : "La laisser vivre sa vie",
-                    "nextAction" : -1,
+                    "nextAction" : 2,
                     "nextDialog" : 3
                 }
 

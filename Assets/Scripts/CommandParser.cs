@@ -9,7 +9,7 @@ public class CommandParser : MonoBehaviour
 {
     //Special selection Command
     [SerializeField] private string specialCommand = "echo Bonjour";
-    [SerializeField] [TextArea] private string specialOutput = "Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
+    [SerializeField] [TextArea] private string specialOutput = "[System] Bonjour\nBonjour Chell, je dois rester discret, retrouve mes infos avec \"cat info.txt\"";
 
     [SerializeField] private string[] forbidenDir;
 
@@ -116,8 +116,10 @@ public class CommandParser : MonoBehaviour
 
 
         //On recupere la commande et on appelle des fonctions differentes en fonction de celle-ci
-        string[] words = PrepareOutputInputCommand(line).Split(" ");
+        //autruche
 
+        //string[] words = PrepareOutputInputCommand(line).Split(" ");
+        string[] words = SeparateWord(PrepareOutputInputCommand(line));
         if (words.Length <= 0) ShowReturnValue("", "Please Input something\n", line);
 
         string command = words[0].Trim();
@@ -140,6 +142,80 @@ public class CommandParser : MonoBehaviour
         }
 
         return true;
+    }
+
+    private String[] SeparateWord(String line)
+    {
+        List<String> words = new List<string>();
+        String[] rawWords = line.Split(" ");
+
+        for(var i =0;i<rawWords.Length;i++)
+        {
+            if (rawWords[i].Length <= 0)
+            {
+                words.Add(rawWords[i]);
+                continue;
+            }
+            switch (rawWords[i][0])
+            {
+                case '\'' :
+                    // Si le mot et lui meme entier ou le dernier de la liste de mot
+                    if (rawWords[i][rawWords[i].Length - 1] == '\'' || i == rawWords.Length - 1)
+                    {
+                        words.Add(rawWords[i]);
+                        break;
+                    }
+
+                    // sinon on teste tout les mots qui suivent pour savoir si ils terminent le mot
+                    String tmp1 = rawWords[i];
+                    for (var j = i + 1; j < rawWords.Length; j++)
+                    {
+                        Debug.Log(rawWords[j]);
+                        tmp1 += " " + rawWords[j];
+                        if (tmp1[tmp1.Length - 1] == '\'')
+                        {
+                            words.Add(tmp1);
+                            i += j;
+                            break;
+                        }
+                    }
+                    break;
+                case '"':
+
+
+
+                    // Si le mot et lui meme entier ou le dernier de la liste de mot
+                    if (rawWords[i][rawWords[i].Length - 1] == '"' || i == rawWords.Length - 1)
+                    {
+                        words.Add(rawWords[i]);
+                        break;
+                    }
+
+                    // sinon on teste tout les mots qui suivent pour savoir si ils terminent le mot
+                    String tmp2 = rawWords[i];
+                    for (var j = i + 1; j < rawWords.Length; j++)
+                    {
+                        Debug.Log(rawWords[j]);
+                        tmp2 += " " + rawWords[j];
+                        if (tmp2[tmp2.Length-1] == '"')
+                        {
+                            words.Add(tmp2);
+                            i += j;
+                            break;
+                        }
+                    }
+                    break;
+
+
+
+                default:
+                    words.Add(rawWords[i]);
+                    break;
+            }
+            
+        }
+
+        return words.ToArray();
     }
 
     //On rajoute des espaces pour permettre au programme de prendre en compte entree/sortie comme des fichiers
@@ -243,6 +319,7 @@ public class CommandParser : MonoBehaviour
         if (new_path == "/." || new_path == "/./") return "/";
 
         return new_path.Substring(2,new_path.Length-2); //To avoid non file arguments to be invalid
+
     }
 
     //Permet de savoir si une fonction est une option du type -blabla ou un argument principal
@@ -406,6 +483,8 @@ public class CommandParser : MonoBehaviour
                 }
                 else
                 {
+                    arguments[0] = "echo ";
+                    DirectPrepare(arguments, ShowReturnValue, command);
                     ShowReturnValue("", "man needs only 1 argument", command);
                 }
                 break;
