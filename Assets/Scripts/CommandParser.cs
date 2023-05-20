@@ -18,7 +18,7 @@ public class CommandParser : MonoBehaviour
     //CD virtuel
     public string currentDirectory = "/";
 
-    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|\"\'[](){}"; //Temporaire, sera fait aussi dans la saisie des caractères
+    private string authorizedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \n\r\t/\\.-_<>*|\"\'[](){}"; //Temporaire, sera fait aussi dans la saisie des caractï¿½res
 
     //Type de commande(voir ci-dessous)
     public enum CommandType : int
@@ -314,9 +314,9 @@ public class CommandParser : MonoBehaviour
 
         new_path = "." + new_path;
 
-        if (new_path == "." || new_path == "./" || new_path == "/") return "";
+        if (new_path == "./") return "./";
 
-        if (new_path == "/." || new_path == "/./") return "/";
+        if (new_path == ".") return ".";
 
         return new_path.Substring(2,new_path.Length-2); //To avoid non file arguments to be invalid
 
@@ -345,7 +345,7 @@ public class CommandParser : MonoBehaviour
     private void SafePrepare(string[] arguments, Action<string, string, string> callback, string userCommand)
     {
 
-        //Detection d'arguments, safe car chemin relatifs transformés en chemins absolus virtuels
+        //Detection d'arguments, safe car chemin relatifs transformï¿½s en chemins absolus virtuels
         for(int i = 1; i < arguments.Length; i++)
         {
             arguments[i] = IsOption(arguments[i]) ? arguments[i] : GetAbsoluteVirtualPath(arguments[i]);
@@ -360,7 +360,7 @@ public class CommandParser : MonoBehaviour
         RawPrepare(newCommand, callback, userCommand);
     }
 
-    //Fonction intermédiaire pour prendre en charge l'entree/sortie avec la securite sur les fichiers de sortie
+    //Fonction intermï¿½diaire pour prendre en charge l'entree/sortie avec la securite sur les fichiers de sortie
     private void DirectPrepare(string[] arguments, Action<string, string, string> callback, string userCommand)
     {
         int i = 0;
@@ -584,19 +584,19 @@ public class CommandParser : MonoBehaviour
 
     public void DetectPalais(string detectString)
     {
-        if (detectString.Contains("Voici une liste de commandes pour m'aider à me retrouver"))
+        if (detectString.Contains("Voici une liste de commandes pour m'aider ï¿½ me retrouver"))
         {
             PalaisMental.current.AddMemory(3);
         }
-        else if (detectString.Contains("a clé blue pour la porte blue"))
+        else if (detectString.Contains("a clï¿½ blue pour la porte blue"))
         {
             PalaisMental.current.AddMemory(4);
         }
-        else if (detectString.Contains("je suis chargé de fouiller une liste de dossiers à sa recherche"))
+        else if (detectString.Contains("je suis chargï¿½ de fouiller une liste de dossiers ï¿½ sa recherche"))
         {
             PalaisMental.current.AddMemory(5);
         }
-        else if (detectString.Contains("j'avais noté le code au début du chapitre qui s'appelait"))
+        else if (detectString.Contains("j'avais notï¿½ le code au dï¿½but du chapitre qui s'appelait"))
         {
             PalaisMental.current.AddMemory(6);
         }
