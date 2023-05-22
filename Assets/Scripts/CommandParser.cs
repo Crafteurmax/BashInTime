@@ -476,7 +476,7 @@ public class CommandParser : MonoBehaviour
                 {
 
                     ShowReturnValue("", "Using cd with * is not allowed\n", "cd " + arguments[1]); //Bloquer le cd avec les * aucun interet et bugs possibles
-                    SafePrepare(new string[]{"cd", ""}, CdCallback, "cd ");
+                    SafePrepare(new string[]{"cd", " ."}, CdCallback, "cd .");
                     break;
                 }
                 SafePrepare(arguments, CdCallback, userLine);
