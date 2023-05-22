@@ -47,7 +47,7 @@
         {
             "id":4,
             "name":"Commandes Duplicat-Réplicat",
-            "description":"Il faut mettre les clées des bonnes couleurs dans les portes correspondantes",
+            "description":"Il faut mettre les clés des bonnes couleurs dans les portes correspondantes. Je pourrais utiliser <color=#00FFFF>cp</color> ou <color=#00FFFF>mv</color>...",
             "precedents":[3
                 
             ],
@@ -58,7 +58,7 @@
         {
             "id":5,
             "name":"Commandes Mais quel bazar ?",
-            "description":"Je dois trouver un certains fichier. Peut-être deuvraige utiliser find ?",
+            "description":"Je dois trouver un certains fichier. Peut-être devrais-je utiliser <color=#00FFFF>find</color> ?",
             "precedents":[3
                 
             ],
@@ -69,7 +69,7 @@
         {
             "id":6,
             "name":"Commandes Mon Roman",
-            "description":"Je me souviens, j'avais noté le code au début du chapitre qui s'appelait \"sens[...]Fusion\" je crois. Avec la commande grep je devrais pouvoir le retrouver.",
+            "description":"Je me souviens, j'avais noté le code au début du chapitre qui s'appelait \"sens[...]Fusion\" je crois. Avec la commande <color=#00FFFF>grep</color> je devrais pouvoir le retrouver.",
             "precedents":[
                 3
             ],
@@ -80,7 +80,7 @@
         {
             "id":7,
             "name":"Codes Duplicat-Réplicat",
-            "description":"le code était 32XXXX",
+            "description":"Le code était <color=#00FFFF>32XXXX</color>.",
             "precedents":[
                4 
             ],
@@ -91,7 +91,7 @@
         {
             "id":8,
             "name":"Codes Mais quel bazar?",
-            "description":"le code était XX76XX",
+            "description":"Le code était <color=#00FFFF>XX76XX</color>.",
             "precedents":[
                 5
             ],
@@ -102,7 +102,7 @@
         {
             "id":9,
             "name":"Codes Mon Roman",
-            "description":"le code était XXXX56",
+            "description":"Le code était <color=#00FFFF>XXXX56</color>.",
             "precedents":[
                 6
             ],
@@ -113,7 +113,7 @@
         {
             "id":10,
             "name":"Code total",
-            "description":"j'ai l'ensemble des 3 codes !!! C'est 327656",
+            "description":"J'ai enfin réuni les 3 codes !!! C'est <color=#00FFFF>327656</color>",
             "precedents":[
                 7,8,9
             ],
@@ -124,7 +124,7 @@
         {
             "id":11,
             "name":"Infromage",
-            "description":"Une souris qui parle ? Je dois vraiment aller voir un psy... Mais si elle m'aide a sortir d'ici...",
+            "description":"Une souris qui parle ? Je dois vraiment aller voir un psy... Mais si elle m'aide à sortir d'ici...",
             "precedents":[
                 10
             ],
@@ -134,7 +134,7 @@
         },
         {
             "id":12,
-            "name":"winner winner chicken dinner",
+            "name":"Winner Winner Chicken Dinner",
             "description":"Je suis vivante !!!! Je suis vivante !!!!!",
             "precedents":[
                 10,11
