@@ -47,7 +47,7 @@
         {
             "id":4,
             "name":"Commandes Duplicat-Réplicat",
-            "description":"",
+            "description":"Il faut mettre les clées des bonnes couleurs dans les portes correspondantes",
             "precedents":[3
                 
             ],
@@ -58,7 +58,7 @@
         {
             "id":5,
             "name":"Commandes Mais quel bazar ?",
-            "description":"",
+            "description":"Je dois trouver un certains fichier. Peut-être deuvraige utiliser find ?",
             "precedents":[3
                 
             ],
