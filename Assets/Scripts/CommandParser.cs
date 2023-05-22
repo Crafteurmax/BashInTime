@@ -462,12 +462,19 @@ public class CommandParser : MonoBehaviour
                 break;
 
             case "cd":
+                if(arguments.Length < 2)
+                {
+                    arguments = new string[] { "cd", " ."};
+                    userLine = "cd .";
+                }
+                
                 if(ncommand != 1)
                 {
                     ShowReturnValue("", "Using cd with pipes is not allowed\n", "cd"); //Bloquer le cd avec le pipes aucun interet et bugs possibles
                 }
                 else if (userLine.Contains("*"))
                 {
+
                     ShowReturnValue("", "Using cd with * is not allowed\n", "cd " + arguments[1]); //Bloquer le cd avec les * aucun interet et bugs possibles
                     SafePrepare(new string[]{"cd", ""}, CdCallback, "cd ");
                     break;
