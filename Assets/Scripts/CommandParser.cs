@@ -98,7 +98,7 @@ public class CommandParser : MonoBehaviour
         line = line.Trim();
 
         //Exception
-        if (line.Equals(specialCommand))
+        if (line.ToLower().Replace("\"", "").Replace("\'", "").Trim().Equals(specialCommand.ToLower()))
         {
             ShowReturnValue(specialOutput, "", specialCommand);
             return false;
@@ -465,6 +465,10 @@ public class CommandParser : MonoBehaviour
                 if(ncommand != 1)
                 {
                     ShowReturnValue("", "Using cd with pipes is not allowed\n", "cd"); //Bloquer le cd avec le pipes aucun interet et bugs possibles
+                }
+                else if (userLine.Contains("*"))
+                {
+                    ShowReturnValue("", "Using cd with * is not allowed\n", "cd " + arguments[1]); //Bloquer le cd avec les * aucun interet et bugs possibles
                 }
                 SafePrepare(arguments, CdCallback, userLine);
                 break;
