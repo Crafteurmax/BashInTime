@@ -2,7 +2,7 @@
 	"Events" : [
 		{
 			"eventName" : "EndOfTheWorld",
-			"timeStamp" : 3000.0,
+			"timeStamp" : 1800.0,
 			"conditionsID" : [],
 			"actionID" : 4
 		}

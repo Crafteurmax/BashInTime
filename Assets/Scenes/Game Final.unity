@@ -2189,6 +2189,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 308495459}
     - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
+      propertyPath: time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
+      propertyPath: timeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198048488701100469, guid: 3656b539cc905ab409f84c6947118709, type: 3}
       propertyPath: conditionsManager
       value: 
       objectReference: {fileID: 1678503055}
