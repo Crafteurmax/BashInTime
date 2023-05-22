@@ -617,15 +617,15 @@ public class CommandParser : MonoBehaviour
         {
             PalaisMental.current.AddMemory(6);
         }
-        else if (detectString.Length < 20 && detectString.Contains("32XXXX"))
+        else if (detectString.Contains("32XXXX"))
         {
             PalaisMental.current.AddMemory(7);
         }
-        else if (detectString.Length < 20 && detectString.Contains("XX76XX"))
+        else if (detectString.Contains("XX76XX"))
         {
             PalaisMental.current.AddMemory(8);
         }
-        else if (detectString.Length < 20 && detectString.Contains("XXXX56"))
+        else if (detectString.Length < 100 && detectString.Contains("XXXX56"))
         {
             PalaisMental.current.AddMemory(9);
         }
