@@ -601,19 +601,19 @@ public class CommandParser : MonoBehaviour
 
     public void DetectPalais(string detectString)
     {
-        if (detectString.Contains("Voici une liste de commandes pour m'aider � me retrouver"))
+        if (detectString.Contains("Voici une liste de commandes pour m'aider"))
         {
             PalaisMental.current.AddMemory(3);
         }
-        else if (detectString.Contains("a cl� blue pour la porte blue"))
+        else if (detectString.Contains("blue pour la porte blue"))
         {
             PalaisMental.current.AddMemory(4);
         }
-        else if (detectString.Contains("je suis charg� de fouiller une liste de dossiers � sa recherche"))
+        else if (detectString.Contains("de fouiller une liste de dossiers"))
         {
             PalaisMental.current.AddMemory(5);
         }
-        else if (detectString.Contains("j'avais not� le code au d�but du chapitre qui s'appelait"))
+        else if (detectString.Contains("du chapitre qui s'appelait"))
         {
             PalaisMental.current.AddMemory(6);
         }
