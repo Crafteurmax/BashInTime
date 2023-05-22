@@ -206,6 +206,8 @@ public class PalaisMental : MonoBehaviour
     {
         AddMemory(memories.memories[id]);
 
+        if (id != 7 && id != 8 && id != 9) return;
+
         if(unlockedMemories[7] && unlockedMemories[8] && unlockedMemories[9])
         {
             AddMemory(10);
