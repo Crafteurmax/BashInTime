@@ -111,6 +111,30 @@
 
        <b>-mtime n</b>
               File's data was last modified h*24 hours ago. See the comments for -atime
+			  
+	   <b>-name pattern</b>
+              Base of file name (the path with the leading directories
+              removed) matches shell pattern pattern.  Because the
+              leading directories of the file names are removed, the
+              pattern should not include a slash, because `-name a/b'
+              will never match anything (and you probably want to use
+              -path instead).  An exception to this is when using only a
+              slash as pattern (`-name /'), because that is a valid
+              string for matching the root directory "/" (because the
+              base name of "/" is "/").  A warning is issued if you try
+              to pass a pattern containing a - but not consisting solely
+              of one - slash, unless the environment variable
+              POSIXLY_CORRECT is set or the option -nowarn is used.
+
+              To ignore a directory and the files under it, use -prune
+              rather than checking every file in the tree; see an
+              example in the description of that action.  Braces are not
+              recognised as being special, despite the fact that some
+              shells including Bash imbue braces with a special meaning
+              in shell patterns.  The filename matching is performed
+              with the use of the fnmatch(3) library function.  Don't
+              forget to enclose the pattern in quotes in order to
+              protect it from expansion by the shell.
 
        <b>-newer reference</b>
               Time of the last data modification of the current file is more recent than that of the last data
