@@ -36,7 +36,7 @@
         {
             "id":3,
             "name":"Premières commandes",
-            "description":"\t - man permet d'obtenir le manuel d'une commande \n \t - ls permet de récupérer la liste de fichiers. \n \t - cd permet de changer de repertoire courant. \n \t - cat permet de lire le contenu d'un fichier'",
+            "description":"\t - <color=#00FFFF>man</color> permet d'obtenir le manuel d'une commande \n \t - <color=#00FFFF>ls</color> permet de récupérer la liste de fichiers. \n \t - <color=#00FFFF>cd</color> permet de changer de repertoire courant. \n \t - <color=#00FFFF>cat</color> permet de lire le contenu d'un fichier'",
             "precedents":[0,2
                 
             ],
