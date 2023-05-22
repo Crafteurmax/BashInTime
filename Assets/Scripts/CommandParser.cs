@@ -414,10 +414,12 @@ public class CommandParser : MonoBehaviour
             return;
         }
 
-        string[] arguments = command.Trim().Split(" ");
+        //autruche
+        //string[] arguments = command.Trim().Split(" ");
+        string[] arguments = SeparateWord(PrepareOutputInputCommand(command));
 
         //Si il manque des arguments, on retourne a la racine
-        if(arguments.Length <= 1)
+        if (arguments.Length <= 1)
         {
             currentDirectory = "/";
         }
@@ -468,7 +470,7 @@ public class CommandParser : MonoBehaviour
                 break;
 
             case "unlock":
-                unlock();
+                if(IsKeyPlaced()) unlock();
                 arguments[0] = "echo ";
                 DirectPrepare(arguments, ShowReturnValue, command);
                 break;
@@ -492,7 +494,7 @@ public class CommandParser : MonoBehaviour
     }
 
 
-    [SerializeField] string forlderAdresse = "testCopyPaste/";
+    private string forlderAdresse = "BashWork/root/home/chell/Bureau/Duplicat-Replicat/";
 
     bool IsKeyPlaced()
     {
@@ -506,6 +508,7 @@ public class CommandParser : MonoBehaviour
             {
                 return false;
             }
+            Debug.Log("dxcfvgbh");
 
             StreamReader Blue = new StreamReader(forlderAdresse + "BlueDoor/BlueKey.txt");
             string BluePassword = "^8+nBa7UBDqFbZzG7!q?VSHVB#B4EKVAyzJS?YH#@7?pv968+UZ?xDJ+3bG&!wKh7zws^zBCQnt_tcqqDP-=g#tFTSDprkBRy2bL%uZHd7pV^Wn+Z%Z*7v&fh$^r?2Mvnmt23b$$+f-?x-PRJSf6x*Qz46hVBH3cS6p^24jsa_dxHC4H=#xbzLU@^%ssCNpm9FWv-&3u%=hK-ch#vMqv4VfrQgbGhSRTEahS!w#VKdZ@Hz&^mK8+x^3H@^6P+8QBTZ8nLSqK+Bdc!$pt_j=kH_ZzZULV!?wh8_#rMu3=*B#zccsHJrK!-CEKyv3cxMc8UCF&rx-aKgWKxrMTAzjw2F6kGtz!zPbfEtrk4WCBn74V_Q&^hSv^YJ2D^qKkZyxtJ+tvkjW#Cd&8rnfRLatRw$A4HJv753^3P8gHRdA92$k4uFRV4Y+?^@^QD*FsvdFD@YxJBDmwwC2p-#Gn^YZv*cg5&uqwy+QFGPUVvtzwRxM+Jm4&yv=7Wa5=@X7vC$CHhXb=Y8DUz+b6xADQD&@NNJ!7L$G86JudRBn7LzAECX%8*E-KXvwp87kB^w!xL43AW#v++KFTXKPB*nmnbmY8@P8!92!J*W=Sb8^EU!ZRTn=22h^+^-GUsss^upX?@G4+XnM6GEwNnDKQBr^^Ced+9MTv&bn8&wnFqSe*xC%+^mQ_9#fZVWh3rFRGTvfmkc9LyQjFTs?av=%J+wCt6gCs3c#4?QC6=?AAbYh5bHZ#h_FVnx7*g4=@@Fe3rPG$m&GJ_9zxLbmtCg9L?-Y$RPRnJ2xx%gf8pAD%d#ebnuxaxPM-jY9_DEwTc8e2&DKnVZLeVHt8aD-$vTCTvXnZz=PV*HpwYjgX68jQYetY9bYyaKX#%+by_-mPTu&YNXv?4L2_d&pfE_WAmp4xp!zKDwgBjX%$#m6TFrUnV+yc-kcfdQx*@ySSWC6Jp9N?yDnvW85y%EtTGVUBp$v^vtEELeU9EhV4+KCE+Dn@k2th8_hW^v@#&!j=JgsS#=^J&mNTE#Sakqzfcr6%B+zvJM=GR!MT#J&W*nvZbT*7Td!FDd$8JmXN%GLf_EXdc?Bxk^T5RN?CFvbZuEYymV=@z%tR47nU8ebW&SAmL@CxF?Jhn7Z4jNDM%9@V%_VhuGS2+Q9$_B5%CgT^-bccQy@%_%W*j3hSgX+MaRXmpEJ$zjHM?b-SKwRyrER#Y6_$mcn-ju5E4PJ4VLrx5q*cy2hHkY_NDBwm+LpxG-%RxFU#H$6+SSnv#vR+dqpunQkaVM9aYAUDKu%2W6vS_VJ2QH?-JPqKww_X!2Nf?3-y4vq&sFg@HNEs4Eu9m3E7LgmMn*DzXNDtQ%2QjArp4tUF&YwG?r+X@F^7&_6H=ptkm&K5Vt@peZ%SVHzFzj$Exnqe&!bA==H=*?KxHRdb93p#QMPcg8uBwCp#zuj9y9C&X2bF-@Uj4Ua@q_w8LE#Fp+Gf+73DDDw+#GPwfx_S5Z+s=CJQ*LB*6?kMs2qDD4t$HukmSuM_9P&#TaZAad5%nQ!Gvg-Wfm86jegdXzzxfF+nYBhfAYEsAfCbEeCyuk984CsFX^Zk?LfWzESTFC=z@Y2*@NWgPtc*Wd7_RANtKavW_td!sh5Z5ga&nt#FB*YRHa#ZTFC84!Ax&%UWn85DJM-S72dEM9rX*!^n=Ae*3@tH#aBrq*mxHhTSQcy7+tpv!^zz8FATeV9GC&ZgCaXy@hbB+B8YLk!ga$xgJL6c%Sd-A*Tu^2H872cy5!2MgpZ6=3CwAwG3pT42yWevF6UJ8$-=k+Wc=ua?Jcs^HJ8dKHCk-9ANTZ3=75_vF*zf!Ns5hcc5C5&BP%bu4dn2!vL#-%NWk%XqDQW^UQg!%@X+_Kj-9Yav_cznPHCMJM#5*B7ZN78TEUEFC7pt4E-X=@G+A+=%N6LGZp5MUv43@aY4rpebKzwQMHLCxxZk-qV^u?SVZzK7+RLN94zwGrEUuVHLNH8CeN?e+t-x7nADtUjjQ*Ly%X%qkvR_jSvE2evS7F3ePM%Sbp^Fc_%3NL%CCuRA#Dvm^5MGWWgVg6M@";
@@ -518,10 +521,11 @@ public class CommandParser : MonoBehaviour
             StreamReader Red = new StreamReader(forlderAdresse + "RedDoor/RedKey.txt");
             string RedPassword = "xxVJARPN9CVeVgcrn9#RqGuVXD!Qsv+wnmSncc*??@FQA6L^@$JQY7hKmnxK2MMAeRm42wxZ3YHFG9h2!5A&AxY&_!y!-27p#fnuNGNU&S=TNMPH&w4+@M&%UQcCubFbK@uReumKVwcPxv+aEQ6Q*p6U&npTaYCXLTa*5R=LAuDFF4yBPzZETsr$+5xu2eng@P%zz$gT^PD3k-HeY5^y4-*p=-M^cx#+S2UaX2^P3d_QvTb6re9VN3w%DT*w9RV#DRngs&Fc$5gss_=r5L7^XV^E+nAvAJ8P7XZ6=vSaQSqMrqhm!hPbqa=*hbt_eBZPRHKSvRA&*QabP$-KCGZwAz7YGn4tPZqZZE7Ds99ZU*76WuRVGj!Cpxr!a!YeR*RUsAUw^V4K*VAddM*QVtrLFyP=jb^qrGEcz-zZp?zX?Ht@pRbCbXEKQXK#d_?&@VBnrNTKeD9^EJ#dhuZvQL&tZjpNBmw2fu4uN-zZSj^b6g?*%UZ-h=9FW_xgX@#^2ac!=Rr2NYx@K^%yZ&jG@=CvG+eK7UEhdnXjr?KvmNZDaZdCAD-D7zH2+pt_^Qa=Z?GJqwbUr@cJuEnNEy$5LVhA$cwYC65jhxuzwmDMm$gb5NBRyK!q9?p+_hxfbTvATt#tej=sg#ySjRH$DF=6X!6jwNynMJ9#G2h9&+-3H$d3=hhDp8E?Nr2xZ6AFSg%uzN!RCDU=kwFCdhwsDSBRF#h=B*zsAA8Dc!9k6=tM#7-KK-Su9h&6GSZ2LWRGbN+wQ8CJF-a?x&%Pbntqs7J9TKJ+E_sb4C#rt_Dyc4B%%JHe?p*eCEgqwAhS#cuaEspVcfa2Hq9snUDVs?GFn6sTCc-xeN-Y-4W3YZSCsubn#cBxS!NE#nz7tX7fyJnpEZvNRufr@6uCJme6mT@md232S@fTAux+m^=yP^XxLNx$5v6d8e5YKP%PnKCAMX$e9T#ZCHj7568m+Rd-zG__ZrzCjdVa&$JZ-C!_^t5V6ERK@J?g5WnCzk2m!zdH#M_t8%K+t84xRXV#VDDS$Ax4DRjX%GYZBA!3zg!L-m^$qfeZfsRhk&_Dw#HPtSbbtF&9B$3HWfjWaF$@efUwXKNqzNysQpBwxzLM7nAvkn5euJFKEG=sT8Qp64M4@fk-tm?4-5p&hznm?HH4%$hQauG-QYcky9_BYMccCPtsMZaza#VgYBS2ffTP5&$J-k%fqVPf+r@MDMaW2WV_8Y+krF2bMZTYxr!L^2Prpy&mtP2pt98t+#gcjhVKJ-k-BA3x7xutam_VQT84jQTMbPaJzJBzkdp?hhd@7u+&Bv-MY^=Qfw9nfqLG?9PxYr7tg@s+PStwJ*ZbTs^=TaAgUbu@?ZyB2YC4PZqnMUuMw6kzGjujM5Y$?dy5s?e8CaELguqqSXsL?WYsq#XEQ$zvLh+U*mv3fDR$LZCPgdgGU&VJ?S-zH2c%zKG7qa6ZwW&tcvWeVBMf#KQCfL?UZC2Q+x!vvDcnTaud2*QYkQhz7sqXgKecdRjU*pa-Fs+@Xs44q8wdLHY*!Lh#e25hs7?T%QKTx_tyQEz4NX=3^4B4+E$MJrvN@y_s2x5Da6A3XVpRS24b7Tz-nc&!bRSJ$S9GtFMMmUU?us2^cSW*Mg-ABB=N6!-@rwsK9=rvfnpE!JTn7W5-f?%8#zZyqh%S6ZtnvW4J$hJHh$b-gAY?@nZ$ZT2Pg_MX73DkwKf6WT8%Fwmh?k=fbeJad7ThJNNb6usa!h5ZK+^jWS&6Ec8w+R4kW+_Ss@aFWgUpv4yd-Re^T2Y4#y$tcguEFu^D&w#NZ3D#-#E^qcB+x=pu?a^9u=nqcP^bM23B*ek5pQUBB6#&%dvv5M9x#r9zu&C8Fna%%wYQ+gMx9PQ6pnqG%SD_EY9T=sY8d@@&fQ7Pkx?#6V#QcCXB9fKh3?7Wwngfu2NDYQaqkBr5n^EEDxPhc_LFG?UhTJt%NKfk%_VBhGhXPW&zFwL82mMkTT=56=5+?yWJWRxuB7sb8RKLwZ_27v^7-7F-VWrmq?LAUUf-HckCj8$WmCpxgnEC=2BhrhMbEvJ$";
             string RedLine = Red.ReadLine();
-            if (File.Exists(forlderAdresse + "RedDoor/BlueKey.txt") || File.Exists(forlderAdresse + "RedDoor/BlueKey.txt"))
+            if (File.Exists(forlderAdresse + "RedDoor/BlueKey.txt") || File.Exists(forlderAdresse + "RedDoor/GreenKey.txt"))
             {
                 return false;
             }
+
 
             StreamReader WhiteRed = new StreamReader(forlderAdresse + "WhiteDoor/RedKey.txt");
             string WhiteRedLine = WhiteRed.ReadLine();
@@ -539,7 +543,7 @@ public class CommandParser : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            //Debug.Log(e);
+            Debug.Log(e);
         }
 
         return false;

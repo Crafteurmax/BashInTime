@@ -2,80 +2,87 @@
        grep, egrep, fgrep, rgrep - print lines that match patterns
 
 <b>SYNOPSIS</b>
-       grep [<u>OPTION...</u>] PATTERNS [<u>FILE...</u>]
-       grep [<u>OPTION...</u>] -e PATTERNS ... [<u>FILE...</u>]
-       grep [<u>OPTION...</u>] -f PATTERN_FILE ... [<u>FILE...</u>]
+       grep [<u>OPTION</u>...] PATTERNS [<u>FILE</u>...]
+       grep [<u>OPTION.</u>..] <b>-e</b> <u>PATTERNS</u> ... [<u>FILE</u>...]
+       grep [<u>OPTION</u>...] <b>-f</b> <u>PATTERN_FILE</u> ... [<u>FILE</u>...]
 
 <b>DESCRIPTION</b>
-       grep  searches  for  PATTERNS  in each FILE.  PATTERNS is one or more patterns separated
-       by newline characters, and grep prints each line that matches a pattern. Typically  PATTERNS
-       should be quoted when grep is used in a shell command.
+       <b>grep</b>  searches  for  <u>PATTERNS</u>  in each <u>FILE</u>.  PATTERNS is one or more patterns separated
+       by newline characters, and <b>grep</b> prints each line that matches a pattern. Typically  <u>PATTERNS</u>
+       should be quoted when <b>grep</b> is used in a shell command.
 
-       A  FILE  of “-” stands for standard input.  If no FILE is given, recursive searches examine the
+       A  <u>FILE</u>  of “-” stands for standard input.  If no FILE is given, recursive searches examine the
        working directory, and nonrecursive searches read standard input. In addition, the variant
-       programs egrep, fgrep and rgrep are the same as grep -E,  grep -F, and  grep -r,  respectively.
+       programs egrep, fgrep and rgrep are the same as <b>grep -E</b>,  <b>grep -F</b>, and  <b>grep -r</b>,  respectively.
        These variants are deprecated, but are provided for backward compatibility.
 
 <b>OPTIONS</b>
    Matching Control
-      <b>-e PATTERNS, --regexp=PATTERNS</b>
-              Use  PATTERNS as the patterns.  If this option is used multiple times or is combined with
-              the -f (--file) option, search for all patterns given.  This option can be used to protect a
+      <b>-e</b> <u>PATTERNS</u>, <b>--regexp</b>=<u>PATTERNS</u>
+              Use  <u>PATTERNS</u> as the patterns.  If this option is used multiple times or is combined with
+              the <b>-f</b> (<b>--file</b>) option, search for all patterns given.  This option can be used to protect a
               pattern beginning with “-”.
 
-       <b>-f FILE, --file=FILE</b>
-              Obtain  patterns  from FILE, one per line. If this option is used multiple times or is
-              combined with the -e (--regexp) option, search for all patterns given. The empty file
+       <b>-f</b> <u>FILE</u>, <b>--file</b>=<u>FILE</u>
+              Obtain  patterns  from <u>FILE</u>, one per line. If this option is used multiple times or is
+              combined with the <b>-e</b> (<b>--regexp</b>) option, search for all patterns given. The empty file
               contains zero patterns, and therefore matches nothing.
 
-       <b>-i, --ignore-case</b>
+       <b>-i</b>, <b>--ignore-case</b>
               Ignore  case distinctions in patterns and input data, so that characters that differ only in
               case they match each other.
 
-       <b>-v, --invert-match</b>
+       <b>-v</b>, <b>--invert-match</b>
               Invert the sense of matching, to select non-matching lines.
 
-<b>General Output Control</b>
-       <b>-c, --count</b>
+General Output Control
+       <b>-c</b>, <b>--count</b>
               Suppress normal output; instead print a count of matching lines for each input file.
               With the -v, --invert-match option (see below), count non-matching lines.
 
-       <b>-L, --files-without-match</b>
+       <b>-L</b>, <b>--files-without-match</b>
               Suppress  normal  output;  instead  print  the name of each input file from which no
               output would normally have been printed.
 
-       <b>-l, --files-with-matches</b>
+       <b>-l</b>, <b>--files-with-matches</b>
               Suppress normal output; instead print the name of each input file from which  output
               would normally have been printed.  Scanning each input file stops upon the first match.
 
-       <b>-m NUM, --max-count=NUM</b>
+       <b>-m</b> <u>NUM</u>, <b>--max-count</b>=<u>NUM</u>
               Stop reading a file after NUM matching lines. If the input is standard input from a regular
               file, and NUM matching lines are output, grep ensures that the standard input is positioned
               to just after the last matching line before exiting, regardless of the presence of trailing
               context lines. This enables a calling process to resume a search. When grep stops after
-              NUM matching lines, it outputs any trailing context lines. When the -c or --count option is
-              also used, grep does not output a count greater than NUM. When the -v or --invert-match
+              NUM matching lines, it outputs any trailing context lines. When the <b>-c or <b>--count option is
+              also used, grep does not output a count greater than NUM. When the <b>-v or <b>--invert-match
               option is also used, grep stops after outputting NUM non-matching lines.
 
    Output Line Prefix Control
-       <b>-n, --line-number</b>
+       <b>-n</b>, <b>--line-number</b>
               Prefix each line of output with the 1-based line number within its input file.
 
+   Context Line Control
+       <b>-A</b> NUM, <b>--after-context</b>=<u>NUM</u>
+              Print NUM  lines  of  trailing  context  after  matching  lines.
+              Places   a  line  containing  a  group  separator  (--)  between
+              contiguous groups of matches.  With the  <b>-o</b>  or  <b>--only-matching</b>
+              option, this has no effect and a warning is given.
+   
    File and Directory Selection
-       <b>-r, --recursive</b>
+       <b>-r</b>, <b>--recursive</b>
               Read all files under each directory, recursively, following symbolic links only if they are on
               the command line. Note that if no file operand is given, B<grep> searches the working
               directory. This is equivalent to the -d recurse option.
 
-       <b>-R, --dereference-recursive</b>
-              Read all files under each directory, recursively.  Follow all symbolic links, unlike -r.
+       <b>-R</b>, <b>--dereference-recursive</b>
+              Read all files under each directory, recursively.  Follow all symbolic links, unlike <b>-r</b>.
 
 <b>PATTERNS</b>
-       For more information on PATTERNS, use man pattern
+       For more information on PATTERNS, use <b>man grep_pattern</b>
 
 <b>EXIT STATUS</b>
        Normally  the exit status is 0 if a line is selected, 1 if no lines were selected, and 2 if
-       an error occurred.  However, if the -q or --quiet  or  --silent  is  used  and  a  line  is
+       an error occurred.  However, if the -q or <b>--quiet</b>  or  <b>--silent</b>  is  used  and  a  line  is
        selected, the exit status is 0 even if an error occurred.
 
 <b>COPYRIGHT</b>

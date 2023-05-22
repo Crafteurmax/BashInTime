@@ -35,8 +35,9 @@ public class DoorScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("win");
+            //Debug.Log("win");
             PalaisMental.current.AddMemory(12); //VICTOIRE
+            chef.SwitchSystem(ChefDorchestre.GameSystem.GoodEnd);
         }
 
        

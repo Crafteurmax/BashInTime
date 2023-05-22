@@ -7,12 +7,12 @@
         },
         {
             "characterName":"[Post-it]",
-            "dialogContent":"Tu peux me parler grâce à la commande <color=#0099FF>echo</color>, commence par me montrer ta présence en disant <color=#0099FF>\"Bonjour\"</color>.",
+            "dialogContent":"Tu peux me parler grâce à la commande <color=#0099FF>echo</color>, commence par me montrer ta présence en disant <color=#0099FF>Bonjour</color>.",
             "dialogChoices": []
         },
         {
             "characterName":"Chell",
-            "dialogContent":"C'est intéressant, écrire <color=#0099FF>echo \"Bonjour\"</color> devrait faire quelque chose, mais où l'écrire...",
+            "dialogContent":"C'est intéressant, écrire <color=#0099FF>echo Bonjour</color> devrait faire quelque chose, mais où l'écrire...",
             "dialogChoices": []
         },
         {

@@ -30,7 +30,8 @@ public class ChefDorchestre : MonoBehaviour
         PalaisMental = 3,
         Lock = 4,
         EndOfTheWorld = 5,
-        Pave = 6
+        Pave = 6,
+        GoodEnd = 7
     }
 
     [SerializeField] private Camera mainCamera;
